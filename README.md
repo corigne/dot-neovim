@@ -1,5 +1,7 @@
 # dot-neovim
 My Neovim configurations ported to LUA
+## What it looks lke:
+![image](https://github.com/corigne/dot-neovim/assets/7695563/4b067d35-2207-44a8-93ac-667db79771c1)
 
 ## Requirements:
 - [git](https://www.youtube.com/watch?v=l60MnDJklnM)
