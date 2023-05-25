@@ -4,7 +4,7 @@ A combination of my own configs and the lsp/autocompletion features
 from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch) series by chris@machine.  
 
 ## Features:
-- Colors: Ships with [tokyonight](https://github.com/folke/tokyonight.nvim) as the default colorscheme, but also installs [everforest](https://github.com/sainnhe/everforest), [dracula](https://github.com/Mofiqul/dracula.nvim), and [ayu-vim](https://github.com/ayu-theme/ayu-vim).
+- Colors: Ships with [tokyonight](https://github.com/folke/tokyonight.nvim) as the default, but also installs [everforest](https://github.com/sainnhe/everforest), [dracula](https://github.com/Mofiqul/dracula.nvim), and [ayu-vim](https://github.com/ayu-theme/ayu-vim).
 - Statusbar: [lualine](https://github.com/nvim-lualine/lualine.nvim)
 - Nerdfont friendly filetree: [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
 - tmux motion compatibility (requires some tmux config, see link): [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
