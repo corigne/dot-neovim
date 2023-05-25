@@ -35,7 +35,7 @@ from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch
     ├─ core.lua : core settings, things like tab size and colorscheme  
     ├─ keymap.lua : the keybindings I made or ported (LSP keybinds are in handlers.lua)  
     ├─ plugins.lua : the plugin section for Packer and some of the required configurations  
-    ├─ /lsp/ : houses the LSP configs, adapted from the 2022 "neovim-from-scratch" series metioned above  
+    └─ /lsp/ : houses the LSP configs, adapted from the 2022 "neovim-from-scratch" series metioned above  
        ├─ handlers.lua : the function and keymap definitions passed as args forthe lsp servers  
        ├─ init.lua : kicks off the lsp module  
        └─ lsp-installer.lua : sets up lsp-config and passes in the options
