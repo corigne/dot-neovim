@@ -16,7 +16,7 @@ from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch
    and doesn't have the updated LSP download link for lua-ls.
 - I think that's it, **create an issue** if something isn't working out of the box.
 
-## To install:
+## Install:
 1. Clone this repo directly into your neovim config directory (usually ~/.config/nvim/ works):  
   i. `git clone git@github.com:corigne/dot-neovim.git ~/.config/nvim`  
   or  
