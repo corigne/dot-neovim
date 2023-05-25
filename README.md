@@ -9,8 +9,12 @@ from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch
 - Nerdfont friendly filetree: [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
 - tmux motion compatibility (requires some tmux config, see link): [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
 - Fuzzy finder and more: [Telescope](https://github.com/nvim-telescope/telescope.nvim)
+- Whitespace management: [vim-better-whitespace](https://github.com/ntpeters/vim-better-whitespace)
 - Lots more...  
-![image](https://github.com/corigne/dot-neovim/assets/7695563/4b067d35-2207-44a8-93ac-667db79771c1)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/aafbc6b4-53ba-4e15-a91b-f07aae861b91)  
+![image](https://github.com/corigne/dot-neovim/assets/7695563/19ee3880-54de-4c62-8b3d-78cd77c90ee3)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/462a4867-0f3a-45ce-9b0e-eb389486269c)
+
 
 ## Requirements:
 - [git](https://www.youtube.com/watch?v=l60MnDJklnM)
