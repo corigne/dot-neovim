@@ -34,7 +34,7 @@ from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch
 ├─ init.lua : the base config file, kicks off with neovim  
 ├─ README.md : this readme  
 └─ /lua/ : the lua folder standard for neovim lua modules  
-   ├─ /settings/ : houses the sub-config scripts  
+   └─ /settings/ : houses the sub-config scripts  
       ├─ cmp.lsp : autocomplete settings  
       ├─ core.lua : core settings, things like tab size and colorscheme  
       ├─ keymap.lua : the keybindings I made or ported (LSP keybinds are in handlers.lua)  
