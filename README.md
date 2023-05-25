@@ -3,7 +3,7 @@ My Neovim configurations ported to LUA.
 A combination of my own configs and the lsp/autocompletion features  
 from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch) series by chris@machine.  
 
-## What it looks like and does:
+## Features:
 - Colors: Ships with tokyonight-night as the default colorscheme, but also installs everforest, darkula, and ayu.
 - Statusbar: [lualine](https://github.com/nvim-lualine/lualine.nvim)
 - Nerdfont friendly filetree: [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
