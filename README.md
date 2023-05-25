@@ -42,5 +42,5 @@ from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch
 ```
 
 ## Adding additional LSP Servers:
-1. Install the LSP server of your choice using either `nvim-lsp-installer` or manually installing it.
+1. Install the LSP server of your choice using either `:LspInstall` or by manually installing.
 2. Add the setup command for the server to `/lua/settings/lsp/lsp-installer.lua` similarly to how the currently configured ones are added there.
