@@ -26,7 +26,7 @@ from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch
   i. (Except Java; we don't serve your kind here.)
 
 ## Filemap:  
-```bash
+```
 ├─ init.lua : the base config file, kicks off with neovim  
 ├─ README.md : this readme  
 └─ /lua/ : the lua folder standard for neovim lua modules  
