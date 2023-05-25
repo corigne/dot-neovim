@@ -1,5 +1,6 @@
 # dot-neovim
-My Neovim configurations ported to LUA
+My Neovim configurations ported to LUA.  
+A combination of my own configs and the lsp/autocompletion features from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch) series by chris@machine.
 ## What it looks lke:
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/4b067d35-2207-44a8-93ac-667db79771c1)
 
