@@ -3,8 +3,12 @@ My Neovim configurations ported to LUA.
 A combination of my own configs and the lsp/autocompletion features  
 from the ["neovim-from-scratch"](https://github.com/LunarVim/Neovim-from-scratch) series by chris@machine.  
 
-## What it looks like:
-- Ships with tokyonight-night as the default colorscheme, but also installs everforest, darkula, and ayu.
+## What it looks like and does:
+- Colors: Ships with tokyonight-night as the default colorscheme, but also installs everforest, darkula, and ayu.
+- Statusbar: [lualine](https://github.com/nvim-lualine/lualine.nvim)
+- Nerdfont friendly filetree: [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua)
+- tmux motion compatibility (requires some tmux config, see link): [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)
+- Fuzzy Finder and more: [Telescope](https://github.com/nvim-telescope/telescope.nvim)
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/4b067d35-2207-44a8-93ac-667db79771c1)
 
 ## Requirements:
