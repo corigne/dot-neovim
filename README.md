@@ -3,10 +3,13 @@
 Nvim configs ported from my old vimscript configs to lua, with some
 additions inspired and borrowed from lunarvim and nvchad.  
 
-Note: This is a personal work-in-progress. It works, but it has some quirks that
+This is a personal work-in-progress. It works, but it has some quirks that
 I am actively working out and will push to this repository. If there are keybind
 related issues or other issues unrelated to the plugins themselves, please create
 an issue ticket and I will happily look into handling it.  
+
+Basic items, tab to cycle through autocompletion, enter to accept. Shift-enter to newline without accepting a suggestion.
+Everything else is self-explanatory. Keybinds are listed in [keybinds](Keybinds) below.
 
 Enjoy!
 
