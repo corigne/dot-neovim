@@ -79,26 +79,26 @@ linux distro's package manager or homebrew.
 ## Keybinds
 
 All non-standard vim keybinds:
-**Default <leader> is <Space>**
+**Default leader is Space**
 
-- <leader> + \  = nohl
-- <leader> + bn = buffer-next
-- <leader> + bp = buffer-prev
-- <leader> + bd = bclose plugin (close the current buffer without closing the window)
-- <leader> + bD = buffer-delete
-- <leader> + bc = ls + prompt buffer-change
-- <leader> + bl = ls (list buffers)
-- <leader> + y = OSC Yank (yank to system clipboard using OSC52 esc)
-- <leader> + yy = OSC Yank whole line
-- <leader> + y (visual) = OSC Yank
-- <leader> + td = close current tab - tabc
-- <leader> + tt = toggle filetree
-- <leader> + tf = NvimTreeFind
-- <leader> + tc = NvimTreeCollapse
-- <leader> + ff = Telescope fuzzyfind
-- <leader> + fg = Telescipe grep
-- <leader> + fb = Telescope buffer builtin
-- <leader> + fh = Telescope helptags
+- leader + \  = nohl
+- leader + bn = buffer-next
+- leader + bp = buffer-prev
+- leader + bd = bclose plugin (close the current buffer without closing the window)
+- leader + bD = buffer-delete
+- leader + bc = ls + prompt buffer-change
+- leader + bl = ls (list buffers)
+- leader + y = OSC Yank (yank to system clipboard using OSC52 esc)
+- leader + yy = OSC Yank whole line
+- leader + y (visual) = OSC Yank
+- leader + td = close current tab - tabc
+- leader + tt = toggle filetree
+- leader + tf = NvimTreeFind
+- leader + tc = NvimTreeCollapse
+- leader + ff = Telescope fuzzyfind
+- leader + fg = Telescipe grep
+- leader + fb = Telescope buffer builtin
+- leader + fh = Telescope helptags
 
 ## Adding additional LSP Servers
 
