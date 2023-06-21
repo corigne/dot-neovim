@@ -78,8 +78,8 @@ linux distro's package manager or homebrew.
 
 ## Keybinds
 
-All non-standard vim keybinds:
-**Default leader is Space**
+All non-standard vim keybinds:  
+**Note: Default leader is Space**
 
 - leader + \  = nohl
 - leader + bn = buffer-next
