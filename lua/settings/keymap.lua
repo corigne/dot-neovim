@@ -1,12 +1,19 @@
 
 -- Clear Search HL
-vim.api.nvim_set_keymap('n', '<C-l>', ':nohl<CR><C-l>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
 -- Buffers
 vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>bp', ':bp<CR>', {})
-vim.api.nvim_set_keymap('n', '<leader>bd', ':ls<CR>:bd<Space>', {})
+vim.api.nvim_set_keymap('n', '<leader>bd',  '<Cmd>lua CloseBuffer(0)<CR>', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bD', ':ls<CR>:bd<Space>', {})
 vim.api.nvim_set_keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
+vim.api.nvim_set_keymap('n', '<leader>bl', ':ls<CR>', {})
+
+-- Clipboard
+vim.api.nvim_set_keymap('n', '<leader>y', '<Plug>OSCYankOperator', {})
+vim.api.nvim_set_keymap('n', '<leader>yy', '<leader>y_', {})
+vim.api.nvim_set_keymap('v', '<leader>y', '<Plug>OSCYankVisual', {})
 
 -- Tabs
 vim.api.nvim_set_keymap('n', '<leader>td', ':tabc<CR>', {})   -- Delete Tab

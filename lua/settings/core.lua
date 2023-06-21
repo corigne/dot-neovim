@@ -15,12 +15,11 @@ vim.opt.splitbelow        = true
 
 -- COLORSCHEME
 vim.opt.termguicolors     = true
-vim.cmd.colorscheme       'tokyonight-night'
+vim.cmd.colorscheme       'kanagawa'
 
 vim.g.better_whitespace_enabled = 1
 vim.g.strip_whitespace_on_save  = 1
 vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = 'Cyan' } )
-     
 
 
 -- SEARCHING
@@ -30,7 +29,7 @@ vim.opt.hlsearch          = true  -- highlight searchterms
 vim.opt.incsearch         = true  -- incremental searching
 
 -- FILES AND PASTING
-vim.opt.autochdir         = true  -- chg dir to opened file's dir
+vim.opt.autochdir         = false  -- chg dir to opened file's dir
 vim.opt.clipboard         = { 'unnamed', 'unnamedplus' }
 
 -- INDENTATION
