@@ -9,7 +9,7 @@ related issues or other issues unrelated to the plugins themselves, please creat
 an issue ticket and I will happily look into handling it.  
 
 Basic items, tab to cycle through autocompletion, enter to accept. Shift-enter to newline without accepting a suggestion.
-Everything else is self-explanatory. Keybinds are listed in [keybinds](Keybinds) below.
+Everything else is self-explanatory. Keybinds are listed in the section below.
 
 Enjoy!
 
