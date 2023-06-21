@@ -25,7 +25,6 @@ Enjoy!
   [friendly-snippets](github.com/rafamadriz/friendly-snippets),
   [vim-snippets](github.com/honza/vim-snippets)
 - 10. Lunarvim's autocomplete backend: [nvim-cmp](github.com/hrsh7th/nvim-cmp)
-- 11.
 
 - UI:
 - 1. Statusbar: [lualine](github.com/nvim-lualine/lualine.nvim)
