@@ -33,7 +33,7 @@ UI:
 - Filetree: [nvim-tree](github.com/nvim-tree/nvim-tree.lua)
 - IDE Tabs: [bufferline](github.com/akinsho/bufferline.nvim)
 - Popup nvim command menu: [wilder](github.com/gelguy/wilder.nvim)
-- Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
+- Syntax Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
 - Colors: Ships with [kanagawa](github.com/rebelot/kanagawa.nvim) as
   the default, but also installs:  
   [everforest](github.com/sainnhe/everforest),
@@ -43,7 +43,14 @@ UI:
 
 ## Preview Images
 
-TODO
+![image](https://github.com/corigne/dot-neovim/assets/7695563/8f6902c6-c540-4ad3-923c-6f9b3b0a116b)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/03d79aec-f979-40f7-b371-5a08fc49083f)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/bab2d3a4-f807-45e5-a34f-27ac53dd2d3a)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/d8bec591-4351-401a-a2ab-bba74dc2c674)
+
+
+
+
 
 ## Requirements
 
