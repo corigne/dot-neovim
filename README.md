@@ -12,32 +12,34 @@ Enjoy!
 
 ## Useful Features
 
-- Workflow:
-- 1. LSP, Linter, and Debugger installer: [Mason](github.com/williamboman/mason.nvim)
-- 2. Linter: [null-ls](github.com/jose-elias-alvarez/null-ls.nvim)
-- 3. LSP Hook Automation: [mason-lspconfig](github.com/williamboman/mason-lspconfig.nvim)
-- 4. Commenting: [nerdcommenter](github.com/preservim/nerdcommenter)
-- 5. tmux integration (requires tmux plugin): [vim-tmux-navigator](github.com/christoomey/vim-tmux-navigator)
-- 6. OSC52 Yanking (for tmux+ssh): [vim-oscyank](github.com/ojroques/vim-oscyank)
-- 7. Fuzzy finder and more: [Telescope](github.com/nvim-telescope/telescope.nvim)
-- 8. Whitespace management: [vim-better-whitespace](github.com/ntpeters/vim-better-whitespace)
-- 9. Snippets: [LuaSnip](github.com/L3M0N3D3/LuaSnip),
+Workflow:
+
+- LSP, Linter, and Debugger installer: [Mason](github.com/williamboman/mason.nvim)
+- Linter: [null-ls](github.com/jose-elias-alvarez/null-ls.nvim)
+- LSP Hook Automation: [mason-lspconfig](github.com/williamboman/mason-lspconfig.nvim)
+- Commenting: [nerdcommenter](github.com/preservim/nerdcommenter)
+- tmux integration (requires tmux plugin): [vim-tmux-navigator](github.com/christoomey/vim-tmux-navigator)
+- OSC52 Yanking (for tmux+ssh): [vim-oscyank](github.com/ojroques/vim-oscyank)
+- Fuzzy finder and more: [Telescope](github.com/nvim-telescope/telescope.nvim)
+- Whitespace management: [vim-better-whitespace](github.com/ntpeters/vim-better-whitespace)
+- Snippets: [LuaSnip](github.com/L3M0N3D3/LuaSnip),
   [friendly-snippets](github.com/rafamadriz/friendly-snippets),
   [vim-snippets](github.com/honza/vim-snippets)
-- 10. Lunarvim's autocomplete backend: [nvim-cmp](github.com/hrsh7th/nvim-cmp)
+- Lunarvim's autocomplete backend: [nvim-cmp](github.com/hrsh7th/nvim-cmp)
 
-- UI:
-- 1. Statusbar: [lualine](github.com/nvim-lualine/lualine.nvim)
-- 2. Filetree: [nvim-tree](github.com/nvim-tree/nvim-tree.lua)
-- 3. IDE Tabs: [bufferline](github.com/akinsho/bufferline.nvim)
-- 4. Popup nvim command menu: [wilder](github.com/gelguy/wilder.nvim)
-- 5. Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
-- 6. Colors: Ships with [kanagawa](github.com/rebelot/kanagawa.nvim) as
+UI:
+
+- Statusbar: [lualine](github.com/nvim-lualine/lualine.nvim)
+- Filetree: [nvim-tree](github.com/nvim-tree/nvim-tree.lua)
+- IDE Tabs: [bufferline](github.com/akinsho/bufferline.nvim)
+- Popup nvim command menu: [wilder](github.com/gelguy/wilder.nvim)
+- Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
+- Colors: Ships with [kanagawa](github.com/rebelot/kanagawa.nvim) as
   the default, but also installs:  
   [everforest](github.com/sainnhe/everforest),
   [dracula](github.com/Mofiqul/dracula.nvim),
   and [ayu-vim](github.com/ayu-theme/ayu-vim). among others.
-- 7. Icons: ships with necessary Nerdfont icons for statusbars and filetree.
+- Icons: ships with necessary Nerdfont icons for statusbars and filetree.
 
 ## Preview Images
 
@@ -81,16 +83,20 @@ set up automatically once installed by Mason.
 ## Filemap
 
 ```bash
-├─ init.lua : the base config file, kicks off with neovim  
-├─ README.md : this readme  
-└─ /lua/ : the lua folder standard for neovim lua modules  
-   └─ /settings/ : houses the sub-config scripts  
-      ├─ cmp.lsp : autocomplete settings  
-      ├─ core.lua : core settings, things like tab size and colorscheme  
-      ├─ keymap.lua : the keybindings I made or ported (LSP keybinds are in handlers.lua)  
-      ├─ plugins.lua : the plugin section for Packer and some of the required configurations  
-      └─ /lsp/ : houses the LSP configs, adapted from the 2022 "neovim-from-scratch" series metioned above  
-         ├─ handlers.lua : the function and keymap definitions passed as args forthe lsp servers  
-         ├─ init.lua : kicks off the lsp module  
-         └─ lsp-installer.lua : sets up lsp-config and passes in the options
+.
+├── init.lua
+├── lua
+│   ├── local_plugins
+│   │   └── bclose.lua
+│   └── settings
+│       ├── cmp.lua
+│       ├── core.lua
+│       ├── keymap.lua
+│       ├── lsp
+│       │   ├── handlers.lua
+│       │   └── setup.lua
+│       └── plugins.lua
+└── README.md
+
+4 directories, 9 files
 ```
