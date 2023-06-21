@@ -10,6 +10,11 @@ an issue ticket and I will happily look into handling it.
 
 Enjoy!
 
+![image](https://github.com/corigne/dot-neovim/assets/7695563/8f6902c6-c540-4ad3-923c-6f9b3b0a116b)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/03d79aec-f979-40f7-b371-5a08fc49083f)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/bab2d3a4-f807-45e5-a34f-27ac53dd2d3a)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/d8bec591-4351-401a-a2ab-bba74dc2c674)
+
 ## Useful Features
 
 Workflow:
@@ -41,17 +46,6 @@ UI:
   and [ayu-vim](github.com/ayu-theme/ayu-vim). among others.
 - Icons: ships with necessary Nerdfont icons for statusbars and filetree.
 
-## Preview Images
-
-![image](https://github.com/corigne/dot-neovim/assets/7695563/8f6902c6-c540-4ad3-923c-6f9b3b0a116b)
-![image](https://github.com/corigne/dot-neovim/assets/7695563/03d79aec-f979-40f7-b371-5a08fc49083f)
-![image](https://github.com/corigne/dot-neovim/assets/7695563/bab2d3a4-f807-45e5-a34f-27ac53dd2d3a)
-![image](https://github.com/corigne/dot-neovim/assets/7695563/d8bec591-4351-401a-a2ab-bba74dc2c674)
-
-
-
-
-
 ## Requirements
 
 - [git](www.youtube.com/watch?v=l60MnDJklnM)
@@ -81,6 +75,30 @@ linux distro's package manager or homebrew.
 3. Start neovim ( Just run: `nvim` ) and you should be prepared to program in
 *most* commons languages.  
   i. (Except Java; we don't serve your kind here.)
+
+## Keybinds
+
+All non-standard vim keybinds:
+**Default <leader> is <Space>**
+
+- <leader> + \  = nohl
+- <leader> + bn = buffer-next
+- <leader> + bp = buffer-prev
+- <leader> + bd = bclose plugin (close the current buffer without closing the window)
+- <leader> + bD = buffer-delete
+- <leader> + bc = ls + prompt buffer-change
+- <leader> + bl = ls (list buffers)
+- <leader> + y = OSC Yank (yank to system clipboard using OSC52 esc)
+- <leader> + yy = OSC Yank whole line
+- <leader> + y (visual) = OSC Yank
+- <leader> + td = close current tab - tabc
+- <leader> + tt = toggle filetree
+- <leader> + tf = NvimTreeFind
+- <leader> + tc = NvimTreeCollapse
+- <leader> + ff = Telescope fuzzyfind
+- <leader> + fg = Telescipe grep
+- <leader> + fb = Telescope buffer builtin
+- <leader> + fh = Telescope helptags
 
 ## Adding additional LSP Servers
 
