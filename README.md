@@ -105,7 +105,7 @@ All non-standard vim keybinds:
 
 ## Adding additional LSP Servers
 
-Install the LSP server of your choice using Mason. LSP servers should be
+Install the LSP server of your choice using `:Mason`. LSP servers should be
 set up automatically once installed by Mason.
 
 ## Filemap
