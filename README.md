@@ -79,7 +79,7 @@ linux distro's package manager or homebrew.
    prompted to remove the plugin directories for those old plugins.
    During the Packer install, you may also get an error about TSUpdate
    not being a valid command, this is also okay. Just keep going.
-4. Restart neovim ( Just run: `nvim again` ) and allow Treesitter to install
+4. Restart neovim ( Close neovim and run: `nvim` again ) and allow Treesitter to install
    the various things it needs to run.
    **Note:** I include some common languages for TS, but you may want to
    modity the treesitter config in lua/settings/plugins.lua to
