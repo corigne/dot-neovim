@@ -73,11 +73,20 @@ linux distro's package manager or homebrew.
   i. `git clone git@github.com:corigne/dot-neovim.git ~/.config/nvim`  
   or  
   ii. `github.com/corigne/dot-neovim.git ~/.config/nvim`  
-2. Run `nvim +PackerInstall +qa` to install all associated plugins.
-  If everything works this may take some time.
-3. Start neovim ( Just run: `nvim` ) and you should be prepared to program in
-*most* commons languages.  
-  i. (Except Java; we don't serve your kind here.)
+2. Run `nvim +PackerInstall` to install all associated plugins.
+   You may recieve errors if you did not have any plugins installed,
+   but this is okay. Acknowledge the errors and allow Packer to install
+   the plugins. If everything works this may take some time.
+   If you already had plugins installed with Packer, you may be
+   prompted to remove the plugin directories for those old plugins.
+   During the Packer install, you may also get an error about TSUpdate
+   not being a valid command, this is also okay. Just keep going.
+4. Restart neovim ( Just run: `nvim again` ) and allow Treesitter to install
+   the various things it needs to run.
+   **Note:** I include some common languages for TS, but you may want to
+   modity the treesitter config in lua/settings/plugins.lua to
+   add additional language compatibility, then restart with `nvim +TSUpdate`.
+5. Install any LSP's you might want to use with `:Mason`
 
 ## Keybinds
 
