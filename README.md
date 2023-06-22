@@ -69,10 +69,8 @@ linux distro's package manager or homebrew.
 ## Install
 
 1. Clone this repo directly into your neovim config directory
-  (usually ~/.config/nvim/ works):  
-  i. `git clone git@github.com:corigne/dot-neovim.git ~/.config/nvim`  
-  or  
-  ii. `github.com/corigne/dot-neovim.git ~/.config/nvim`  
+  (~/.config/nvim/ is typical):
+  `git clone https://github.com/corigne/dot-neovim.git ~/.config/nvim`  
 2. Run `nvim +PackerInstall` to install all associated plugins.
    You may recieve errors if you did not have any plugins installed,
    but this is okay. Acknowledge the errors and allow Packer to install
