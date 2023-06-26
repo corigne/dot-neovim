@@ -110,15 +110,15 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = false,
+    dotfiles = true,
   },
 })
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "c", "lua", "vim", "query", "cpp", "go", "rust",
     "typescript", "javascript", "svelte", "css" },
-  sync_install = false,
-  auto_install = false,
+  sync_install = true,
+  auto_install = true,
   ignore_install = { "" },
 
   highlight = {
@@ -134,6 +134,9 @@ require('nvim-treesitter.configs').setup {
 
     additional_vim_regex_highlighting = true,
   },
+  indent = {
+    enable = true
+  }
 }
 	-- Local Plugins
 require('local_plugins/bclose')
