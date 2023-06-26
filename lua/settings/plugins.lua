@@ -65,6 +65,9 @@ require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip'
   use 'hrsh7th/cmp-nvim-lsp'
 
+  -- Bracketing
+  use "windwp/nvim-autopairs"
+
   -- Snippet Engine
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
@@ -138,6 +141,9 @@ require('nvim-treesitter.configs').setup {
     enable = true
   }
 }
+
+require("nvim-autopairs").setup {}
+
 	-- Local Plugins
 require('local_plugins/bclose')
 require('settings/cmp')
