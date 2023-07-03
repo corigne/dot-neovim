@@ -1,14 +1,14 @@
 # NVIMIS  
 
 Nvim configs ported from my old vimscript configs to lua, with some
-additions inspired and borrowed from lunarvim and nvchad.  
+additions inspired and borrowed from nvchad.  
 
 This is a personal work-in-progress. It works, but it has some quirks that
 I am actively working out and will push to this repository. If there are keybind
 related issues or other issues unrelated to the plugins themselves, please create
 an issue ticket and I will happily look into handling it.  
 
-Basic items, tab to cycle through autocompletion, enter to accept. Shift-enter to newline without accepting a suggestion.
+Basic items, tab to cycle through autocompletion, enter to accept.
 Everything else is self-explanatory. Keybinds are listed in the section below.
 
 Enjoy!
@@ -23,6 +23,8 @@ Enjoy!
 Workflow:
 
 - LSP, Linter, and Debugger installer: [Mason](github.com/williamboman/mason.nvim)
+- LSP Handler: [Lspsaga](github.com/nvimdev/lspsaga.nvim)
+(Replaced lunarvim LSP Handler)
 - Linter: [null-ls](github.com/jose-elias-alvarez/null-ls.nvim)
 - LSP Hook Automation: [mason-lspconfig](github.com/williamboman/mason-lspconfig.nvim)
 - Commenting: [nerdcommenter](github.com/preservim/nerdcommenter)
@@ -79,12 +81,12 @@ linux distro's package manager or homebrew.
    prompted to remove the plugin directories for those old plugins.
    During the Packer install, you may also get an error about TSUpdate
    not being a valid command, this is also okay. Just keep going.
-4. Restart neovim ( Close neovim and run: `nvim` again ) and allow Treesitter to install
-   the various things it needs to run.
+3. Restart neovim ( Close neovim and run: `nvim` again ) and allow Treesitter
+   to install the various things it needs to run.
    **Note:** I include some common languages for TS, but you may want to
    modity the treesitter config in lua/settings/plugins.lua to
    add additional language compatibility, then restart with `nvim +TSUpdate`.
-5. Install any LSP's you might want to use with `:Mason`
+4. Install any LSP's you might want to use with `:Mason`
 
 ## Keybinds
 
@@ -110,6 +112,9 @@ All non-standard vim keybinds:
 - leader + fg = Telescipe grep
 - leader + fb = Telescope buffer builtin
 - leader + fh = Telescope helptags
+
+For Lspsaga you can find the Keybinds
+[here](https://github.com/nvimdev/lspsaga.nvim#example-configuration).
 
 ## Adding additional LSP Servers
 

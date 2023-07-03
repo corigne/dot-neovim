@@ -58,28 +58,36 @@ require('packer').startup(function()
   use 'hrsh7th/cmp-cmdline'
   use 'saadparwaiz1/cmp_luasnip'
   use 'hrsh7th/cmp-nvim-lsp'
-
-  -- Bracketing
+  use {
+      "glepnir/lspsaga.nvim",
+      opt = false,
+      branch = "main",
+      event = "LspAttach",
+      config = function ()
+          require("lspsaga").setup({})
+    end,
+  }
+  -- bracketing
   use "windwp/nvim-autopairs"
 
-  -- Snippet Engine
-  use 'L3MON4D3/LuaSnip'
+  -- snippet engine
+  use 'l3mon4d3/luasnip'
   use 'rafamadriz/friendly-snippets'
   use 'honza/vim-snippets'
 
-  -- Clipboard (Requires an OSC52 Compliant Terminal Emulator)
+  -- clipboard (requires an osc52 compliant terminal emulator)
   use 'ojroques/vim-oscyank'
 
-  -- Comments, Whitespace, and Highlighting (TS)
+  -- comments, whitespace, and highlighting (ts)
   use 'preservim/nerdcommenter'
   use 'ntpeters/vim-better-whitespace'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync' }
+  use { 'nvim-treesitter/nvim-treesitter', run = ':tsupdatesync' }
 
 end)
 
--- Plugin Configuration
+-- plugin configuration
 
----- Packer Plugins
+---- packer plugins
 require('nvim-tree').setup()
 require('lualine').setup({})
 
@@ -140,7 +148,7 @@ require('nvim-treesitter.configs').setup {
     enable = true
   }
 }
-
+require("luasnip.loaders.from_vscode").lazy_load()
 require("nvim-autopairs").setup {}
 
 	-- Local Plugins
