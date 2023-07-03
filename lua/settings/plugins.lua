@@ -21,12 +21,14 @@ require('packer').startup(function()
       'nvim-tree/nvim-web-devicons', -- optional
     }
   }
-  use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
+  use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
+  use 'romgrk/barbar.nvim'
   use 'gelguy/wilder.nvim'
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
+  use("tiagovla/scope.nvim")
 
   -- tmux motion integration (requires same plugin for tmux)
   use 'christoomey/vim-tmux-navigator'
@@ -87,9 +89,16 @@ end)
 
 -- plugin configuration
 
----- packer plugins
+---- packer Plugins
+require('scope').setup({})
 require('nvim-tree').setup()
 require('lualine').setup({})
+require('barbar').setup({
+  sidebar_filetypes = {
+    -- Use the default values: {event = 'BufWinLeave', text = nil}
+    NvimTree = true
+  },
+})
 
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -108,7 +117,6 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
   highlighter = wilder.basic_highlighter(),
 }))
 
-require("bufferline").setup{}
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
   disable_netrw=false,
@@ -148,6 +156,7 @@ require('nvim-treesitter.configs').setup {
     enable = true
   }
 }
+require("telescope").load_extension("scope")
 require("luasnip.loaders.from_vscode").lazy_load()
 require("nvim-autopairs").setup {}
 

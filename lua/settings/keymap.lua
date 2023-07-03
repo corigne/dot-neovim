@@ -1,6 +1,6 @@
 
 local keymap = vim.keymap.set
-
+local opts = { noremap = true, silent = true }
 -- Clear Search HL
 keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
@@ -10,7 +10,7 @@ keymap('n', '<leader>ss', ':StripWhitespace<CR>', {})
 -- Buffers
 keymap('n', '<leader>bn', ':bn<CR>', {})
 keymap('n', '<leader>bp', ':bp<CR>', {})
-keymap('n', '<leader>bd',  '<Cmd>lua CloseBuffer(0)<CR>', { silent = true })
+-- keymap('n', '<leader>bd',  '<Cmd>lua CloseBuffer(0)<CR>', {})
 keymap('n', '<leader>bD', ':ls<CR>:bd<Space>', {})
 keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
 keymap('n', '<leader>bl', ':ls<CR>', {})
@@ -35,7 +35,41 @@ keymap('n', '<leader>fg', builtin.live_grep, {})
 keymap('n', '<leader>fb', builtin.buffers, {})
 keymap('n', '<leader>fh', builtin.help_tags, {})
 
--- Lspsaga Keybinds
+-- barbar Keybindings
+
+-- Move to previous/next
+keymap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
+keymap('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+-- Re-order to previous/next
+keymap('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
+keymap('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+-- Goto buffer in position...
+keymap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
+keymap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
+keymap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
+keymap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
+keymap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
+keymap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
+keymap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
+keymap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
+keymap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
+keymap('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+-- Pin/unpin buffer
+keymap('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+-- Close buffer
+keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+-- Wipeout buffer
+--                 :BufferWipeout
+-- Close commands
+--                 :BufferCloseAllButCurrent
+--                 :BufferCloseAllButPinned
+--                 :BufferCloseAllButCurrentOrPinned
+--                 :BufferCloseBuffersLeft
+--                 :BufferCloseBuffersRight
+-- Magic buffer-picking mode
+keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
+
+-- Lspsaga Keybindings --
 
 -- LSP finder - Find the symbol's definition
 -- If there is no definition, it will instead be hidden

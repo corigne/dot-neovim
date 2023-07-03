@@ -41,7 +41,7 @@ UI:
 
 - Statusbar: [lualine](github.com/nvim-lualine/lualine.nvim)
 - Filetree: [nvim-tree](github.com/nvim-tree/nvim-tree.lua)
-- IDE Tabs: [bufferline](github.com/akinsho/bufferline.nvim)
+- IDE Tabs: [barbar](github.com/romgrk/barbar)
 - Popup nvim command menu: [wilder](github.com/gelguy/wilder.nvim)
 - Syntax Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
 - Colors: Ships with [kanagawa](github.com/rebelot/kanagawa.nvim) as
