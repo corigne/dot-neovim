@@ -92,6 +92,7 @@ All non-standard vim keybinds:
 **Note: Default leader is Space**
 
 - leader + \  = nohl
+- leader + ss = Strip highlighted whitespace from file (trailing)
 - leader + bn = buffer-next
 - leader + bp = buffer-prev
 - leader + bd = bclose plugin (close the current buffer without closing the window)
