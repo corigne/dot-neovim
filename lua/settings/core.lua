@@ -17,11 +17,6 @@ vim.opt.splitbelow        = true
 vim.opt.termguicolors     = true
 vim.cmd.colorscheme       'kanagawa'
 
-vim.g.better_whitespace_enabled = 1
-vim.g.strip_whitespace_on_save  = 1
-vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = 'Cyan' } )
-
-
 -- SEARCHING
 vim.opt.showmatch         = false -- show matching
 vim.opt.ignorecase        = true  -- case insensitive search
@@ -53,8 +48,6 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
 })
 
--- Required for nvim-tree
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
+vim.g.better_whitespace_enabled = 1
+vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = 'Cyan' } )
 

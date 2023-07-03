@@ -31,12 +31,6 @@ require('packer').startup(function()
   -- tmux motion integration (requires same plugin for tmux)
   use 'christoomey/vim-tmux-navigator'
 
-
-  -- Comments, Whitespace, and Highlighting (TS)
-  use 'preservim/nerdcommenter'
-  use 'ntpeters/vim-better-whitespace'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync' }
-
   -- Fuzzy Finder
   use 'nvim-lua/plenary.nvim'
   use {
@@ -75,6 +69,11 @@ require('packer').startup(function()
 
   -- Clipboard (Requires an OSC52 Compliant Terminal Emulator)
   use 'ojroques/vim-oscyank'
+
+  -- Comments, Whitespace, and Highlighting (TS)
+  use 'preservim/nerdcommenter'
+  use 'ntpeters/vim-better-whitespace'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdateSync' }
 
 end)
 

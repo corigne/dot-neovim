@@ -2,6 +2,9 @@
 -- Clear Search HL
 vim.api.nvim_set_keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
+-- Strip Whitespace
+vim.api.nvim_set_keymap('n', '<leader>ss', ':StripWhitespace<CR>', {})
+
 -- Buffers
 vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>bp', ':bp<CR>', {})
