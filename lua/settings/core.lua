@@ -48,6 +48,7 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
 })
 
+vim.g.cssColorVimDoNotMessMyUpdatetime = 1
 vim.g.better_whitespace_enabled = 1
 vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = 'Cyan' } )
 

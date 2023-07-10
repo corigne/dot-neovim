@@ -38,26 +38,26 @@ keymap('n', '<leader>fh', builtin.help_tags, {})
 -- barbar Keybindings
 
 -- Move to previous/next
-keymap('n', '<A-,>', '<Cmd>BufferPrevious<CR>', opts)
-keymap('n', '<A-.>', '<Cmd>BufferNext<CR>', opts)
+keymap('n', ',', '<Cmd>BufferPrevious<CR>', opts)
+keymap('n', '.', '<Cmd>BufferNext<CR>', opts)
 -- Re-order to previous/next
-keymap('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', opts)
-keymap('n', '<A->>', '<Cmd>BufferMoveNext<CR>', opts)
+keymap('n', '<M-,>', '<Cmd>BufferMovePrevious<CR>', opts)
+keymap('n', '<M-.>', '<Cmd>BufferMoveNext<CR>', opts)
 -- Goto buffer in position...
-keymap('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', opts)
-keymap('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', opts)
-keymap('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', opts)
-keymap('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', opts)
-keymap('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', opts)
-keymap('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', opts)
-keymap('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', opts)
-keymap('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', opts)
-keymap('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', opts)
-keymap('n', '<A-0>', '<Cmd>BufferLast<CR>', opts)
+keymap('n', '<M-1>', '<Cmd>BufferGoto 1<CR>', opts)
+keymap('n', '<M-2>', '<Cmd>BufferGoto 2<CR>', opts)
+keymap('n', '<M-3>', '<Cmd>BufferGoto 3<CR>', opts)
+keymap('n', '<M-4>', '<Cmd>BufferGoto 4<CR>', opts)
+keymap('n', '<M-5>', '<Cmd>BufferGoto 5<CR>', opts)
+keymap('n', '<M-6>', '<Cmd>BufferGoto 6<CR>', opts)
+keymap('n', '<M-7>', '<Cmd>BufferGoto 7<CR>', opts)
+keymap('n', '<M-8>', '<Cmd>BufferGoto 8<CR>', opts)
+keymap('n', '<M-9>', '<Cmd>BufferGoto 9<CR>', opts)
+keymap('n', '<M-0>', '<Cmd>BufferLast<CR>', opts)
 -- Pin/unpin buffer
-keymap('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
+keymap('n', '<M-p>', '<Cmd>BufferPin<CR>', opts)
 -- Close buffer
-keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+keymap('n', '<M-c>', '<Cmd>BufferClose<CR>', opts)
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands

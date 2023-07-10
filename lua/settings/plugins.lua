@@ -21,7 +21,6 @@ require('packer').startup(function()
       'nvim-tree/nvim-web-devicons', -- optional
     }
   }
-  use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
   use 'romgrk/barbar.nvim'
   use 'gelguy/wilder.nvim'
   use {
@@ -73,9 +72,16 @@ require('packer').startup(function()
   use "windwp/nvim-autopairs"
 
   -- snippet engine
-  use 'l3mon4d3/luasnip'
+  use 'molleweide/LuaSnip-snippets.nvim'
   use 'rafamadriz/friendly-snippets'
-  use 'honza/vim-snippets'
+  use {
+    'l3mon4d3/luasnip',
+    wants = 'friendly-snippets',
+    requires = {
+      'rafamadriz/friendly-snippets',
+      'molleweide/luasnip_snippets.nvim',
+    }
+  }
 
   -- clipboard (requires an osc52 compliant terminal emulator)
   use 'ojroques/vim-oscyank'
@@ -84,6 +90,7 @@ require('packer').startup(function()
   use 'preservim/nerdcommenter'
   use 'ntpeters/vim-better-whitespace'
   use { 'nvim-treesitter/nvim-treesitter', run = ':tsupdatesync' }
+  use 'ap/vim-css-color' -- highlight color in css files
 
 end)
 
@@ -159,6 +166,8 @@ require('nvim-treesitter.configs').setup {
 require("telescope").load_extension("scope")
 require("luasnip.loaders.from_vscode").lazy_load()
 require("nvim-autopairs").setup {}
+
+vim.g.cssColorVimDoNotMessMyUpdatetime = 1
 
 	-- Local Plugins
 require('local_plugins/bclose')

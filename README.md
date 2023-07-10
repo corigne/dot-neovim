@@ -93,6 +93,12 @@ linux distro's package manager or homebrew.
 All non-standard vim keybinds:  
 **Note: Default leader is Space**
 
+Normal Mode:
+
+- , = navigate one tab to the left
+- . = navigate one tab to the right
+- Super + , = move current tab to the left
+- Super + , = move current tab to the right
 - leader + \  = nohl
 - leader + ss = Strip highlighted whitespace from file (trailing)
 - leader + bn = buffer-next
