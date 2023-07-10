@@ -17,7 +17,7 @@ Enjoy!
 
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/856e8da9-ea5a-4452-9cec-4975f06f5d93)
 
-##### Autocomplete, with snippets:  
+##### LSP with autocomplete, and snippets:  
 
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/0203868c-8026-46ed-a4de-f8c11458f149)
 
