@@ -169,7 +169,7 @@ set up automatically once installed by Mason.
 ## Filemap
 
 ```bash
-4 dir.
+.
 ├── init.lua
 ├── lua
 │   ├── cmp-config.lua
