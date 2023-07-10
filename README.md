@@ -151,7 +151,7 @@ gt
 __Show line diagnostics__  
 -- You can pass argument ++unfocus to
 -- unfocus the show_line_diagnostics floating window  
-<leader>sl  
+leadersl  
 
 __Show buffer diagnostics__  
 leader + sb  
