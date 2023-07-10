@@ -1,4 +1,6 @@
-# NVIMIS  
+# nvimIS
+
+### neovim is for misfits
 
 Nvim configs ported from my old vimscript configs to lua, with some
 additions inspired from lunarvim and nvchad.
@@ -13,15 +15,19 @@ Everything else is self-explanatory. Keybinds are listed in the section below.
 Enjoy!
 
 ##### Diagnostics:  
+
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/856e8da9-ea5a-4452-9cec-4975f06f5d93)
 
 ##### Autocomplete, with snippets:  
+
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/0203868c-8026-46ed-a4de-f8c11458f149)
 
 ##### Fuzzy Finder using Telescope:  
+
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/bab2d3a4-f807-45e5-a34f-27ac53dd2d3a)
 
 ##### Nice nvim popout menus with autocompletion:  
+
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/d8bec591-4351-401a-a2ab-bba74dc2c674)
 
 ## Useful Features
