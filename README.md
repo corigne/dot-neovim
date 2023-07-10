@@ -13,8 +13,12 @@ Everything else is self-explanatory. Keybinds are listed in the section below.
 
 Enjoy!
 
+Diagnostics
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/8f6902c6-c540-4ad3-923c-6f9b3b0a116b)
+
+Autocomplete, with snippets!
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/03d79aec-f979-40f7-b371-5a08fc49083f)
+
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/bab2d3a4-f807-45e5-a34f-27ac53dd2d3a)
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/d8bec591-4351-401a-a2ab-bba74dc2c674)
 
