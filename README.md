@@ -14,7 +14,7 @@ Everything else is self-explanatory. Keybinds are listed in the section below.
 Enjoy!
 
 Diagnostics:  
-![image](https://github.com/corigne/dot-neovim/assets/7695563/8f6902c6-c540-4ad3-923c-6f9b3b0a116b)
+![image](https://github.com/corigne/dot-neovim/assets/7695563/856e8da9-ea5a-4452-9cec-4975f06f5d93)
 
 Autocomplete, with snippets:  
 ![image](https://github.com/corigne/dot-neovim/assets/7695563/0203868c-8026-46ed-a4de-f8c11458f149)
@@ -61,8 +61,7 @@ UI:
 ## Requirements
 
 - [git](www.youtube.com/watch?v=l60MnDJklnM)
-- [neovim](github.com/neovim/neovim/wiki/Installing-Neovim) - (version 0.7.0 or greater)
-- [Packer](github.com/wbthomason/packer.nvim) - For plugin management.
+- [neovim](github.com/neovim/neovim/wiki/Installing-Neovim) - (version __0.9.1__ or greater)
 - [ripgrep](github.com/BurntSushi/ripgrep)
 
 ## Recommended (required for some LSPs)
@@ -80,20 +79,8 @@ linux distro's package manager or homebrew.
 1. Clone this repo directly into your neovim config directory
   (~/.config/nvim/ is typical):  
   `git clone https://github.com/corigne/dot-neovim.git ~/.config/nvim`  
-2. Run `nvim +PackerInstall` to install all associated plugins.
-   You may recieve errors if you did not have any plugins installed,
-   but this is okay. Acknowledge the errors and allow Packer to install
-   the plugins. If everything works this may take some time.
-   If you already had plugins installed with Packer, you may be
-   prompted to remove the plugin directories for those old plugins.
-   During the Packer install, you may also get an error about TSUpdate
-   not being a valid command, this is also okay. Just keep going.
-3. Restart neovim ( Close neovim and run: `nvim` again ) and allow Treesitter
-   to install the various things it needs to run.
-   **Note:** I include some common languages for TS, but you may want to
-   modity the treesitter config in lua/settings/plugins.lua to
-   add additional language compatibility, then restart with `nvim +TSUpdate`.
-4. Install any LSP's you might want to use with `:Mason`
+2. Run neovim `nvim` to install all associated plugins on first-run.
+3. Install any LSP's you might want to use with `:Mason`
 
 ## Keybinds
 
