@@ -126,8 +126,72 @@ Normal Mode:
 - leader + fb = Telescope buffer builtin
 - leader + fh = Telescope helptags
 
-For Lspsaga you can find the Keybinds
-[here](https://dev.neovim.pro/lspsaga/).
+__LSP SAGA__  
+-- LSP finder - Find the symbol's definition
+-- If there is no definition, it will instead be hidden
+-- When you use an action in finder like "open vsplit",
+-- you can use <C-t> to jump back
+gh
+
+-- Code action
+- <leader> + ca
+
+-- Rename all occurrences of the hovered word for the entire file
+gr
+
+-- Peek definition
+-- You can edit the file containing the definition in the floating window
+-- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+-- It also supports tagstack
+-- Use <C-t> to jump back
+gp
+
+-- Go to definition
+gd
+
+-- Peek type definition
+-- You can edit the file containing the type definition in the floating window
+-- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+-- It also supports tagstack
+-- Use <C-t> to jump back
+gt
+
+-- Show line diagnostics
+-- You can pass argument ++unfocus to
+-- unfocus the show_line_diagnostics floating window
+<leader>sl
+
+-- Show buffer diagnostics
+<leader>sb
+
+-- Show workspace diagnostics
+<leader>sw
+
+-- Show cursor diagnostics
+<leader>sc
+
+-- Diagnostic jump
+-- You can use <C-o> to jump back to your previous location
+[e = (back)
+]e = (forward)
+
+-- Toggle outline
+<leader>o
+
+-- Hover Doc
+-- If there is no hover doc,
+-- there will be a notification stating that
+-- there is no information available.
+-- To disable it just use ":Lspsaga hover_doc ++quiet"
+-- Pressing the key twice will enter the hover window
+K
+
+-- Call hierarchy
+<Leader>ci (incoming)
+<Leader>co (outgoing)
+
+-- Floating terminal
+<M-d>
 
 ## Adding additional LSP Servers
 
