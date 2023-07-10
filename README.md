@@ -101,7 +101,7 @@ Normal Mode:
 - leader + ss = Strip highlighted whitespace from file (trailing)
 - leader + bn = buffer-next
 - leader + bp = buffer-prev
-- leader + bd = bclose plugin (close the current buffer without closing the window)
+- leader + q = close current buffer (closes the tab too, intentionally)
 - leader + bD = buffer-delete
 - leader + bc = ls + prompt buffer-change
 - leader + bl = ls (list buffers)
