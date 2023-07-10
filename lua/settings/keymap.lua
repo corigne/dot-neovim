@@ -1,6 +1,7 @@
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
+
 -- Clear Search HL
 keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 

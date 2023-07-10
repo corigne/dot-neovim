@@ -1,100 +1,139 @@
-require('packer').startup(function()
-  -- Package management
-  use 'wbthomason/packer.nvim'
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+vim.g.mapleader       = ' '
+vim.g.maplocalleader  = ' '
+
+require('lazy').setup({
 
   -- Color Schemes
-  use 'dracula/vim'
-  use { 'folke/tokyonight.nvim', branch = 'main' }
-  use 'sainnhe/everforest'
-  use 'rebelot/kanagawa.nvim'
-  use 'ayu-theme/ayu-vim'
+  'rebelot/kanagawa.nvim',
+  'dracula/vim',
+  'sainnhe/everforest',
+  'ayu-theme/ayu-vim',
+  'folke/tokyonight.nvim',
 
   -- Icons
-  use 'ryanoasis/vim-devicons'
-  use 'nvim-tree/nvim-web-devicons'
-  use 'lewis6991/gitsigns.nvim' -- used for GIT status for barbar
+  'ryanoasis/vim-devicons',
+  'nvim-tree/nvim-web-devicons',
+  'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
 
   -- Window and Workflow Improvements
-  use {
+  {
     'nvim-tree/nvim-tree.lua',
     requires = {
       'nvim-tree/nvim-web-devicons', -- optional
     }
-  }
-  use 'romgrk/barbar.nvim'
-  use 'gelguy/wilder.nvim'
-  use {
+  },
+  'romgrk/barbar.nvim',
+  'gelguy/wilder.nvim',
+  {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-  }
-  use("tiagovla/scope.nvim")
+  },
+  "tiagovla/scope.nvim",
 
   -- tmux motion integration (requires same plugin for tmux)
-  use 'christoomey/vim-tmux-navigator'
+  'christoomey/vim-tmux-navigator',
 
   -- Fuzzy Finder
-  use 'nvim-lua/plenary.nvim'
-  use {
+  'nvim-lua/plenary.nvim',
+  {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
   -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  },
 
   -- LSP, Debugging, and LINT
-  use {
+  {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
     run = ":MasonUpdate" -- :MasonUpdate updates registry contents
-  }
-  use 'mfussenegger/nvim-dap' -- TODO Keybindings required.
-  use 'jose-elias-alvarez/null-ls.nvim'
-  use 'jay-babu/mason-null-ls.nvim'
-  use { 'fatih/vim-go', run = ':GoUpdateBinaries' }
+  },
+  'mfussenegger/nvim-dap', -- TODO Keybindings required.
+  'jose-elias-alvarez/null-ls.nvim',
+  'jay-babu/mason-null-ls.nvim',
+  { 'fatih/vim-go', run = ':GoUpdateBinaries' },
 
   -- Autocompletion Engine and Extensions
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use {
-      "glepnir/lspsaga.nvim",
-      opt = false,
-      branch = "main",
-      event = "LspAttach",
-      config = function ()
-          require("lspsaga").setup({})
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'saadparwaiz1/cmp_luasnip',
+  'hrsh7th/cmp-nvim-lsp',
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+        require('lspsaga').setup({})
     end,
-  }
+    dependenices = {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-tree/nvim-web-devicons'
+    }
+  },
   -- bracketing
-  use "windwp/nvim-autopairs"
+  "windwp/nvim-autopairs",
 
   -- snippet engine
-  use 'molleweide/LuaSnip-snippets.nvim'
-  use 'rafamadriz/friendly-snippets'
-  use {
+  'molleweide/LuaSnip-snippets.nvim',
+  'rafamadriz/friendly-snippets',
+  {
     'l3mon4d3/luasnip',
     wants = 'friendly-snippets',
     requires = {
       'rafamadriz/friendly-snippets',
       'molleweide/luasnip_snippets.nvim',
     }
-  }
+  },
 
   -- clipboard (requires an osc52 compliant terminal emulator)
-  use 'ojroques/vim-oscyank'
+  'ojroques/vim-oscyank',
 
   -- comments, whitespace, and highlighting (ts)
-  use 'preservim/nerdcommenter'
-  use 'ntpeters/vim-better-whitespace'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':tsupdatesync' }
-  use 'ap/vim-css-color' -- highlight color in css files
+  'preservim/nerdcommenter',
+  'ntpeters/vim-better-whitespace',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ":TSUpdate",
+  },
+  'ap/vim-css-color', -- highlight color in css files
 
-end)
+})
 
 -- plugin configuration
+
+local lspconfig = require("lspconfig")
+require("mason-lspconfig").setup_handlers({
+
+  function (server_name) -- automatically handles installed by Mason
+    lspconfig[server_name].setup({
+    })
+  end,
+
+  ["lua_ls"] = function ()
+    lspconfig.lua_ls.setup {
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = {'vim', 'require'},
+          },
+        },
+      },
+    }
+  end,
+})
 
 ---- packer Plugins
 require('scope').setup({})
@@ -166,6 +205,7 @@ require('nvim-treesitter.configs').setup {
 require("telescope").load_extension("scope")
 require("luasnip.loaders.from_vscode").lazy_load()
 require("nvim-autopairs").setup {}
+require('gitsigns').setup()
 
 vim.g.cssColorVimDoNotMessMyUpdatetime = 1
 

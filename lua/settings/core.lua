@@ -1,7 +1,6 @@
 -- CORE NEOVIM CONFIG
 
 -- MISC
-vim.g.mapleader           = ' '
 vim.opt.encoding          = 'utf-8'
 vim.opt.mouse             = 'a'   -- mouse clicking enabled in all modes
 vim.opt.number            = true  -- line numbers
