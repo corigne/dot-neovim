@@ -125,7 +125,7 @@ __LSP SAGA__
 gh
 
 -- Code action
-- <leader> + ca
+leader + ca
 
 -- Rename all occurrences of the hovered word for the entire file
 gr
@@ -153,13 +153,13 @@ gt
 <leader>sl
 
 -- Show buffer diagnostics
-<leader>sb
+leader + sb
 
 -- Show workspace diagnostics
-<leader>sw
+leader + sw
 
 -- Show cursor diagnostics
-<leader>sc
+leader + sc
 
 -- Diagnostic jump
 -- You can use <C-o> to jump back to your previous location
@@ -167,7 +167,7 @@ gt
 ]e = (forward)
 
 -- Toggle outline
-<leader>o
+leader + o
 
 -- Hover Doc
 -- If there is no hover doc,
@@ -178,8 +178,8 @@ gt
 K
 
 -- Call hierarchy
-<Leader>ci (incoming)
-<Leader>co (outgoing)
+leader + ci (incoming)
+leader + co (outgoing)
 
 -- Floating terminal
 <M-d>
