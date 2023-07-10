@@ -122,7 +122,7 @@ __LSP SAGA Keybindings__
 __LSP finder__ - Find the symbol's definition
 -- If there is no definition, it will instead be hidden
 -- When you use an action in finder like "open vsplit",
--- you can use <C-t> to jump back  
+-- you can use `Ctrl + t` to jump back  
 gh  
 
 __Code action__  
@@ -135,7 +135,7 @@ __Peek definition__
 -- You can edit the file containing the definition in the floating window
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
 -- It also supports tagstack
--- Use <C-t> to jump back  
+-- Use `Ctrl + t` to jump back  
 gp  
 
 __Go to definition__  
@@ -145,7 +145,7 @@ __Peek type definition__
 -- You can edit the file containing the type definition in the floating window
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
 -- It also supports tagstack
--- Use <C-t> to jump back  
+-- Use `Ctrl + t` to jump back  
 gt  
 
 __Show line diagnostics__  
@@ -163,7 +163,7 @@ __Show cursor diagnostics__
 leader + sc  
 
 __Diagnostic jump__  
--- You can use <C-o> to jump back to your previous location  
+-- You can use `Ctrl + o` to jump back to your previous location  
 [e = (back)  
 ]e = (forward)  
 
