@@ -128,7 +128,7 @@ gh
 __Code action__  
 leader + ca  
 
--- Rename all occurrences of the hovered word for the entire file  
+__Rename all occurrences__ of the hovered word for the entire file  
 gr  
 
 __Peek definition__  
@@ -151,7 +151,7 @@ gt
 __Show line diagnostics__  
 -- You can pass argument ++unfocus to
 -- unfocus the show_line_diagnostics floating window  
-leadersl  
+leader + sl  
 
 __Show buffer diagnostics__  
 leader + sb  
