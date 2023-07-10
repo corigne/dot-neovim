@@ -1,6 +1,5 @@
-# nvimIS
-
-### neovim is for misfits
+# dogma.nvim
+### Icontravertibly the best neovim config. /s
 
 Nvim configs ported from my old vimscript configs to lua, with some
 additions inspired from lunarvim and nvchad.
