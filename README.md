@@ -117,25 +117,20 @@ Normal Mode:
 - leader + fb = Telescope buffer builtin
 - leader + fh = Telescope helptags
 
-__LSP SAGA Keybindings__  
+### LSP SAGA Keybindings  
 
 gh   = __LSP finder__ - Find the symbol's definition  
 -- If there is no definition, it will instead be hidden  
 -- When you use an action in finder like "open vsplit",  
 -- you can use `Ctrl + t` to jump back  
-
 leader + ca  = __Code action__  
-
 gr   = __Rename all occurrences__ of the hovered word for the entire file  
-
 gp  = __Peek definition__  
 -- You can edit the file containing the definition in the floating window  
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"  
 -- Use `Ctrl + t` to jump back  
 
-__Go to definition__  
-gd  
-
+gd  = __Go to definition__  
 gt  = __Peek type definition__  
 -- You can edit the file containing the type definition in the floating window  
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"  
@@ -146,18 +141,14 @@ leader + sl  = __Show line diagnostics__
 -- unfocus the show_line_diagnostics floating window  
 
 leader + sb  = __Show buffer diagnostics__  
-
 leader + sw  = __Show workspace diagnostics__  
-
 leader + sc  = __Show cursor diagnostics__  
-
 
 [e  = __Diagnostic jump back__  
 ]e  = __Diagnostic jump forward__  
 -- You can use `Ctrl + o` to jump back to your previous location    
 
 leader + o  = -- Toggle outline  
-
 Shift + k = __Hover Doc__  
 -- If there is no hover doc,  
 -- there will be a notification stating that  
@@ -167,7 +158,6 @@ Shift + k = __Hover Doc__
 
 leader + ci  = __Call hierarchy__  incoming
 leader + co  = __Call hierarchy__  outgoing
-  
 <M-d>  = __Floating terminal__  
 
 ## Adding additional LSP Servers  
