@@ -1,3 +1,4 @@
+-- Installs lazy.nvim if it isn't installed already.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -31,7 +32,7 @@ require('lazy').setup({
   -- Window and Workflow Improvements
   {
     'nvim-tree/nvim-tree.lua',
-    requires = {
+    dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional
     }
   },
@@ -39,11 +40,11 @@ require('lazy').setup({
   'gelguy/wilder.nvim',
   {
     'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
   },
   "tiagovla/scope.nvim",
 
-  -- tmux motion integration (requires same plugin for tmux)
+  -- tmux motion integration (dependencies same plugin for tmux)
   'christoomey/vim-tmux-navigator',
 
   -- Fuzzy Finder
@@ -51,7 +52,7 @@ require('lazy').setup({
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.1',
   -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    dependencies = { {'nvim-lua/plenary.nvim'} }
   },
 
   -- LSP, Debugging, and LINT
@@ -59,12 +60,12 @@ require('lazy').setup({
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
-    run = ":MasonUpdate" -- :MasonUpdate updates registry contents
+    build = ":MasonUpdate" -- :MasonUpdate updates registry contents
   },
   'mfussenegger/nvim-dap', -- TODO Keybindings required.
   'jose-elias-alvarez/null-ls.nvim',
   'jay-babu/mason-null-ls.nvim',
-  { 'fatih/vim-go', run = ':GoUpdateBinaries' },
+  { 'fatih/vim-go', build = ':GoUpdateBinaries' },
 
   -- Autocompletion Engine and Extensions
   'hrsh7th/nvim-cmp',
@@ -87,18 +88,16 @@ require('lazy').setup({
   "windwp/nvim-autopairs",
 
   -- snippet engine
-  'molleweide/LuaSnip-snippets.nvim',
   'rafamadriz/friendly-snippets',
   {
     'l3mon4d3/luasnip',
     wants = 'friendly-snippets',
-    requires = {
+    dependencies = {
       'rafamadriz/friendly-snippets',
-      'molleweide/luasnip_snippets.nvim',
     }
   },
 
-  -- clipboard (requires an osc52 compliant terminal emulator)
+  -- clipboard (dependencies an osc52 compliant terminal emulator)
   'ojroques/vim-oscyank',
 
   -- comments, whitespace, and highlighting (ts)
@@ -106,8 +105,41 @@ require('lazy').setup({
   'ntpeters/vim-better-whitespace',
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ":TSUpdate",
+    opts = {
+      highlight = { enable = true },
+      indent = { enable = true },
+      ensure_installed = {
+        "bash",
+        "c",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "luadoc",
+        "luap",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
+        "regex",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "yaml",
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
+        },
+      },
+    }
   },
+
   'ap/vim-css-color', -- highlight color in css files
 
 })
@@ -178,30 +210,6 @@ require("nvim-tree").setup({
   },
 })
 
-require('nvim-treesitter.configs').setup {
-  ensure_installed = { "c", "lua", "vim", "query", "cpp", "go", "rust",
-    "typescript", "javascript", "svelte", "css" },
-  sync_install = true,
-  auto_install = true,
-  ignore_install = { "" },
-
-  highlight = {
-    enable = true,
-
-    disable = function(lang, buf)
-        local max_filesize = 200 * 1024 -- 200 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
-
-    additional_vim_regex_highlighting = true,
-  },
-  indent = {
-    enable = true
-  }
-}
 require("telescope").load_extension("scope")
 require("luasnip.loaders.from_vscode").lazy_load()
 require("nvim-autopairs").setup {}
