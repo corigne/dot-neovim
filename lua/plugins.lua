@@ -1,3 +1,5 @@
+-- PLUGIN SETTINGS
+
 -- Installs lazy.nvim if it isn't installed already.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -88,12 +90,6 @@ require('lazy').setup({
   { 'fatih/vim-go', build = ':GoUpdateBinaries' },
 
   -- Autocompletion Engine and Extensions
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
-  'saadparwaiz1/cmp_luasnip',
-  'hrsh7th/cmp-nvim-lsp',
   {
     'nvimdev/lspsaga.nvim',
     config = function()
@@ -104,6 +100,13 @@ require('lazy').setup({
         'nvim-tree/nvim-web-devicons'
     }
   },
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'saadparwaiz1/cmp_luasnip',
+
   -- bracketing
   "windwp/nvim-autopairs",
 
@@ -182,11 +185,14 @@ require("mason-null-ls").setup({
   handlers = {},
 })
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
 
   function (server_name) -- automatically handles installed by Mason
     lspconfig[server_name].setup({
+      capabilities = capabilities,
     })
   end,
 
@@ -213,12 +219,9 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
 require("nvim-tree").setup({})
 
 require("telescope").load_extension("scope")
-require("luasnip.loaders.from_vscode").lazy_load()
 require("nvim-autopairs").setup {}
 require('gitsigns').setup()
 
 vim.g.cssColorVimDoNotMessMyUpdatetime = 1
 
-	-- Local Plugins
-require('local_plugins/bclose')
-require('settings/cmp')
+-- Autocomplete

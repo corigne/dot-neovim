@@ -169,20 +169,12 @@ set up automatically once installed by Mason.
 ## Filemap
 
 ```bash
-.
+4 dir.
 ├── init.lua
 ├── lua
-│   ├── local_plugins
-│   │   └── bclose.lua
-│   └── settings
-│       ├── cmp.lua
-│       ├── core.lua
-│       ├── keymap.lua
-│       ├── lsp
-│       │   ├── handlers.lua
-│       │   └── setup.lua
-│       └── plugins.lua
+│   ├── cmp-config.lua
+│   ├── core.lua
+│   ├── keymap.lua
+│   └── plugins.lua
 └── README.md
-
-4 directories, 9 files
 ```

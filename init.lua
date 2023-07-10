@@ -1,5 +1,6 @@
-require('settings/plugins')
-require('settings/core')
-require('settings/keymap')
+require('plugins')
+require('core')
+require('keymap')
+require('cmp-config')
 
 print 'All configurations loaded successfully.'

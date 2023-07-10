@@ -1,3 +1,4 @@
+-- KEYMAP SETTINGS
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -11,7 +12,7 @@ keymap('n', '<leader>ss', ':StripWhitespace<CR>', {})
 -- Buffers
 keymap('n', '<leader>bn', ':bn<CR>', {})
 keymap('n', '<leader>bp', ':bp<CR>', {})
--- keymap('n', '<leader>bd',  '<Cmd>lua CloseBuffer(0)<CR>', {})
+keymap('n', '<leader>q', ':BufferClose<CR>', {})
 keymap('n', '<leader>bD', ':ls<CR>:bd<Space>', {})
 keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
 keymap('n', '<leader>bl', ':ls<CR>', {})
