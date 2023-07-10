@@ -36,13 +36,31 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons', -- optional
     }
   },
-  'romgrk/barbar.nvim',
+
+  {'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function() vim.g.barbar_auto_setup = false end,
+    opts = {
+      animation = true,
+      insert_at_start = true,
+      NvimTree = true
+    },
+    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+  },
+
   'gelguy/wilder.nvim',
+
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
   },
   "tiagovla/scope.nvim",
+
+  -- Git Integration
+  "tpope/vim-fugitive",
 
   -- tmux motion integration (dependencies same plugin for tmux)
   'christoomey/vim-tmux-navigator',
@@ -90,11 +108,13 @@ require('lazy').setup({
   -- snippet engine
   'rafamadriz/friendly-snippets',
   {
-    'l3mon4d3/luasnip',
-    wants = 'friendly-snippets',
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "1.2.*",
+    build = "make install_jsregexp",
     dependencies = {
-      'rafamadriz/friendly-snippets',
-    }
+        'rafamadriz/friendly-snippets',
+    },
   },
 
   -- clipboard (dependencies an osc52 compliant terminal emulator)
@@ -146,6 +166,20 @@ require('lazy').setup({
 
 -- plugin configuration
 
+require('scope').setup({})
+require('nvim-tree').setup()
+require('lualine').setup({})
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("null-ls").setup({
+
+  -- STUFF NOT SUPPORTED BY MASON HERE
+})
+require("mason-null-ls").setup({
+  -- AUTOMATIC SETUP ENABLED
+  handlers = {},
+})
+
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
 
@@ -167,27 +201,6 @@ require("mason-lspconfig").setup_handlers({
   end,
 })
 
----- packer Plugins
-require('scope').setup({})
-require('nvim-tree').setup()
-require('lualine').setup({})
-require('barbar').setup({
-  sidebar_filetypes = {
-    -- Use the default values: {event = 'BufWinLeave', text = nil}
-    NvimTree = true
-  },
-})
-
-require("mason").setup()
-require("mason-lspconfig").setup()
-require("null-ls").setup({
-  -- STUFF NOT SUPPORTED BY MASON HERE
-})
-require("mason-null-ls").setup({
-  -- AUTOMATIC SETUP ENABLED
-  handlers = {},
-})
-
 local wilder = require('wilder')
 wilder.setup({modes = {':', '/', '?'}})
 wilder.set_option('renderer', wilder.popupmenu_renderer({
@@ -195,20 +208,7 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
   highlighter = wilder.basic_highlighter(),
 }))
 
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  disable_netrw=false,
-  hijack_netrw=true,
-  view = {
-    width = 30,
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
+require("nvim-tree").setup({})
 
 require("telescope").load_extension("scope")
 require("luasnip.loaders.from_vscode").lazy_load()
