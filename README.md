@@ -117,74 +117,75 @@ Normal Mode:
 - leader + fb = Telescope buffer builtin
 - leader + fh = Telescope helptags
 
-__LSP SAGA__  
--- LSP finder - Find the symbol's definition
+__LSP SAGA Keybindings__  
+
+__LSP finder__ - Find the symbol's definition
 -- If there is no definition, it will instead be hidden
 -- When you use an action in finder like "open vsplit",
--- you can use <C-t> to jump back
-gh
+-- you can use <C-t> to jump back  
+gh  
 
--- Code action
-leader + ca
+__Code action__  
+leader + ca  
 
--- Rename all occurrences of the hovered word for the entire file
-gr
+-- Rename all occurrences of the hovered word for the entire file  
+gr  
 
--- Peek definition
+__Peek definition__  
 -- You can edit the file containing the definition in the floating window
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
 -- It also supports tagstack
--- Use <C-t> to jump back
-gp
+-- Use <C-t> to jump back  
+gp  
 
--- Go to definition
-gd
+__Go to definition__  
+gd  
 
--- Peek type definition
+__Peek type definition__  
 -- You can edit the file containing the type definition in the floating window
 -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
 -- It also supports tagstack
--- Use <C-t> to jump back
-gt
+-- Use <C-t> to jump back  
+gt  
 
--- Show line diagnostics
+__Show line diagnostics__  
 -- You can pass argument ++unfocus to
--- unfocus the show_line_diagnostics floating window
-<leader>sl
+-- unfocus the show_line_diagnostics floating window  
+<leader>sl  
 
--- Show buffer diagnostics
-leader + sb
+__Show buffer diagnostics__  
+leader + sb  
 
--- Show workspace diagnostics
-leader + sw
+__Show workspace diagnostics__  
+leader + sw  
 
--- Show cursor diagnostics
-leader + sc
+__Show cursor diagnostics__  
+leader + sc  
 
--- Diagnostic jump
--- You can use <C-o> to jump back to your previous location
-[e = (back)
-]e = (forward)
+__Diagnostic jump__  
+-- You can use <C-o> to jump back to your previous location  
+[e = (back)  
+]e = (forward)  
 
--- Toggle outline
-leader + o
+-- Toggle outline  
+leader + o  
 
--- Hover Doc
--- If there is no hover doc,
--- there will be a notification stating that
--- there is no information available.
--- To disable it just use ":Lspsaga hover_doc ++quiet"
--- Pressing the key twice will enter the hover window
-K
+__Hover Doc__  
+-- If there is no hover doc,  
+-- there will be a notification stating that  
+-- there is no information available.  
+-- To disable it just use ":Lspsaga hover_doc ++quiet"  
+-- Pressing the key twice will enter the hover window  
+K  
 
--- Call hierarchy
-leader + ci (incoming)
-leader + co (outgoing)
+__Call hierarchy__  
+leader + ci (incoming)  
+leader + co (outgoing)  
+  
+__Floating terminal__  
+<M-d>  
 
--- Floating terminal
-<M-d>
-
-## Adding additional LSP Servers
+## Adding additional LSP Servers  
 
 Install the LSP server of your choice using `:Mason`. LSP servers should be
 set up automatically once installed by Mason.
