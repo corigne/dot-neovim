@@ -127,7 +127,7 @@ Normal Mode:
 - leader + fh = Telescope helptags
 
 For Lspsaga you can find the Keybinds
-[here](https://github.com/nvimdev/lspsaga.nvim#example-configuration).
+[here](https://dev.neovim.pro/lspsaga/).
 
 ## Adding additional LSP Servers
 
