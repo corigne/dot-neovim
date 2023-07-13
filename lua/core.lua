@@ -51,3 +51,12 @@ vim.g.cssColorVimDoNotMessMyUpdatetime = 1
 vim.g.better_whitespace_enabled = 1
 vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = 'Cyan' } )
 
+-- Temporarily suppress null-ls offset_encodings error until alternative found
+local notify = vim.notify
+vim.notify = function(msg, ...)
+    if msg:match("warning: multiple different client offset_encodings") then
+        return
+    end
+
+    notify(msg, ...)
+end
