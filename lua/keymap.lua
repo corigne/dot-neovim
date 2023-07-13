@@ -138,3 +138,11 @@ keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
 -- Floating terminal
 keymap({"n", "t"}, "<M-d>", "<cmd>Lspsaga term_toggle<CR>")
+
+-- DAP-UI
+local dap_ui = require('dapui')
+keymap("n", "<Leader>ddd", dap_ui.toggle, opts)
+keymap("n", "<Leader>db", ":DapToggleBreakpoint<CR>", opts)
+keymap("n", "<Leader>dc", ":DapContinue<CR>", opts)
+keymap("n", "<Leader>ds", ":DapStepInto<CR>", opts)
+keymap("n", "<Leader>dn", ":DapStepOver<CR>", opts)

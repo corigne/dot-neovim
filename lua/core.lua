@@ -32,6 +32,9 @@ vim.opt.softtabstop       = 2
 vim.opt.expandtab         = true  -- converts tabs to whitespace
 vim.opt.shiftwidth        = 2     -- default autoindent shift amount
 vim.opt.autoindent        = true
+vim.opt.list = true
+vim.opt.listchars:append "space:⋅"
+vim.opt.listchars:append "eol:↴"
 
 -- CURSOR: Enables blinkng & highlighting with different cursor shapes per mode.
 vim.opt.guicursor         = {
@@ -48,8 +51,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.g.cssColorVimDoNotMessMyUpdatetime = 1
-vim.g.better_whitespace_enabled = 1
-vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = 'Cyan' } )
 
 -- Temporarily suppress null-ls offset_encodings error until alternative found
 local notify = vim.notify
