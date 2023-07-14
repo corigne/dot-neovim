@@ -6,9 +6,6 @@ local opts = { noremap = true, silent = true }
 -- Clear Search HL
 keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
--- Strip Whitespace
-keymap('n', '<leader>ss', ':StripWhitespace<CR>', {})
-
 -- Buffers
 keymap('n', '<leader>bn', ':bn<CR>', {})
 keymap('n', '<leader>bp', ':bp<CR>', {})
@@ -21,9 +18,6 @@ keymap('n', '<leader>bl', ':ls<CR>', {})
 keymap('n', '<leader>y', '<Plug>OSCYankOperator', {})
 keymap('n', '<leader>yy', '<leader>y_', {})
 keymap('v', '<leader>y', '<Plug>OSCYankVisual', {})
-
--- Tabs
-keymap('n', '<leader>td', ':tabc<CR>', {})   -- Delete Tab
 
 -- nvim-tree
 keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { silent = true})
@@ -63,11 +57,7 @@ keymap('n', '<M-c>', '<Cmd>BufferClose<CR>', opts)
 -- Wipeout buffer
 --                 :BufferWipeout
 -- Close commands
---                 :BufferCloseAllButCurrent
---                 :BufferCloseAllButPinned
---                 :BufferCloseAllButCurrentOrPinned
---                 :BufferCloseBuffersLeft
---                 :BufferCloseBuffersRight
+keymap('n', '<M-c>p', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', opts)
 -- Magic buffer-picking mode
 keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 

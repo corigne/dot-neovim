@@ -166,6 +166,7 @@ require('lazy').setup({
   },
   { 'lukas-reineke/indent-blankline.nvim' },
   'yaocccc/nvim-hlchunk',
+  --{ "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
   'ap/vim-css-color', -- highlight color in css files
 })
 
@@ -286,6 +287,19 @@ require('mason-lspconfig').setup_handlers({
   end,
 })
 
+-- Optional, enable for lua hlchunk.
+--[[require('hlchunk').setup({]]
+    --[[indent = {]]
+        --[[chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/]]
+
+        --[[style = {]]
+            --[["#8B00FF",]]
+        --[[},]]
+    --[[},]]
+    --[[blank = {]]
+        --[[enable = false,]]
+    --[[}]]
+--[[})]]
 
 local wilder = require('wilder')
 wilder.setup({modes = {':', '/', '?'}})
