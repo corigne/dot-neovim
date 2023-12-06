@@ -27,7 +27,6 @@ require('lazy').setup({
   'folke/tokyonight.nvim',
 
   -- Icons
-  'ryanoasis/vim-devicons',
   'nvim-tree/nvim-web-devicons',
   'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
 
@@ -38,136 +37,173 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons', -- optional
     }
   },
-
-  {'romgrk/barbar.nvim',
-    dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-    },
-    init = function() vim.g.barbar_auto_setup = false end,
-    opts = {
-      animation = true,
-      insert_at_start = true,
-      sidebar_filetypes = {
-        NvimTree = true,
-      },
-    },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
-  },
-
-  'gelguy/wilder.nvim',
-
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
-  },
-  'tiagovla/scope.nvim',
-
-  -- Git Integration
-  'tpope/vim-fugitive',
-
-  -- tmux motion integration (dependencies same plugin for tmux)
-  'christoomey/vim-tmux-navigator',
-
-  -- Fuzzy Finder
-  'nvim-lua/plenary.nvim',
-  {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-  -- or                            , branch = '0.1.x',
-    dependencies = { {'nvim-lua/plenary.nvim'} }
-  },
-
-  -- LSP, Debugging, and LINT
-    'neovim/nvim-lspconfig',
-  {
-    'williamboman/mason.nvim',
-    build = ':MasonUpdate' -- :MasonUpdate updates registry contents
-  },
-    'williamboman/mason-lspconfig.nvim',
-
-  'mfussenegger/nvim-dap', -- TODO Keybindings required.
-  {
-    'rcarriga/nvim-dap-ui',
-    dependencies = { {'nvim-dap'} },
-  },
-
-  'jose-elias-alvarez/null-ls.nvim',
-  'jay-babu/mason-null-ls.nvim',
-  { 'fatih/vim-go', build = ':GoUpdateBinaries' },
-
-  -- Autocompletion Engine and Extensions
-  {
-    'nvimdev/lspsaga.nvim',
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
     config = function()
-        require('lspsaga').setup({})
-    end,
-    dependenices = {
-        'nvim-treesitter/nvim-treesitter',
-        'nvim-tree/nvim-web-devicons'
-    }
-  },
-
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'saadparwaiz1/cmp_luasnip',
-  { 'folke/neodev.nvim', opts = {} },
-
-  -- bracketing
-  'windwp/nvim-autopairs',
-
-  -- snippet engine
-  'rafamadriz/friendly-snippets',
-
-  {
-    'L3MON4D3/LuaSnip',
-    -- follow latest release.
-    version = '1.2.*',
-    build = 'make install_jsregexp',
-    dependencies = {
-        'rafamadriz/friendly-snippets',
-    },
-
-  },
-
-  -- clipboard (dependencies an osc52 compliant terminal emulator)
-  'ojroques/vim-oscyank',
-
-  -- comments, whitespace, and highlighting (ts)
-  'preservim/nerdcommenter',
-
-  {
-    'mcauley-penney/tidy.nvim',
-    config = {
-        filetype_exclude = { 'markdown', 'diff' }
-    },
-    init = function()
-        vim.keymap.set('n', '<leader>te', require('tidy').toggle, {})
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
     end
   },
+  {'romgrk/barbar.nvim',
+  dependencies = {
+    'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+    'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+  },
+  init = function() vim.g.barbar_auto_setup = false end,
+  opts = {
+    animation = true,
+    insert_at_start = true,
+    sidebar_filetypes = {
+      NvimTree = true,
+    },
+  },
+  version = '^1.0.0', -- optional: only update when a new 1.x version is released
+},
 
-  {
+'andweeb/presence.nvim',
+'gelguy/wilder.nvim',
+
+{
+  'nvim-lualine/lualine.nvim',
+  dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+},
+'tiagovla/scope.nvim',
+
+-- Git Integration
+'tpope/vim-fugitive',
+
+-- tmux motion integration (dependencies same plugin for tmux)
+'christoomey/vim-tmux-navigator',
+
+-- image preview inline
+{
+'edluffy/hologram.nvim',
+config = function()
+  require("hologram").setup({
+    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+  })
+end,
+
+},
+
+-- Fuzzy Finder
+'nvim-lua/plenary.nvim',
+-- init.lua:
+{
+  'nvim-telescope/telescope.nvim', tag = '0.1.4',
+  dependencies = { 'nvim-lua/plenary.nvim' }
+},
+
+-- LSP, Debugging, and LINT
+'neovim/nvim-lspconfig',
+{
+  'williamboman/mason.nvim',
+  build = ':MasonUpdate' -- :MasonUpdate updates registry contents
+},
+'williamboman/mason-lspconfig.nvim',
+
+'mfussenegger/nvim-dap', -- TODO Keybindings required.
+{
+  'rcarriga/nvim-dap-ui',
+  dependencies = { {'nvim-dap'} },
+},
+
+'jose-elias-alvarez/null-ls.nvim',
+'jay-babu/mason-null-ls.nvim',
+-- { 'fatih/vim-go', build = ':GoUpdateBinaries' },
+-- trying go.nvim for a bit
+{
+  "ray-x/go.nvim",
+  dependencies = {  -- optional packages
+    "ray-x/guihua.lua",
+    "neovim/nvim-lspconfig",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  config = function()
+    require("go").setup()
+  end,
+  event = {"CmdlineEnter"},
+  ft = {"go", 'gomod'},
+  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+},
+-- Autocompletion Engine and Extensions
+{
+  'nvimdev/lspsaga.nvim',
+  config = function()
+    require('lspsaga').setup({})
+  end,
+  dependenices = {
     'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    build = ':TSUpdate',
+    'nvim-tree/nvim-web-devicons'
+  }
+},
+
+'simrat39/rust-tools.nvim',
+
+'hrsh7th/nvim-cmp',
+'hrsh7th/cmp-path',
+'hrsh7th/cmp-cmdline',
+'hrsh7th/cmp-nvim-lsp',
+'hrsh7th/cmp-buffer',
+'saadparwaiz1/cmp_luasnip',
+{ 'folke/neodev.nvim', opts = {} },
+
+-- bracketing
+'windwp/nvim-autopairs',
+
+-- snippet engine
+'rafamadriz/friendly-snippets',
+
+{
+  'L3MON4D3/LuaSnip',
+  -- follow latest release.
+  version = '1.2.*',
+  build = 'make install_jsregexp',
+  dependencies = {
+    'rafamadriz/friendly-snippets',
   },
 
-  {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    init = function()
-      -- disable rtp plugin, as we only need its queries for mini.ai
-      -- In case other textobject modules are enabled, we will load them
-      -- once nvim-treesitter is loaded
-      require('lazy.core.loader').disable_rtp_plugin('nvim-treesitter-textobjects')
-      load_textobjects = true
-    end,
+},
+
+-- clipboard (dependencies an osc52 compliant terminal emulator)
+'ojroques/vim-oscyank',
+
+-- comments, whitespace, and highlighting (ts)
+'preservim/nerdcommenter',
+
+{
+  'mcauley-penney/tidy.nvim',
+  config = {
+    filetype_exclude = { 'markdown', 'diff' }
   },
-  { 'lukas-reineke/indent-blankline.nvim' },
-  'yaocccc/nvim-hlchunk',
-  --{ "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
-  'ap/vim-css-color', -- highlight color in css files
+  init = function()
+    vim.keymap.set('n', '<leader>te', require('tidy').toggle, {})
+  end
+},
+
+{
+  'nvim-treesitter/nvim-treesitter',
+  lazy = false,
+  build = ':TSUpdate',
+},
+
+{
+  'nvim-treesitter/nvim-treesitter-textobjects',
+  init = function()
+    -- disable rtp plugin, as we only need its queries for mini.ai
+    -- In case other textobject modules are enabled, we will load them
+    -- once nvim-treesitter is loaded
+    require('lazy.core.loader').disable_rtp_plugin('nvim-treesitter-textobjects')
+    load_textobjects = true
+  end,
+},
+{ 'lukas-reineke/indent-blankline.nvim' },
+'yaocccc/nvim-hlchunk',
+--{ "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
+'ap/vim-css-color', -- highlight color in css files
 })
 
 -- plugin configuration
@@ -193,6 +229,7 @@ require'nvim-treesitter.configs'.setup {
     'python',
     'query',
     'regex',
+    'rust',
     'tsx',
     'typescript',
     'vim',
@@ -256,6 +293,21 @@ require('mason-lspconfig').setup_handlers({
     })
   end,
 
+  ['rust_analyzer'] = function ()
+    local rt = require("rust-tools")
+
+    rt.setup({
+      server = {
+        on_attach = function(_, bufnr)
+          -- Hover actions
+          vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+          -- Code action groups
+          vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end,
+      },
+    })
+  end,
+
   ['lua_ls'] = function ()
     lspconfig.lua_ls.setup {
       settings = {
@@ -282,25 +334,26 @@ require('mason-lspconfig').setup_handlers({
         '--pch-storage=memory',
         '--suggest-missing-includes',
       },
-    capabilities = capabilities,
+      capabilities = capabilities,
     }
   end,
 })
 
 -- Optional, enable for lua hlchunk.
 --[[require('hlchunk').setup({]]
-    --[[indent = {]]
-        --[[chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/]]
+--[[indent = {]]
+--[[chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/]]
 
-        --[[style = {]]
-            --[["#8B00FF",]]
-        --[[},]]
-    --[[},]]
-    --[[blank = {]]
-        --[[enable = false,]]
-    --[[}]]
+--[[style = {]]
+--[["#8B00FF",]]
+--[[},]]
+--[[},]]
+--[[blank = {]]
+--[[enable = false,]]
+--[[}]]
 --[[})]]
 
+require("presence").setup({ })
 local wilder = require('wilder')
 wilder.setup({modes = {':', '/', '?'}})
 wilder.set_option('renderer', wilder.popupmenu_renderer({
@@ -311,13 +364,36 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
 require('nvim-autopairs').setup {}
 require('scope').setup({})
 require('nvim-tree').setup({})
-require('telescope').setup({
-  pickers = {
-    colorscheme = {
-      enable_preview = true
+require('telescope').setup{
+  defaults = {
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    mappings = {
+      i = {
+        -- map actions.which_key to <C-h> (default: <C-/>)
+        -- actions.which_key shows the mappings for your picker,
+        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+        ["<C-h>"] = "which_key"
+      }
     }
+  },
+  pickers = {
+    -- Default configuration for builtin pickers goes here:
+    -- picker_name = {
+    --   picker_config_key = value,
+    --   ...
+    -- }
+    -- Now the picker_config_key will be applied every time you call this
+    -- builtin picker
+  },
+  extensions = {
+    -- Your extension configuration goes here:
+    -- extension_name = {
+    --   extension_config_key = value,
+    -- }
+    -- please take a look at the readme of the extension you want to configure
   }
-})
+}
 require('telescope').load_extension('scope')
 require('gitsigns').setup()
 

@@ -3,34 +3,54 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+local toggle_tidy = require("tidy").toggle
+
+-- ==================
 -- Clear Search HL
 keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
+-- ==================
 -- Buffers
 keymap('n', '<leader>bn', ':bn<CR>', {})
 keymap('n', '<leader>bp', ':bp<CR>', {})
 keymap('n', '<leader>q', ':BufferClose<CR>', {})
-keymap('n', '<leader>bD', ':ls<CR>:bd<Space>', {})
 keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
 keymap('n', '<leader>bl', ':ls<CR>', {})
 
+-- ==================
+-- Autoformat toggle for buffer.
+keymap('n', '<leader>nt', toggle_tidy, {})
+
+-- ==================
 -- Clipboard
 keymap('n', '<leader>y', '<Plug>OSCYankOperator', {})
 keymap('n', '<leader>yy', '<leader>y_', {})
 keymap('v', '<leader>y', '<Plug>OSCYankVisual', {})
 
+-- ==================
 -- nvim-tree
 keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { silent = true})
 keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', {})
 keymap('n', '<leader>tc', ':NvimTreeCollapse<CR>', {})
 
+-- ==================
 -- Telescope
 local builtin = require('telescope.builtin')
 keymap('n', '<leader>ff', builtin.find_files, {})
 keymap('n', '<leader>fg', builtin.live_grep, {})
 keymap('n', '<leader>fb', builtin.buffers, {})
+keymap('n', '<leader>fd', builtin.lsp_definitions, {})
+keymap('n', '<leader>fr', builtin.lsp_references, {})
+keymap('n', '<leader>ft', builtin.lsp_type_definitions, {})
 keymap('n', '<leader>fh', builtin.help_tags, {})
 
+keymap('n', '<leader>gs', builtin.git_status, {})
+keymap('n', '<leader>gc', builtin.git_commits, {})
+keymap('n', '<leader>gb', builtin.git_branches, {})
+
+keymap('n', '<leader>sd', builtin.diagnostics, {})
+
+-- ==================
 -- barbar Keybindings
 
 -- Move to previous/next
@@ -61,6 +81,7 @@ keymap('n', '<M-c>p', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', opts)
 -- Magic buffer-picking mode
 keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 
+-- ==================
 -- Lspsaga Keybindings --
 
 -- LSP finder - Find the symbol's definition

@@ -32,7 +32,7 @@ vim.opt.softtabstop       = 2
 vim.opt.expandtab         = true  -- converts tabs to whitespace
 vim.opt.shiftwidth        = 2     -- default autoindent shift amount
 vim.opt.autoindent        = true
-vim.opt.list = true
+vim.opt.list = false
 vim.opt.listchars:append "space:⋅"
 vim.opt.listchars:append "eol:↴"
 
