@@ -47,6 +47,15 @@ require('lazy').setup({
       })
     end
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
   {'romgrk/barbar.nvim',
   dependencies = {
     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
@@ -62,7 +71,13 @@ require('lazy').setup({
   },
   version = '^1.0.0', -- optional: only update when a new 1.x version is released
 },
-
+{
+  "kdheepak/lazygit.nvim",
+  -- optional for floating window border decoration
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+  },
+},
 'andweeb/presence.nvim',
 'gelguy/wilder.nvim',
 
@@ -80,12 +95,12 @@ require('lazy').setup({
 
 -- image preview inline
 {
-'edluffy/hologram.nvim',
-config = function()
-  require("hologram").setup({
-    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
-  })
-end,
+  'edluffy/hologram.nvim',
+  config = function()
+    require("hologram").setup({
+      auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+    })
+  end,
 
 },
 
@@ -118,16 +133,16 @@ end,
 {
   "ray-x/go.nvim",
   dependencies = {  -- optional packages
-    "ray-x/guihua.lua",
-    "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
-  },
-  config = function()
-    require("go").setup()
-  end,
-  event = {"CmdlineEnter"},
-  ft = {"go", 'gomod'},
-  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  "ray-x/guihua.lua",
+  "neovim/nvim-lspconfig",
+  "nvim-treesitter/nvim-treesitter",
+},
+config = function()
+  require("go").setup()
+end,
+event = {"CmdlineEnter"},
+ft = {"go", 'gomod'},
+build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
 },
 -- Autocompletion Engine and Extensions
 {
@@ -380,21 +395,21 @@ require('telescope').setup{
   pickers = {
     -- Default configuration for builtin pickers goes here:
     -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
-  },
-  extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
-  }
-}
-require('telescope').load_extension('scope')
-require('gitsigns').setup()
+      --   picker_config_key = value,
+      --   ...
+      -- }
+      -- Now the picker_config_key will be applied every time you call this
+      -- builtin picker
+    },
+    extensions = {
+      -- Your extension configuration goes here:
+      -- extension_name = {
+        --   extension_config_key = value,
+        -- }
+        -- please take a look at the readme of the extension you want to configure
+      }
+    }
+    require('telescope').load_extension('scope')
+    require('gitsigns').setup()
 
-vim.g.cssColorVimDoNotMessMyUpdatetime = 1
+    vim.g.cssColorVimDoNotMessMyUpdatetime = 1
