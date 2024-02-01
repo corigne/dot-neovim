@@ -72,7 +72,7 @@ cmp.setup {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
+      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
       -- they way you will only jump inside the snippet region
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
@@ -111,7 +111,7 @@ cmp.setup {
   },
   sources = {
     { name = "nvim_lsp" },
-    { name = "luasnip" },
+ --   { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
   },
@@ -135,7 +135,7 @@ cmp.setup {
       if vim.api.nvim_get_mode().mode == 'c' then
         return true
       else
-        return not context.in_treesitter_capture("comment") 
+        return not context.in_treesitter_capture("comment")
           and not context.in_syntax_group("Comment")
       end
     end

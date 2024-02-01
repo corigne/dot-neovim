@@ -31,11 +31,16 @@ require('lazy').setup({
   'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
 
   -- Window and Workflow Improvements
+  -- NOTE: Temporarily disabled while I test telescope-file-browser
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   dependencies = {
+  --     'nvim-tree/nvim-web-devicons', -- optional
+  --   }
+  -- },
   {
-    'nvim-tree/nvim-tree.lua',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons', -- optional
-    }
+      "nvim-telescope/telescope-file-browser.nvim",
+      dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
   },
   {
     "kylechui/nvim-surround",
@@ -308,19 +313,17 @@ require('mason-lspconfig').setup_handlers({
     })
   end,
 
-  ['rust_analyzer'] = function ()
-    local rt = require("rust-tools")
+  ['cssls'] = function ()
+    --Enable (broadcasting) snippet capability for completion
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    rt.setup({
-      server = {
-        on_attach = function(_, bufnr)
-          -- Hover actions
-          vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-          -- Code action groups
-          vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-        end,
-      },
-    })
+    require'lspconfig'.cssls.setup {
+      capabilities = capabilities,
+    }
+  end,
+
+  ["rust_analyzer"] = function ()
+    require("rust-tools").setup()
   end,
 
   ['lua_ls'] = function ()
@@ -378,7 +381,8 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
 
 require('nvim-autopairs').setup {}
 require('scope').setup({})
-require('nvim-tree').setup({})
+-- NOTE: temporarily disabling while I test just using telescop-filepicker
+-- require('nvim-tree').setup({})
 require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
@@ -403,6 +407,19 @@ require('telescope').setup{
     },
     extensions = {
       -- Your extension configuration goes here:
+      file_browser = {
+            theme = "ivy",
+            -- disables netrw and use telescope-file-browser in its place
+            hijack_netrw = true,
+            mappings = {
+              ["i"] = {
+                -- your custom insert mode mappings
+              },
+              ["n"] = {
+                -- your custom normal mode mappings
+              },
+            },
+          },
       -- extension_name = {
         --   extension_config_key = value,
         -- }
@@ -410,6 +427,7 @@ require('telescope').setup{
       }
     }
     require('telescope').load_extension('scope')
+    require("telescope").load_extension('file_browser')
     require('gitsigns').setup()
 
     vim.g.cssColorVimDoNotMessMyUpdatetime = 1
