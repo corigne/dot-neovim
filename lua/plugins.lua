@@ -21,6 +21,7 @@ require('lazy').setup({
 
   -- Color Schemes
   'rebelot/kanagawa.nvim',
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   'dracula/vim',
   'sainnhe/everforest',
   'ayu-theme/ayu-vim',
@@ -227,6 +228,32 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
 })
 
 -- plugin configuration
+
+require("catppuccin").setup({
+    flavour = "frappe", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "frappe",
+    },
+    transparent_background = true, -- disables setting the background color.
+    show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+    },
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+    },
+})
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or 'all' (the five listed parsers should always be installed)

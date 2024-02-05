@@ -14,7 +14,7 @@ vim.opt.splitbelow        = true
 
 -- COLORSCHEME
 vim.opt.termguicolors     = true
-vim.cmd.colorscheme       'kanagawa'
+vim.cmd.colorscheme       'catppuccin'
 
 -- SEARCHING
 vim.opt.showmatch         = false -- show matching
