@@ -1,6 +1,8 @@
 # dogma.nvim
 ### (In)contravertibly the best neovim config. /s
 
+Note: I am working on updating the keybindings and plugin list to cut down on unnecessary bulk in the config and better align with my current workflow. These changes shift toward telescope. Until these changes are finalized please refer to the keybinding lua file.
+
 Nvim configs ported from my old vimscript configs to lua, with some
 additions inspired from lunarvim and nvchad.
 
