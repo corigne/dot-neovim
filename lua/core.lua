@@ -23,14 +23,14 @@ vim.opt.hlsearch          = true  -- highlight searchterms
 vim.opt.incsearch         = true  -- incremental searching
 
 -- FILES AND PASTING
-vim.opt.autochdir         = false  -- chg dir to opened file's dir
-vim.opt.clipboard         = { 'unnamed', 'unnamedplus' }
+vim.opt.autochdir         = true  -- chg dir to opened file's dir
+vim.opt.clipboard         = { 'unnamedplus' }
 
 -- INDENTATION
-vim.opt.tabstop           = 2
-vim.opt.softtabstop       = 2
+vim.opt.tabstop           = 4
+vim.opt.softtabstop       = 4
 vim.opt.expandtab         = true  -- converts tabs to whitespace
-vim.opt.shiftwidth        = 2     -- default autoindent shift amount
+vim.opt.shiftwidth        = 4     -- default autoindent shift amount
 vim.opt.autoindent        = true
 vim.opt.list = false
 vim.opt.listchars:append "space:⋅"

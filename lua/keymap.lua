@@ -11,8 +11,6 @@ keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
 -- ==================
 -- Buffers
-keymap('n', '<leader>bn', ':bn<CR>', {})
-keymap('n', '<leader>bp', ':bp<CR>', {})
 keymap('n', '<leader>q', ':BufferClose<CR>', {})
 keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
 keymap('n', '<leader>bl', ':ls<CR>', {})
@@ -20,18 +18,6 @@ keymap('n', '<leader>bl', ':ls<CR>', {})
 -- ==================
 -- Autoformat toggle for buffer.
 keymap('n', '<leader>nt', toggle_tidy, {})
-
--- ==================
--- Clipboard
-keymap('n', '<leader>y', '<Plug>OSCYankOperator', {})
-keymap('n', '<leader>yy', '<leader>y_', {})
-keymap('v', '<leader>y', '<Plug>OSCYankVisual', {})
-
--- ==================
--- nvim-tree
--- keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', { silent = true})
--- keymap('n', '<leader>tf', ':NvimTreeFindFile<CR>', {})
--- keymap('n', '<leader>tc', ':NvimTreeCollapse<CR>', {})
 
 -- ==================
 -- Telescope
@@ -52,6 +38,14 @@ keymap('n', '<leader>gc', builtin.git_commits, {})
 keymap('n', '<leader>gb', builtin.git_branches, {})
 
 keymap('n', '<leader>sd', builtin.diagnostics, {})
+
+-- DAP-UI
+local dap_ui = require('dapui')
+keymap("n", "<Leader>ddd", dap_ui.toggle, opts)
+keymap("n", "<Leader>B", ":DapToggleBreakpoint<CR>", opts)
+keymap("n", "<Leader>C", ":DapContinue<CR>", opts)
+keymap("n", "<Leader>I", ":DapStepInto<CR>", opts)
+keymap("n", "<Leader>O", ":DapStepOver<CR>", opts)
 
 -- ==================
 -- barbar Keybindings
@@ -153,11 +147,3 @@ keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 -- Floating terminal
 keymap({"n", "t"}, "<D-d>", "<cmd>Lspsaga term_toggle<CR>")
 keymap({"n", "t"}, "<M-d>", "<cmd>Lspsaga term_toggle<CR>")
-
--- DAP-UI
-local dap_ui = require('dapui')
-keymap("n", "<Leader>ddd", dap_ui.toggle, opts)
-keymap("n", "<Leader>db", ":DapToggleBreakpoint<CR>", opts)
-keymap("n", "<Leader>dc", ":DapContinue<CR>", opts)
-keymap("n", "<Leader>ds", ":DapStepInto<CR>", opts)
-keymap("n", "<Leader>dn", ":DapStepOver<CR>", opts)

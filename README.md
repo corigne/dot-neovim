@@ -40,26 +40,22 @@ Workflow:
 (Replaced lunarvim LSP Handler)
 - Linter: [null-ls](github.com/jose-elias-alvarez/null-ls.nvim)
 - LSP Hook Automation: [mason-lspconfig](github.com/williamboman/mason-lspconfig.nvim)
-- Commenting: [nerdcommenter](github.com/preservim/nerdcommenter)
-- tmux integration (requires tmux plugin): [vim-tmux-navigator](github.com/christoomey/vim-tmux-navigator)
-- OSC52 Yanking (for tmux+ssh): [vim-oscyank](github.com/ojroques/vim-oscyank)
-- Fuzzy finder and more: [Telescope](github.com/nvim-telescope/telescope.nvim)
+- DAP Adapter Autoconfiguration: [mason-nvim-dap](github.com/jay-babu/mason-nvim-dap.nvim)
+- Commenting Macros: [nerdcommenter](github.com/preservim/nerdcommenter)
+- Telescope (Fuzzy Find, Grep, Diagnostics, and more): [Telescope](github.com/nvim-telescope/telescope.nvim)
 - Whitespace management: [vim-better-whitespace](github.com/ntpeters/vim-better-whitespace)
-- Snippets: [LuaSnip](github.com/L3M0N3D3/LuaSnip),
-  [friendly-snippets](github.com/rafamadriz/friendly-snippets),
-  [vim-snippets](github.com/honza/vim-snippets)
 - Lunarvim's autocomplete backend: [nvim-cmp](github.com/hrsh7th/nvim-cmp)
 
 UI:
-
 - Statusbar: [lualine](github.com/nvim-lualine/lualine.nvim)
-- Filetree: [nvim-tree](github.com/nvim-tree/nvim-tree.lua)
-- IDE Tabs: [barbar](github.com/romgrk/barbar)
+- Filetree: Removed in favor of the Telescope file picker.
+- IDE Style Buffer Tabs: [barbar](github.com/romgrk/barbar)
 - Popup nvim command menu: [wilder](github.com/gelguy/wilder.nvim)
 - Syntax Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
-- Colors: Ships with [kanagawa](github.com/rebelot/kanagawa.nvim) as
+- Colors: Ships with [catppuccin-frappe](github.com/catppuccin/nvim) as
   the default, but also installs:  
   [everforest](github.com/sainnhe/everforest),
+  [kanagawa](github.com/rebelot/kanagawa.nvim)
   [dracula](github.com/Mofiqul/dracula.nvim),
   and [ayu-vim](github.com/ayu-theme/ayu-vim). among others.
 - Icons: ships with necessary Nerdfont icons for statusbars and filetree.
@@ -74,6 +70,8 @@ UI:
 
 Note: many of these can be installed using your
 linux distro's package manager or homebrew.
+Mason diagnostic output will usually tell you when there's a missing dependency
+during install.
 
 - [llvm](llvm.org)
 - [clang](clang.llvm.org)
@@ -90,83 +88,49 @@ linux distro's package manager or homebrew.
 
 ## Keybinds
 
-All non-standard vim keybinds:  
+Some helpful keybinds for common plugins, see [the keymap.lua file](lua/keymap.lua)
+for the rest of the bindings, e.g. LSPSaga and
+
 **Note: Default leader is Space**
 
 Normal Mode:
 
-- , = navigate one tab to the left
-- . = navigate one tab to the right
+- , = navigate one tab to the left in barbar
+- . = navigate one tab to the right in barbar
 - Super/Meta + , = move current tab to the left
 - Super/Meta + , = move current tab to the right
+
 - leader + \  = nohl
+- leader + nt = toggle nvim tidy on/off, default is on
 - leader + ss = Strip highlighted whitespace from file (trailing)
-- leader + bn = buffer-next
-- leader + bp = buffer-prev
 - leader + q = close current buffer (closes the tab too, intentionally)
-- leader + bD = buffer-delete
-- leader + bc = ls + prompt buffer-change
-- leader + bl = ls (list buffers)
-- leader + y = OSC Yank (yank to system clipboard using OSC52 esc)
-- leader + yy = OSC Yank whole line
-- leader + y (visual) = OSC Yank
-- leader + td = close current tab - tabc
-- leader + tt = toggle filetree
-- leader + tf = NvimTreeFind
-- leader + tc = NvimTreeCollapse
-- leader + ff = Telescope fuzzyfind
-- leader + fg = Telescipe grep
-- leader + fb = Telescope buffer builtin
-- leader + fh = Telescope helptags
+- leader + tt = telescope file picker
+- leader + fg = telescope findgrep
+- leader + ff = telescope findfile
+- leader + fd = telescope lsp definitions
+- leader + fr = telescope lsp references
+- leader + ft = telescope lsp typedef
+- leader + sd = telescope diagnostics
+- leader + gs = telescope git status
 
-### LSP SAGA Keybindings  
+- Super/Meta + d = toggle hover terminal (LSPSaga)
+- leader + ca = show LSPSaga code actions
+- leader + re = LSPSaga rename current variable under cursor
+- leader + pd = LSPSaga peek definition
+- leader + ss = LSPSaga show current line diagnostics
+- leader + sc = LSPSaga cursor diagnostics
+- leader + K  = LSPSaga hover doc toggle
 
-- gh   = __LSP finder__ - Find the symbol's definition  
--- If there is no definition, it will instead be hidden  
--- When you use an action in finder like "open vsplit",  
--- you can use `Ctrl + t` to jump back  
+- leader + ddd = toggle dap-ui on/off
+- leader + B = set a breakpoint for DAP
+- leader + C = continue in DAP
+- leader + I = step into in DAP
+- leader + O = step over in DAP
 
-- leader + ca  = __Code action__  
-- gr   = __Rename all occurrences__ of the hovered word for the entire file  
-- gp  = __Peek definition__  
--- You can edit the file containing the definition in the floating window  
--- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"  
--- Use `Ctrl + t` to jump back  
-
-- gd  = __Go to definition__
-- gt  = __Peek type definition__  
--- You can edit the file containing the type definition in the floating window  
--- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"  
--- Use `Ctrl + t` to jump back    
-
-- leader + sl  = __Show line diagnostics__  
--- You can pass argument ++unfocus to
--- unfocus the show_line_diagnostics floating window  
-
-- leader + sb  = __Show buffer diagnostics__  
-- leader + sw  = __Show workspace diagnostics__  
-- leader + sc  = __Show cursor diagnostics__  
-
-- [e  = __Diagnostic jump back__  
-- ]e  = __Diagnostic jump forward__  
--- You can use `Ctrl + o` to jump back to your previous location    
-
-- leader + o  = -- Toggle outline  
-- Shift + k = __Hover Doc__  
--- If there is no hover doc,  
--- there will be a notification stating that  
--- there is no information available.  
--- To disable it just use ":Lspsaga hover_doc ++quiet"  
--- Pressing the key twice will enter the hover window  
-
-- leader + ci  = __Call hierarchy__  incoming
-- leader + co  = __Call hierarchy__  outgoing
-- Meta + d  = __Floating terminal__  
-
-## Adding additional LSP Servers  
+## Adding/Installing/Configuring LSP Servers and Debug Adapters
 
 Install the LSP server of your choice using `:Mason`. LSP servers should be
-set up automatically once installed by Mason.
+set up automatically once installed by Mason. The same goes for debug adapters.
 
 ## Filemap
 
@@ -176,6 +140,7 @@ set up automatically once installed by Mason.
 ├── lua
 │   ├── cmp-config.lua
 │   ├── core.lua
+│   ├── dap-config.lua
 │   ├── keymap.lua
 │   └── plugins.lua
 └── README.md

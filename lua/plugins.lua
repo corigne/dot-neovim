@@ -19,9 +19,9 @@ vim.g.maplocalleader  = ' '
 
 require('lazy').setup({
 
-  -- Color Schemes
-  'rebelot/kanagawa.nvim',
+  -- Color Schemes, can be set to one of these in core.lua
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  'rebelot/kanagawa.nvim',
   'dracula/vim',
   'sainnhe/everforest',
   'ayu-theme/ayu-vim',
@@ -32,13 +32,6 @@ require('lazy').setup({
   'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
 
   -- Window and Workflow Improvements
-  -- NOTE: Temporarily disabled while I test telescope-file-browser
-  -- {
-  --   'nvim-tree/nvim-tree.lua',
-  --   dependencies = {
-  --     'nvim-tree/nvim-web-devicons', -- optional
-  --   }
-  -- },
   {
       "nvim-telescope/telescope-file-browser.nvim",
       dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
@@ -48,9 +41,7 @@ require('lazy').setup({
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("nvim-surround").setup()
     end
   },
   {
@@ -62,6 +53,7 @@ require('lazy').setup({
       -- refer to the configuration section below
     }
   },
+  -- Tab bar (top)
   {'romgrk/barbar.nvim',
   dependencies = {
     'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
@@ -87,32 +79,15 @@ require('lazy').setup({
 'andweeb/presence.nvim',
 'gelguy/wilder.nvim',
 
+-- Status line (bottom)
 {
   'nvim-lualine/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
 },
 'tiagovla/scope.nvim',
 
--- Git Integration
-'tpope/vim-fugitive',
-
--- tmux motion integration (dependencies same plugin for tmux)
-'christoomey/vim-tmux-navigator',
-
--- image preview inline
-{
-  'edluffy/hologram.nvim',
-  config = function()
-    require("hologram").setup({
-      auto_display = true -- WIP automatic markdown image display, may be prone to breaking
-    })
-  end,
-
-},
-
--- Fuzzy Finder
+-- Telescope Stuff
 'nvim-lua/plenary.nvim',
--- init.lua:
 {
   'nvim-telescope/telescope.nvim', tag = '0.1.4',
   dependencies = { 'nvim-lua/plenary.nvim' }
@@ -134,8 +109,7 @@ require('lazy').setup({
 
 'jose-elias-alvarez/null-ls.nvim',
 'jay-babu/mason-null-ls.nvim',
--- { 'fatih/vim-go', build = ':GoUpdateBinaries' },
--- trying go.nvim for a bit
+"jay-babu/mason-nvim-dap.nvim",
 {
   "ray-x/go.nvim",
   dependencies = {  -- optional packages
@@ -169,25 +143,10 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
 'hrsh7th/cmp-cmdline',
 'hrsh7th/cmp-nvim-lsp',
 'hrsh7th/cmp-buffer',
-'saadparwaiz1/cmp_luasnip',
 { 'folke/neodev.nvim', opts = {} },
 
 -- bracketing
 'windwp/nvim-autopairs',
-
--- snippet engine
-'rafamadriz/friendly-snippets',
-
-{
-  'L3MON4D3/LuaSnip',
-  -- follow latest release.
-  version = '1.2.*',
-  build = 'make install_jsregexp',
-  dependencies = {
-    'rafamadriz/friendly-snippets',
-  },
-
-},
 
 -- clipboard (dependencies an osc52 compliant terminal emulator)
 'ojroques/vim-oscyank',
@@ -322,6 +281,10 @@ require('mason').setup()
 require('mason-lspconfig').setup({
   automatic_installation = true,
 })
+require('mason-nvim-dap').setup({
+  ensure_installed = { "codelldb", "delve", "python" },
+  handlers = {},
+})
 
 require('lspconfig').glslls.setup{}
 
@@ -384,20 +347,6 @@ require('mason-lspconfig').setup_handlers({
   end,
 })
 
--- Optional, enable for lua hlchunk.
---[[require('hlchunk').setup({]]
---[[indent = {]]
---[[chars = { "│", "¦", "┆", "┊", }, -- more code can be found in https://unicodeplus.com/]]
-
---[[style = {]]
---[["#8B00FF",]]
---[[},]]
---[[},]]
---[[blank = {]]
---[[enable = false,]]
---[[}]]
---[[})]]
-
 require("presence").setup({ })
 local wilder = require('wilder')
 wilder.setup({modes = {':', '/', '?'}})
@@ -408,8 +357,6 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
 
 require('nvim-autopairs').setup {}
 require('scope').setup({})
--- NOTE: temporarily disabling while I test just using telescop-filepicker
--- require('nvim-tree').setup({})
 require('telescope').setup{
   defaults = {
     -- Default configuration for telescope goes here:
