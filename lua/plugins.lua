@@ -143,6 +143,13 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
 'hrsh7th/cmp-cmdline',
 'hrsh7th/cmp-nvim-lsp',
 'hrsh7th/cmp-buffer',
+{
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!).
+	build = "make install_jsregexp"
+},
 { 'folke/neodev.nvim', opts = {} },
 
 -- bracketing
@@ -354,7 +361,7 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
   -- highlighter applies highlighting to the candidates
   highlighter = wilder.basic_highlighter(),
 }))
-
+require("luasnip.loaders.from_snipmate").lazy_load()
 require('nvim-autopairs').setup {}
 require('scope').setup({})
 require('telescope').setup{
