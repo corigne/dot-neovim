@@ -156,8 +156,7 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
 'windwp/nvim-autopairs',
 
 -- clipboard (dependencies an osc52 compliant terminal emulator)
-'ojroques/vim-oscyank',
-
+'ojroques/nvim-osc52',
 -- comments, whitespace, and highlighting (ts)
 'preservim/nerdcommenter',
 

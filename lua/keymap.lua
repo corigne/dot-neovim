@@ -16,6 +16,12 @@ keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
 keymap('n', '<leader>bl', ':ls<CR>', {})
 
 -- ==================
+-- Clipboard
+keymap('n', '<leader>y', require('osc52').copy_operator, {expr = true})
+keymap('n', '<leader>yy', '<leader>c_', {remap = true})
+keymap('v', '<leader>y', require('osc52').copy_visual)
+
+-- ==================
 -- Autoformat toggle for buffer.
 keymap('n', '<leader>nt', toggle_tidy, {})
 
