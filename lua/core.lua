@@ -24,7 +24,7 @@ vim.opt.incsearch         = true  -- incremental searching
 
 -- FILES AND PASTING
 vim.opt.autochdir         = true  -- chg dir to opened file's dir
-vim.opt.clipboard         = { 'unnamedplus' }
+vim.opt.clipboard         = { 'unnamed','unnamedplus' }
 
 -- INDENTATION
 vim.opt.tabstop           = 4
