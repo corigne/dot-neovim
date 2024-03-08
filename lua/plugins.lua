@@ -290,7 +290,63 @@ require('mason-lspconfig').setup({
 })
 require('mason-nvim-dap').setup({
   ensure_installed = { "codelldb", "delve", "python" },
-  handlers = {},
+  handlers = {
+      function(config)
+          -- all sources with no handler get passed here
+
+          -- Keep original functionality
+          require('mason-nvim-dap').default_setup(config)
+      end,
+      delve = function(config)
+          config.configurations = {
+              {
+                  type = "delve",
+                  name = "Debug File",
+                  request = "launch",
+                  program = "${file}"
+              },
+              {
+                  type = "delve",
+                  name = "Debug Module",
+                  request = "launch",
+                  program = "./${relativeFileDirname}"
+              },
+              {
+                  type = "delve",
+                  name = "Debug Module w/ Args",
+                  request = "launch",
+                  program = "./${relativeFileDirname}",
+                  args = function()
+                      local args_string = vim.fn.input("Arguments: ")
+                      return vim.split(args_string, " ")
+                  end,
+              },
+              {
+                  type = "delve",
+                  name = "Debug File Tests",
+                  request = "launch",
+                  mode = "test",
+                  program = "${file}"
+              },
+              {
+                  type = "delve",
+                  name = "Debug Module Tests",
+                  request = "launch",
+                  mode = "test",
+                  program = "./${relativeFileDirname}"
+              }
+          }
+          config.adapters = {
+              type = "server",
+              port = "${port}",
+              executable = {
+                  command = vim.fn.stdpath("data") .. '/mason/bin/dlv',
+                  args = { "dap", "-l", "127.0.0.1:${port}" },
+              },
+          }
+          require('mason-nvim-dap').default_setup(config) -- don't forget this!
+      end,
+  },
 })
 
 require('lspconfig').glslls.setup{}
