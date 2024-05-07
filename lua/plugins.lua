@@ -82,7 +82,7 @@ require('lazy').setup({
 -- Status line (bottom)
 {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons', opt = true }
+  dependencies = { 'nvim-tree/nvim-web-devicons' }
 },
 'tiagovla/scope.nvim',
 
@@ -100,8 +100,13 @@ require('lazy').setup({
   build = ':MasonUpdate' -- :MasonUpdate updates registry contents
 },
 'williamboman/mason-lspconfig.nvim',
-
-'mfussenegger/nvim-dap', -- TODO Keybindings required.
+'nvim-neotest/nvim-nio',
+{
+    'mfussenegger/nvim-dap',
+    dependencies = {
+        {'nvim-neotest/nvim-nio'}
+    }, -- TODO Keybindings required.
+},
 {
   'rcarriga/nvim-dap-ui',
   dependencies = { {'nvim-dap'} },
@@ -130,7 +135,7 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
   config = function()
     require('lspsaga').setup({})
   end,
-  dependenices = {
+  dependencies = {
     'nvim-treesitter/nvim-treesitter',
     'nvim-tree/nvim-web-devicons'
   }
@@ -162,7 +167,7 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
 
 {
   'mcauley-penney/tidy.nvim',
-  config = {
+  opts = {
     filetype_exclude = { 'markdown', 'diff' }
   },
   init = function()
@@ -220,6 +225,17 @@ require("catppuccin").setup({
     },
 })
 
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.openscad = {
+    install_info = {
+        url = "https://github.com/bollian/tree-sitter-openscad",
+        files = {"src/parser.c"},
+        generate_requires_npm = true,
+        requires_generate_from_grammar = false
+    },
+    filetype = "scad"
+}
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or 'all' (the five listed parsers should always be installed)
   ensure_installed = {
@@ -248,32 +264,16 @@ require'nvim-treesitter.configs'.setup {
     'vimdoc',
     'yaml',  -- Install parsers synchronously (only applied to `ensure_installed`)
   },
+  modules = {},
 
   sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
-
-  -- List of parsers to ignore installing (for 'all')
   ignore_install = { '' },
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = '/some/path/to/store/parsers', -- Remember to run vim.opt.runtimepath:append('/some/path/to/store/parsers')!
 
   highlight = {
     enable = true,
+    --disable = { '' },
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { '' },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
 }
@@ -288,6 +288,7 @@ require('mason-lspconfig').setup({
   automatic_installation = true,
 })
 require('mason-nvim-dap').setup({
+  automatic_installation = true,
   ensure_installed = { "codelldb", "delve", "python" },
   handlers = {
       function(config)
@@ -465,5 +466,3 @@ require('telescope').setup{
     require('telescope').load_extension('scope')
     require("telescope").load_extension('file_browser')
     require('gitsigns').setup()
-
-    vim.g.cssColorVimDoNotMessMyUpdatetime = 1

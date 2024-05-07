@@ -23,7 +23,7 @@ vim.opt.hlsearch          = true  -- highlight searchterms
 vim.opt.incsearch         = true  -- incremental searching
 
 -- FILES AND PASTING
-vim.opt.autochdir         = true  -- chg dir to opened file's dir
+vim.opt.autochdir         = false  -- chg dir to opened file's dir
 vim.opt.clipboard         = { 'unnamed','unnamedplus' }
 
 -- INDENTATION
