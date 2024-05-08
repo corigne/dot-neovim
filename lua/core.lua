@@ -3,18 +3,17 @@
 -- MISC
 vim.opt.encoding          = 'utf-8'
 vim.opt.mouse             = 'a'   -- mouse clicking enabled in all modes
+vim.opt.ttyfast           = true
+vim.opt.compatible        = false -- disable oldvi compatibility
+
+-- VISUAL
+vim.opt.termguicolors     = true
+vim.cmd.colorscheme       'catppuccin'
 vim.opt.number            = true  -- line numbers
 vim.opt.relativenumber    = true  -- rel line numbers
 vim.opt.wildmode          = {'longest', 'list'} -- bashlike tab completion
 vim.opt.cc                = {80, 140}
-vim.opt.ttyfast           = true
-vim.opt.compatible        = false -- disable oldvi compatibility
-vim.opt.splitright        = true
-vim.opt.splitbelow        = true
-
--- COLORSCHEME
-vim.opt.termguicolors     = true
-vim.cmd.colorscheme       'catppuccin'
+vim.opt.linespace         = 1
 
 -- SEARCHING
 vim.opt.showmatch         = false -- show matching
@@ -25,6 +24,8 @@ vim.opt.incsearch         = true  -- incremental searching
 -- FILES AND PASTING
 vim.opt.autochdir         = false  -- chg dir to opened file's dir
 vim.opt.clipboard         = { 'unnamed','unnamedplus' }
+vim.opt.splitright        = true
+vim.opt.splitbelow        = true
 
 -- INDENTATION
 vim.opt.tabstop           = 4
