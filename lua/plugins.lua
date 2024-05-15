@@ -194,7 +194,7 @@ build = ':lua require("go.install").update_all_sync()' -- if you need to install
 { 'lukas-reineke/indent-blankline.nvim' },
 'yaocccc/nvim-hlchunk',
 --{ "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
-'ap/vim-css-color', -- highlight color in css files
+'brenoprata10/nvim-highlight-colors', -- highlight color in css files
 })
 
 -- plugin configuration
@@ -224,6 +224,27 @@ require("catppuccin").setup({
         },
     },
 })
+
+require("nvim-highlight-colors").setup {
+	---Render style
+	---@usage 'background'|'foreground'|'virtual'
+	render = 'background',
+
+	---Set virtual symbol (requires render to be set to 'virtual')
+	virtual_symbol = '■',
+
+	---Highlight named colors, e.g. 'green'
+	enable_named_colors = true,
+
+	---Highlight tailwind colors, e.g. 'bg-blue-500'
+	enable_tailwind = true,
+
+	---Set custom colors
+	---Label must be properly escaped with '%' to adhere to `string.gmatch`
+	--- :help string.gmatch
+	custom_colors = {
+	}
+}
 
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.openscad = {
@@ -258,6 +279,7 @@ require'nvim-treesitter.configs'.setup {
     'query',
     'regex',
     'rust',
+    'svelte',
     'tsx',
     'typescript',
     'vim',
@@ -273,9 +295,9 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
     --disable = { '' },
-
     additional_vim_regex_highlighting = false,
   },
+  indent = { enable = true },
 }
 
 local lspconfig = require('lspconfig')
@@ -445,9 +467,9 @@ require('telescope').setup{
     extensions = {
       -- Your extension configuration goes here:
       file_browser = {
-            theme = "ivy",
+            -- theme = "ivy",
             -- disables netrw and use telescope-file-browser in its place
-            hijack_netrw = true,
+            hijack_netrw = false,
             mappings = {
               ["i"] = {
                 -- your custom insert mode mappings
