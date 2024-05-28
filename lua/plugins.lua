@@ -165,7 +165,10 @@ require('lazy').setup({
     { 'folke/neodev.nvim', opts = {} },
 
     {
-        "kkoomen/vim-doge",
+        "danymat/neogen",
+        config = true,
+        -- Uncomment next line if you want to follow only stable versions
+        -- version = "*"
     },
 
     -- bracketing
@@ -295,6 +298,8 @@ require'nvim-treesitter.configs'.setup {
         'c',
         'cpp',
         'c_sharp',
+        'comment',
+        'jsdoc',
         'html',
         'hlsl',
         'glsl',
@@ -326,7 +331,7 @@ require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
         --disable = { '' },
-        additional_vim_regex_highlighting = false,
+        additional_vim_regex_highlighting = true,
     },
     indent = { enable = true },
 }

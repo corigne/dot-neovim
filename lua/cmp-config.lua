@@ -11,6 +11,7 @@ if not snip_status_ok then
 end
 
 require('luasnip.loaders.from_vscode').lazy_load()
+require('neogen').setup({ snippet_engine = "luasnip" })
 
 local has_words_before = function()
     unpack = unpack or table.unpack

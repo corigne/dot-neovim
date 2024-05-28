@@ -26,7 +26,7 @@ keymap('v', '<leader>y', require('osc52').copy_visual)
 keymap('n', '<leader>nt', toggle_tidy, {})
 
 -- ==================
--- Telescope
+-- Telescope and NvimTree
 local telescope_builtin = require('telescope.builtin')
 
 keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', opts)
@@ -45,6 +45,11 @@ keymap('n', '<leader>gc', telescope_builtin.git_commits, {})
 keymap('n', '<leader>gb', telescope_builtin.git_branches, {})
 
 keymap('n', '<leader>sd', telescope_builtin.diagnostics, {})
+
+-- ==================
+-- neogen
+local neogen = require('neogen')
+keymap('n', '<leader>ng', neogen.generate, opts)
 
 -- DAP-UI
 local dap_ui = require('dapui')
