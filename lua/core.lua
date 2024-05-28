@@ -46,6 +46,10 @@ vim.opt.guicursor         = {
   'sm:block-blinkwait175-blinkoff150-blinkon175'
 }
 
+-- Disable Netrw for nvim-tree
+vim.g.loaded_netrw       = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Disable Comments on Newline
 vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"

@@ -27,23 +27,24 @@ keymap('n', '<leader>nt', toggle_tidy, {})
 
 -- ==================
 -- Telescope
-local builtin = require('telescope.builtin')
+local telescope_builtin = require('telescope.builtin')
 
-keymap('n', '<leader>tt', ':Telescope file_browser<CR>', {})
-keymap('n', '<leader>ff', builtin.find_files, {})
-keymap('n', '<leader>fg', builtin.live_grep, {})
-keymap('n', '<leader>fb', builtin.buffers, {})
-keymap('n', '<leader>fr', builtin.lsp_references, {})
-keymap('n', '<leader>fi', builtin.lsp_implementations, {})
-keymap('n', '<leader>fd', builtin.lsp_definitions, {})
-keymap('n', '<leader>ft', builtin.lsp_type_definitions, {})
-keymap('n', '<leader>fh', builtin.help_tags, {})
+keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', opts)
+keymap('n', '<leader>tf', ':Telescope file_browser<CR>', {})
+keymap('n', '<leader>ff', telescope_builtin.find_files, {})
+keymap('n', '<leader>fg', telescope_builtin.live_grep, {})
+keymap('n', '<leader>fb', telescope_builtin.buffers, {})
+keymap('n', '<leader>fr', telescope_builtin.lsp_references, {})
+keymap('n', '<leader>fi', telescope_builtin.lsp_implementations, {})
+keymap('n', '<leader>fd', telescope_builtin.lsp_definitions, {})
+keymap('n', '<leader>ft', telescope_builtin.lsp_type_definitions, {})
+keymap('n', '<leader>fh', telescope_builtin.help_tags, {})
 
-keymap('n', '<leader>gs', builtin.git_status, {})
-keymap('n', '<leader>gc', builtin.git_commits, {})
-keymap('n', '<leader>gb', builtin.git_branches, {})
+keymap('n', '<leader>gs', telescope_builtin.git_status, {})
+keymap('n', '<leader>gc', telescope_builtin.git_commits, {})
+keymap('n', '<leader>gb', telescope_builtin.git_branches, {})
 
-keymap('n', '<leader>sd', builtin.diagnostics, {})
+keymap('n', '<leader>sd', telescope_builtin.diagnostics, {})
 
 -- DAP-UI
 local dap_ui = require('dapui')
