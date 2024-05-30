@@ -14,6 +14,7 @@ vim.opt.relativenumber    = true  -- rel line numbers
 vim.opt.wildmode          = {'longest', 'list'} -- bashlike tab completion
 vim.opt.cc                = {80, 140}
 vim.opt.linespace         = 1
+vim.opt.signcolumn        = 'yes'
 
 -- SEARCHING
 vim.opt.showmatch         = false -- show matching
@@ -39,11 +40,11 @@ vim.opt.listchars:append "eol:↴"
 
 -- CURSOR: Enables blinkng & highlighting with different cursor shapes per mode.
 vim.opt.guicursor         = {
-  'n-v-c:block',
-  'i-ci-ve:ver25-blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
-  'r-cr:hor20',
-  'o:hor50',
-  'sm:block-blinkwait175-blinkoff150-blinkon175'
+    'n-v-c:block',
+    'i-ci-ve:ver25-blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
+    'r-cr:hor20',
+    'o:hor50',
+    'sm:block-blinkwait175-blinkoff150-blinkon175'
 }
 
 -- Disable Netrw for nvim-tree
@@ -52,7 +53,7 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Disable Comments on Newline
 --vim.api.nvim_create_autocmd("FileType", {
-  --command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
+--command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
 --})
 
 vim.g.cssColorVimDoNotMessMyUpdatetime = 1
