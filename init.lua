@@ -4,4 +4,4 @@ require('keymap')
 require('dap-config')
 require('cmp-config')
 
-print 'All configurations loaded successfully.'
+print('All configurations loaded successfully.')
