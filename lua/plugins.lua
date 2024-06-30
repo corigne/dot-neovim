@@ -65,13 +65,12 @@ require('lazy').setup({
         },
         init = function() vim.g.barbar_auto_setup = false end,
         opts = {
-            animation = true,
+            animation = false,
             insert_at_start = true,
             sidebar_filetypes = {
                 NvimTree = true,
             },
         },
-        version = '^1.0.0', -- optional: only update when a new 1.x version is released
     },
     {
         "kdheepak/lazygit.nvim",
@@ -212,6 +211,19 @@ require('lazy').setup({
 
     -- clipboard (dependencies an osc52 compliant terminal emulator)
     'ojroques/nvim-osc52',
+    -- org mode
+    {
+        'nvim-orgmode/orgmode',
+        event = 'VeryLazy',
+        ft = { 'org' },
+        config = function()
+            -- Setup orgmode
+            require('orgmode').setup({
+                org_agenda_files = '~/orgfiles/**/*',
+                org_default_notes_file = '~/orgfiles/refile.org',
+            })
+        end,
+    },
     -- comments, whitespace, and highlighting (ts)
     'preservim/nerdcommenter',
 
@@ -362,7 +374,7 @@ require'nvim-treesitter.configs'.setup {
 
     sync_install = false,
     auto_install = true,
-    ignore_install = { '' },
+    ignore_install = { 'org' },
 
     highlight = {
         enable = true,
