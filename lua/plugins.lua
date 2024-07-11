@@ -1,14 +1,14 @@
 -- PLUGIN SETTINGS
 
 -- Installs lazy.nvim if it isn't installed already.
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
@@ -20,7 +20,7 @@ vim.g.maplocalleader  = ' '
 require('lazy').setup({
 
     -- Color Schemes, can be set to one of these in core.lua
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
     'rebelot/kanagawa.nvim',
     'dracula/vim',
     'sainnhe/everforest',
@@ -33,24 +33,24 @@ require('lazy').setup({
 
     -- Window and Workflow Improvements
     {
-        "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+        'nvim-telescope/telescope-file-browser.nvim',
+        dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
     },
     {
-        "nvim-tree/nvim-tree.lua",
+        'nvim-tree/nvim-tree.lua',
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
     {
-        "kylechui/nvim-surround",
-        version = "*", -- Use for stability; omit to use `main` branch for the latest features
-        event = "VeryLazy",
+        'kylechui/nvim-surround',
+        version = '*', -- Use for stability; omit to use `main` branch for the latest features
+        event = 'VeryLazy',
         config = function()
-            require("nvim-surround").setup()
+            require('nvim-surround').setup()
         end
     },
     {
-        "folke/todo-comments.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        'folke/todo-comments.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {
             -- your configuration comes here
             -- or leave it empty to use the default settings
@@ -73,10 +73,10 @@ require('lazy').setup({
         },
     },
     {
-        "kdheepak/lazygit.nvim",
+        'kdheepak/lazygit.nvim',
         -- optional for floating window border decoration
         dependencies = {
-            "nvim-lua/plenary.nvim",
+            'nvim-lua/plenary.nvim',
         },
     },
     'andweeb/presence.nvim',
@@ -115,22 +115,21 @@ require('lazy').setup({
         dependencies = { {'nvim-dap'} },
     },
 
-    'jose-elias-alvarez/null-ls.nvim',
-    'jay-babu/mason-null-ls.nvim',
-    "jay-babu/mason-nvim-dap.nvim",
+    'mfussenegger/nvim-lint',
+    'jay-babu/mason-nvim-dap.nvim',
     {
-        "ray-x/go.nvim",
+        'ray-x/go.nvim',
         dependencies = {  -- optional packages
-            "ray-x/guihua.lua",
-            "neovim/nvim-lspconfig",
-            "nvim-treesitter/nvim-treesitter",
+            'ray-x/guihua.lua',
+            'neovim/nvim-lspconfig',
+            'nvim-treesitter/nvim-treesitter',
         },
         config = function()
-            require("go").setup()
+            require('go').setup()
         end,
-        event = {"CmdlineEnter"},
-        ft = {"go", 'gomod'},
-        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+        event = {'CmdlineEnter'},
+        ft = {'go', 'gomod'},
+        build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     },
     {
         "kevinhwang91/nvim-ufo",
@@ -158,60 +157,61 @@ require('lazy').setup({
     'rafamadriz/friendly-snippets',
     'saadparwaiz1/cmp_luasnip',
     {
-        "L3MON4D3/LuaSnip",
+        'L3MON4D3/LuaSnip',
         -- follow latest release.
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         -- install jsregexp (optional!).
-        build = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" },
+        build = 'make install_jsregexp',
+        dependencies = { 'rafamadriz/friendly-snippets' },
     },
     { 'folke/neodev.nvim', opts = {} },
     {
-        "folke/trouble.nvim",
+        'folke/trouble.nvim',
         opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
+        cmd = 'Trouble',
         keys = {
             {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
+                '<leader>xx',
+                '<cmd>Trouble diagnostics toggle<cr>',
+                desc = 'Diagnostics (Trouble)',
             },
             {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
+                '<leader>xX',
+                '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+                desc = 'Buffer Diagnostics (Trouble)',
             },
             {
-                "<leader>cs",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
-                desc = "Symbols (Trouble)",
+                '<leader>cs',
+                '<cmd>Trouble symbols toggle focus=false<cr>',
+                desc = 'Symbols (Trouble)',
             },
             {
-                "<leader>cl",
-                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-                desc = "LSP Definitions / references / ... (Trouble)",
+                '<leader>cl',
+                '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+                desc = 'LSP Definitions / references / ... (Trouble)',
             },
             {
-                "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
+                '<leader>xL',
+                '<cmd>Trouble loclist toggle<cr>',
+                desc = 'Location List (Trouble)',
             },
             {
-                "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
+                '<leader>xQ',
+                '<cmd>Trouble qflist toggle<cr>',
+                desc = 'Quickfix List (Trouble)',
             },
         },
     },
     {
-        "danymat/neogen",
+        'danymat/neogen',
         config = true,
         -- Uncomment next line if you want to follow only stable versions
-        -- version = "*"
+        -- version = '*'
     },
 
     -- bracketing
     'windwp/nvim-autopairs',
+    'windwp/nvim-ts-autotag',
 
     -- clipboard (dependencies an osc52 compliant terminal emulator)
     'ojroques/nvim-osc52',
@@ -230,11 +230,10 @@ require('lazy').setup({
     },
     -- comments, whitespace, and highlighting (ts)
     'preservim/nerdcommenter',
-
     {
         'mcauley-penney/tidy.nvim',
         opts = {
-            filetype_exclude = { 'markdown', 'diff' }
+            filetype_exclude = { 'markdown', 'diff', 'svelte' }
         },
         init = function()
             vim.keymap.set('n', '<leader>te', require('tidy').toggle, {})
@@ -259,23 +258,23 @@ require('lazy').setup({
     },
     { 'lukas-reineke/indent-blankline.nvim' },
     'yaocccc/nvim-hlchunk',
-    --{ "shellRaining/hlchunk.nvim", event = { "UIEnter" }, },
+    --{ 'shellRaining/hlchunk.nvim', event = { 'UIEnter' }, },
     'brenoprata10/nvim-highlight-colors', -- highlight color in css files
 })
 
 -- plugin configuration
 
-require("catppuccin").setup({
-    flavour = "frappe", -- latte, frappe, macchiato, mocha
+require('catppuccin').setup({
+    flavour = 'frappe', -- latte, frappe, macchiato, mocha
     background = { -- :h background
-        light = "latte",
-        dark = "frappe",
+        light = 'latte',
+        dark = 'frappe',
     },
     transparent_background = false, -- disables setting the background color.
     show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
     dim_inactive = {
         enabled = false, -- dims the background color of inactive window
-        shade = "dark",
+        shade = 'dark',
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
     },
     integrations = {
@@ -286,17 +285,17 @@ require("catppuccin").setup({
         notify = false,
         mini = {
             enabled = true,
-            indentscope_color = "",
+            indentscope_color = '',
         },
     },
 })
 
-require("nvim-tree").setup({
+require('nvim-tree').setup({
     git = {
         enable = true,
     },
     sort = {
-        sorter = "case_sensitive",
+        sorter = 'case_sensitive',
     },
     view = {
         width = 42,
@@ -304,14 +303,14 @@ require("nvim-tree").setup({
     },
     renderer = {
         group_empty = true,
-        highlight_git = "all",
+        highlight_git = 'all',
     },
     filters = {
         dotfiles = true,
     },
 })
 
-require("nvim-highlight-colors").setup {
+require('nvim-highlight-colors').setup {
     ---Render style
     ---@usage 'background'|'foreground'|'virtual'
     render = 'background',
@@ -332,15 +331,15 @@ require("nvim-highlight-colors").setup {
     }
 }
 
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+local parser_config = require 'nvim-treesitter.parsers'.get_parser_configs()
 parser_config.openscad = {
     install_info = {
-        url = "https://github.com/bollian/tree-sitter-openscad",
-        files = {"src/parser.c"},
+        url = 'https://github.com/bollian/tree-sitter-openscad',
+        files = {'src/parser.c'},
         generate_requires_npm = true,
         requires_generate_from_grammar = false
     },
-    filetype = "scad"
+    filetype = 'scad'
 }
 
 require'nvim-treesitter.configs'.setup {
@@ -399,7 +398,7 @@ require('mason-lspconfig').setup({
 })
 require('mason-nvim-dap').setup({
     automatic_installation = true,
-    ensure_installed = { "codelldb", "delve", "python" },
+    ensure_installed = { 'codelldb', 'delve', 'python' },
     handlers = {
         function(config)
             -- all sources with no handler get passed here
@@ -410,48 +409,48 @@ require('mason-nvim-dap').setup({
         delve = function(config)
             config.configurations = {
                 {
-                    type = "delve",
-                    name = "Debug File",
-                    request = "launch",
-                    program = "${file}"
+                    type = 'delve',
+                    name = 'Debug File',
+                    request = 'launch',
+                    program = '${file}'
                 },
                 {
-                    type = "delve",
-                    name = "Debug Module",
-                    request = "launch",
-                    program = "./${relativeFileDirname}"
+                    type = 'delve',
+                    name = 'Debug Module',
+                    request = 'launch',
+                    program = './${relativeFileDirname}'
                 },
                 {
-                    type = "delve",
-                    name = "Debug Module w/ Args",
-                    request = "launch",
-                    program = "./${relativeFileDirname}",
+                    type = 'delve',
+                    name = 'Debug Module w/ Args',
+                    request = 'launch',
+                    program = './${relativeFileDirname}',
                     args = function()
-                        local args_string = vim.fn.input("Arguments: ")
-                        return vim.split(args_string, " ")
+                        local args_string = vim.fn.input('Arguments: ')
+                        return vim.split(args_string, ' ')
                     end,
                 },
                 {
-                    type = "delve",
-                    name = "Debug File Tests",
-                    request = "launch",
-                    mode = "test",
-                    program = "${file}"
+                    type = 'delve',
+                    name = 'Debug File Tests',
+                    request = 'launch',
+                    mode = 'test',
+                    program = '${file}'
                 },
                 {
-                    type = "delve",
-                    name = "Debug Module Tests",
-                    request = "launch",
-                    mode = "test",
-                    program = "./${relativeFileDirname}"
+                    type = 'delve',
+                    name = 'Debug Module Tests',
+                    request = 'launch',
+                    mode = 'test',
+                    program = './${relativeFileDirname}'
                 }
             }
             config.adapters = {
-                type = "server",
-                port = "${port}",
+                type = 'server',
+                port = '${port}',
                 executable = {
-                    command = vim.fn.stdpath("data") .. '/mason/bin/dlv',
-                    args = { "dap", "-l", "127.0.0.1:${port}" },
+                    command = vim.fn.stdpath('data') .. '/mason/bin/dlv',
+                    args = { 'dap', '-l', '127.0.0.1:${port}' },
                 },
             }
             require('mason-nvim-dap').default_setup(config) -- don't forget this!
@@ -460,15 +459,6 @@ require('mason-nvim-dap').setup({
 })
 
 require('lspconfig').glslls.setup{}
-
-require('null-ls').setup({
-    -- STUFF NOT SUPPORTED BY MASON HERE
-})
-require('mason-null-ls').setup({
-    -- AUTOMATIC SETUP ENABLED
-    handlers = {},
-})
-
 require('mason-lspconfig').setup_handlers({
     function (server_name) -- automatically handles installed by Mason
         lspconfig[server_name].setup({
@@ -485,8 +475,8 @@ require('mason-lspconfig').setup_handlers({
         }
     end,
 
-    ["rust_analyzer"] = function ()
-        require("rust-tools").setup()
+    ['rust_analyzer'] = function ()
+        require('rust-tools').setup()
     end,
 
     ['lua_ls'] = function ()
@@ -543,6 +533,7 @@ require('ufo').setup({
 -- End Setup Folding
 
 require("presence").setup({ })
+
 local wilder = require('wilder')
 wilder.setup({modes = {':', '/', '?'}})
 wilder.set_option('renderer', wilder.popupmenu_renderer({
@@ -550,6 +541,19 @@ wilder.set_option('renderer', wilder.popupmenu_renderer({
     highlighter = wilder.basic_highlighter(),
 }))
 require('nvim-autopairs').setup {}
+require('nvim-ts-autotag').setup({
+  opts = {
+    -- Defaults
+    enable_close = true, -- Auto close tags
+    enable_rename = true, -- Auto rename pairs of tags
+    enable_close_on_slash = false -- Auto close on trailing </
+  },
+  -- Also override individual filetype configs, these take priority.
+  -- Empty by default, useful if one of the "opts" global settings
+  -- doesn't work well in a specific filetype
+  per_filetype = {
+  }
+})
 require('scope').setup({})
 require('telescope').setup{
     defaults = {
@@ -560,7 +564,7 @@ require('telescope').setup{
                 -- map actions.which_key to <C-h> (default: <C-/>)
                 -- actions.which_key shows the mappings for your picker,
                 -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-                ["<C-h>"] = "which_key"
+                ['<C-h>'] = 'which_key'
             }
         }
     },
@@ -576,14 +580,14 @@ require('telescope').setup{
     extensions = {
         -- Your extension configuration goes here:
         file_browser = {
-            -- theme = "ivy",
+            -- theme = 'ivy',
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = false,
             mappings = {
-                ["i"] = {
+                ['i'] = {
                     -- your custom insert mode mappings
                 },
-                ["n"] = {
+                ['n'] = {
                     -- your custom normal mode mappings
                 },
             },
@@ -595,5 +599,5 @@ require('telescope').setup{
     }
 }
 require('telescope').load_extension('scope')
-require("telescope").load_extension('file_browser')
+require('telescope').load_extension('file_browser')
 require('gitsigns').setup()
