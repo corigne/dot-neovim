@@ -12,7 +12,7 @@ vim.cmd.colorscheme         'catppuccin'
 vim.opt.number              = true  -- line numbers
 vim.opt.relativenumber      = true  -- rel line numbers
 vim.opt.wildmode            = {'longest', 'list'} -- bashlike tab completion
-vim.opt.cc                  = {80, 140}
+vim.opt.cc                  = {79, 139}
 vim.opt.linespace           = 1
 vim.opt.signcolumn          = 'yes'
 

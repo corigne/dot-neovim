@@ -229,6 +229,7 @@ require('lazy').setup({
         end,
     },
     -- comments, whitespace, and highlighting (ts)
+    'tpope/vim-sleuth',
     'preservim/nerdcommenter',
     {
         'mcauley-penney/tidy.nvim',
