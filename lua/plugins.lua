@@ -96,7 +96,7 @@ require('lazy').setup({
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
 
-    -- LSP, Debugging, and LINT
+    -- LSP, Folds, Debugging, and LINT
     'neovim/nvim-lspconfig',
     {
         'williamboman/mason.nvim',
@@ -131,6 +131,10 @@ require('lazy').setup({
         event = {"CmdlineEnter"},
         ft = {"go", 'gomod'},
         build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    },
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = "kevinhwang91/promise-async",
     },
     -- Autocompletion Engine and Extensions
     {
@@ -515,6 +519,28 @@ require('mason-lspconfig').setup_handlers({
         }
     end,
 })
+
+-- Setup Folding
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+-- Option 3: treesitter as a main provider instead
+-- (Note: the `nvim-treesitter` plugin is *not* needed.)
+-- ufo uses the same query files for folding (queries/<lang>/folds.scm)
+-- performance and stability are better than `foldmethod=nvim_treesitter#foldexpr()`
+require('ufo').setup({
+    provider_selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+})
+--
+-- End Setup Folding
 
 require("presence").setup({ })
 local wilder = require('wilder')
