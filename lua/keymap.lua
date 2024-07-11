@@ -30,6 +30,7 @@ keymap('n', '<leader>nt', toggle_tidy, {})
 local telescope_builtin = require('telescope.builtin')
 
 keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', opts)
+keymap('n' , '<leader>ttf',':NvimTreeFindFile<CR>', opts)
 keymap('n', '<leader>tf', ':Telescope file_browser<CR>', {})
 keymap('n', '<leader>ff', telescope_builtin.find_files, {})
 keymap('n', '<leader>fg', telescope_builtin.live_grep, {})

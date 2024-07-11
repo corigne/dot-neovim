@@ -299,7 +299,10 @@ require('nvim-tree').setup({
         sorter = 'case_sensitive',
     },
     view = {
-        width = 42,
+        width = {
+            min = 30,
+            max = 75
+        },
         relativenumber = true,
     },
     renderer = {
@@ -308,6 +311,7 @@ require('nvim-tree').setup({
     },
     filters = {
         dotfiles = true,
+        git_ignored = false,
     },
 })
 
