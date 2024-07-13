@@ -12,6 +12,9 @@ keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 -- ==================
 -- Buffers
 keymap('n', '<leader>q', ':BufferClose<CR>', {})
+keymap('n', '<leader>qq', ':BufferClose!<CR>', {})
+keymap('n', '<leader>qa', ':BufferCloseAllButCurrent<CR>', {})
+keymap('n', '<leader>qp', ':BufferCloseAllButCurrentOrPinned<CR>', {})
 keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
 keymap('n', '<leader>bl', ':ls<CR>', {})
 
