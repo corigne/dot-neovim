@@ -482,7 +482,6 @@ require('mason-nvim-dap').setup({
     },
 })
 
-require('lspconfig').glslls.setup{}
 require('mason-lspconfig').setup_handlers({
     function (server_name) -- automatically handles installed by Mason
         lspconfig[server_name].setup({
