@@ -15,6 +15,8 @@ vim.opt.wildmode            = {'longest', 'list'} -- bashlike tab completion
 vim.opt.cc                  = {79, 139}
 vim.opt.linespace           = 1
 vim.opt.signcolumn          = 'yes'
+vim.opt.wrap                = true
+vim.opt.linebreak           = true
 
 -- SEARCHING
 vim.opt.showmatch           = false -- show matching
