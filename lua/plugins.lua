@@ -489,57 +489,6 @@ require('mason-nvim-dap').setup({
     },
 })
 
-require('mason-lspconfig').setup_handlers({
-    function (server_name) -- automatically handles installed by Mason
-        lspconfig[server_name].setup({
-            capabilities = capabilities,
-        })
-    end,
-
-    ['cssls'] = function ()
-        --Enable (broadcasting) snippet capability for completion
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-        require'lspconfig'.cssls.setup {
-            capabilities = capabilities,
-        }
-    end,
-
-    ['rust_analyzer'] = function ()
-        require('rust-tools').setup()
-    end,
-
-    ['lua_ls'] = function ()
-        lspconfig.lua_ls.setup {
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        globals = {'vim', 'require'},
-                    },
-                },
-            },
-        }
-    end,
-
-    ['clangd'] = function ()
-        lspconfig.clangd.setup {
-            cmd = {
-                'clangd',
-                '--background-index',
-                '-j=12',
-                '--clang-tidy',
-                '--clang-tidy-checks=*',
-                '--all-scopes-completion',
-                '--cross-file-rename',
-                '--completion-style=detailed',
-                '--pch-storage=memory',
-                '--suggest-missing-includes',
-            },
-            capabilities = capabilities,
-        }
-    end,
-})
-
 -- Setup Folding
 vim.o.foldcolumn = '1' -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
