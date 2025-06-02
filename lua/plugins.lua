@@ -115,7 +115,11 @@ require('lazy').setup({
         dependencies = { {'nvim-dap'} },
     },
 
-    'mfussenegger/nvim-lint',
+    {
+    'nvimtools/none-ls.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' }
+    },
+    'jay-babu/mason-null-ls.nvim',
     'jay-babu/mason-nvim-dap.nvim',
     {
         'ray-x/go.nvim',
@@ -419,6 +423,9 @@ require('lualine').setup({})
 require('mason').setup()
 require('mason-lspconfig').setup({
     automatic_installation = true,
+})
+require('mason-null-ls').setup({
+    handlers = {},
 })
 require('mason-nvim-dap').setup({
     automatic_installation = true,

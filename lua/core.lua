@@ -6,6 +6,10 @@ vim.opt.mouse               = 'a'   -- mouse clicking enabled in all modes
 vim.opt.ttyfast             = true
 vim.opt.compatible          = false -- disable oldvi compatibility
 
+-- PROVIDERS
+vim.g.perl_host_prog        = '/usr/bin/perl'
+vim.g.loaded_perl_provider  = 0
+
 -- VISUAL
 vim.opt.termguicolors       = true
 vim.cmd.colorscheme         'catppuccin'
@@ -63,9 +67,9 @@ vim.g.loaded_netrw          = 1
 vim.g.loaded_netrwPlugin    = 1
 
 -- Uncomment Below to Disable Comments on Newline
---vim.api.nvim_create_autocmd("FileType", {
---command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
---})
+vim.api.nvim_create_autocmd("FileType", {
+command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
+})
 
 -- I don't remember why I put this here.
 vim.g.cssColorVimDoNotMessMyUpdatetime = 1
