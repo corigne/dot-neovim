@@ -3,14 +3,14 @@
 -- Installs lazy.nvim if it isn't installed already.
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath,
+    })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -20,25 +20,52 @@ vim.g.maplocalleader  = ' '
 require('lazy').setup({
 
     -- Color Schemes, can be set to one of these in core.lua
-    { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
-    'rebelot/kanagawa.nvim',
-    'dracula/vim',
-    'sainnhe/everforest',
-    'ayu-theme/ayu-vim',
-    'folke/tokyonight.nvim',
+    {
+        'catppuccin/nvim',
+        name = 'catppuccin',
+        priority = 1000,
+        cond = not vim.g.vscode,
+    },
+    {
+        'rebelot/kanagawa.nvim',
+        cond = not vim.g.vscode,
+    },
+    {
+        'dracula/vim',
+        cond = not vim.g.vscode,
+    },
+    {
+        'ayu-theme/ayu-vim',
+        cond = not vim.g.vscode,
+    },
+    {
+        'folke/tokyonight.nvim',
+        cond = not vim.g.vscode,
+    },
+    {
+        'sainnhe/everforest',
+        cond = not vim.g.vscode,
+    },
+    {
+        'nvim-tree/nvim-web-devicons',
+        cond = not vim.g.vscode,
+    },
 
     -- Icons
-    'nvim-tree/nvim-web-devicons',
-    'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
+    {
+        'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
+        cond = not vim.g.vscode,
+    },
 
     -- Window and Workflow Improvements
     {
         'nvim-telescope/telescope-file-browser.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' }
+        dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
     },
     {
         'nvim-tree/nvim-tree.lua',
-        dependencies = { 'nvim-tree/nvim-web-devicons' }
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        cond = not vim.g.vscode
     },
     {
         'kylechui/nvim-surround',
@@ -71,6 +98,7 @@ require('lazy').setup({
                 NvimTree = true,
             },
         },
+        cond = not vim.g.vscode
     },
     {
         'kdheepak/lazygit.nvim',
@@ -80,12 +108,16 @@ require('lazy').setup({
         },
     },
     'andweeb/presence.nvim',
-    'gelguy/wilder.nvim',
+    {
+        'gelguy/wilder.nvim',
+        cond = not vim.g.vscode
+    },
 
     -- Status line (bottom)
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' }
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        cond = not vim.g.vscode
     },
     'tiagovla/scope.nvim',
 
@@ -116,7 +148,7 @@ require('lazy').setup({
     },
 
     {
-    'nvimtools/none-ls.nvim',
+        'nvimtools/none-ls.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     'jay-babu/mason-null-ls.nvim',
@@ -151,7 +183,10 @@ require('lazy').setup({
         }
     },
 
-    'simrat39/rust-tools.nvim',
+    {
+        'simrat39/rust-tools.nvim',
+        cond = not vim.g.vscode
+    },
 
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-path',
@@ -168,7 +203,10 @@ require('lazy').setup({
         build = 'make install_jsregexp',
         dependencies = { 'rafamadriz/friendly-snippets' },
     },
-    { 'folke/neodev.nvim', opts = {} },
+    {
+        'folke/neodev.nvim',
+        opts = {},
+    },
     {
         'folke/trouble.nvim',
         opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -205,6 +243,7 @@ require('lazy').setup({
                 desc = 'Quickfix List (Trouble)',
             },
         },
+        cond = not vim.g.vscode
     },
     {
         'danymat/neogen',
@@ -218,7 +257,10 @@ require('lazy').setup({
     'windwp/nvim-ts-autotag',
 
     -- clipboard (dependencies an osc52 compliant terminal emulator)
-    'ojroques/nvim-osc52',
+    {
+        'ojroques/nvim-osc52',
+        cond = not vim.g.vscode
+    },
     -- org mode
     {
         'nvim-orgmode/orgmode',
@@ -244,13 +286,11 @@ require('lazy').setup({
             vim.keymap.set('n', '<leader>te', require('tidy').toggle, {})
         end
     },
-
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = false,
         build = ':TSUpdate',
     },
-
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
         init = function()
@@ -276,60 +316,11 @@ require('lazy').setup({
         config = function()
             require('kitty-scrollback').setup()
         end,
+        cond = not vim.g.vscode
     }
 })
 
 -- plugin configuration
-
-require('catppuccin').setup({
-    flavour = 'frappe', -- latte, frappe, macchiato, mocha
-    background = { -- :h background
-        light = 'latte',
-        dark = 'frappe',
-    },
-    transparent_background = false, -- disables setting the background color.
-    show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
-    dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
-        shade = 'dark',
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
-    },
-    integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        notify = false,
-        mini = {
-            enabled = true,
-            indentscope_color = '',
-        },
-    },
-})
-
-require('nvim-tree').setup({
-    git = {
-        enable = true,
-    },
-    sort = {
-        sorter = 'case_sensitive',
-    },
-    view = {
-        width = {
-            min = 30,
-            max = 75
-        },
-        relativenumber = true,
-    },
-    renderer = {
-        group_empty = true,
-        highlight_git = 'all',
-    },
-    filters = {
-        dotfiles = true,
-        git_ignored = false,
-    },
-})
 
 require('nvim-highlight-colors').setup {
     ---Render style
@@ -419,74 +410,12 @@ local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('lualine').setup({})
 require('mason').setup()
 require('mason-lspconfig').setup({
     automatic_installation = true,
 })
 require('mason-null-ls').setup({
     handlers = {},
-})
-require('mason-nvim-dap').setup({
-    automatic_installation = true,
-    ensure_installed = { 'codelldb', 'delve', 'python' },
-    handlers = {
-        function(config)
-            -- all sources with no handler get passed here
-
-            -- Keep original functionality
-            require('mason-nvim-dap').default_setup(config)
-        end,
-        delve = function(config)
-            config.configurations = {
-                {
-                    type = 'delve',
-                    name = 'Debug File',
-                    request = 'launch',
-                    program = '${file}'
-                },
-                {
-                    type = 'delve',
-                    name = 'Debug Module',
-                    request = 'launch',
-                    program = './${relativeFileDirname}'
-                },
-                {
-                    type = 'delve',
-                    name = 'Debug Module w/ Args',
-                    request = 'launch',
-                    program = './${relativeFileDirname}',
-                    args = function()
-                        local args_string = vim.fn.input('Arguments: ')
-                        return vim.split(args_string, ' ')
-                    end,
-                },
-                {
-                    type = 'delve',
-                    name = 'Debug File Tests',
-                    request = 'launch',
-                    mode = 'test',
-                    program = '${file}'
-                },
-                {
-                    type = 'delve',
-                    name = 'Debug Module Tests',
-                    request = 'launch',
-                    mode = 'test',
-                    program = './${relativeFileDirname}'
-                }
-            }
-            config.adapters = {
-                type = 'server',
-                port = '${port}',
-                executable = {
-                    command = vim.fn.stdpath('data') .. '/mason/bin/dlv',
-                    args = { 'dap', '-l', '127.0.0.1:${port}' },
-                },
-            }
-            require('mason-nvim-dap').default_setup(config) -- don't forget this!
-        end,
-    },
 })
 
 -- Setup Folding
@@ -513,25 +442,19 @@ require('ufo').setup({
 
 require("presence").setup({ })
 
-local wilder = require('wilder')
-wilder.setup({modes = {':', '/', '?'}})
-wilder.set_option('renderer', wilder.popupmenu_renderer({
-    -- highlighter applies highlighting to the candidates
-    highlighter = wilder.basic_highlighter(),
-}))
 require('nvim-autopairs').setup {}
 require('nvim-ts-autotag').setup({
-  opts = {
-    -- Defaults
-    enable_close = true, -- Auto close tags
-    enable_rename = true, -- Auto rename pairs of tags
-    enable_close_on_slash = false -- Auto close on trailing </
-  },
-  -- Also override individual filetype configs, these take priority.
-  -- Empty by default, useful if one of the "opts" global settings
-  -- doesn't work well in a specific filetype
-  per_filetype = {
-  }
+    opts = {
+        -- Defaults
+        enable_close = true, -- Auto close tags
+        enable_rename = true, -- Auto rename pairs of tags
+        enable_close_on_slash = false -- Auto close on trailing </
+    },
+    -- Also override individual filetype configs, these take priority.
+    -- Empty by default, useful if one of the "opts" global settings
+    -- doesn't work well in a specific filetype
+    per_filetype = {
+    }
 })
 require('scope').setup({})
 require('telescope').setup{
@@ -580,3 +503,125 @@ require('telescope').setup{
 require('telescope').load_extension('scope')
 require('telescope').load_extension('file_browser')
 require('gitsigns').setup()
+
+if not vim.g.vscode then
+    require('catppuccin').setup({
+        flavour = 'frappe', -- latte, frappe, macchiato, mocha
+        background = { -- :h background
+            light = 'latte',
+            dark = 'frappe',
+        },
+        transparent_background = false, -- disables setting the background color.
+        show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
+        dim_inactive = {
+            enabled = false, -- dims the background color of inactive window
+            shade = 'dark',
+            percentage = 0.15, -- percentage of the shade to apply to the inactive window
+        },
+        integrations = {
+            cmp = true,
+            gitsigns = true,
+            nvimtree = true,
+            treesitter = true,
+            notify = false,
+            mini = {
+                enabled = true,
+                indentscope_color = '',
+            },
+        },
+    })
+
+    require('nvim-tree').setup({
+        git = {
+            enable = true,
+        },
+        sort = {
+            sorter = 'case_sensitive',
+        },
+        view = {
+            width = {
+                min = 30,
+                max = 75
+            },
+            relativenumber = true,
+        },
+        renderer = {
+            group_empty = true,
+            highlight_git = 'all',
+        },
+        filters = {
+            dotfiles = true,
+            git_ignored = false,
+        },
+    })
+
+    require('lualine').setup({})
+    require('mason-nvim-dap').setup({
+        automatic_installation = true,
+        ensure_installed = { 'codelldb', 'delve', 'python' },
+        handlers = {
+            function(config)
+                -- all sources with no handler get passed here
+
+                -- Keep original functionality
+                require('mason-nvim-dap').default_setup(config)
+            end,
+            delve = function(config)
+                config.configurations = {
+                    {
+                        type = 'delve',
+                        name = 'Debug File',
+                        request = 'launch',
+                        program = '${file}'
+                    },
+                    {
+                        type = 'delve',
+                        name = 'Debug Module',
+                        request = 'launch',
+                        program = './${relativeFileDirname}'
+                    },
+                    {
+                        type = 'delve',
+                        name = 'Debug Module w/ Args',
+                        request = 'launch',
+                        program = './${relativeFileDirname}',
+                        args = function()
+                            local args_string = vim.fn.input('Arguments: ')
+                            return vim.split(args_string, ' ')
+                        end,
+                    },
+                    {
+                        type = 'delve',
+                        name = 'Debug File Tests',
+                        request = 'launch',
+                        mode = 'test',
+                        program = '${file}'
+                    },
+                    {
+                        type = 'delve',
+                        name = 'Debug Module Tests',
+                        request = 'launch',
+                        mode = 'test',
+                        program = './${relativeFileDirname}'
+                    }
+                }
+                config.adapters = {
+                    type = 'server',
+                    port = '${port}',
+                    executable = {
+                        command = vim.fn.stdpath('data') .. '/mason/bin/dlv',
+                        args = { 'dap', '-l', '127.0.0.1:${port}' },
+                    },
+                }
+                require('mason-nvim-dap').default_setup(config) -- don't forget this!
+            end,
+        },
+    })
+
+    local wilder = require('wilder')
+    wilder.setup({modes = {':', '/', '?'}})
+    wilder.set_option('renderer', wilder.popupmenu_renderer({
+        -- highlighter applies highlighting to the candidates
+        highlighter = wilder.basic_highlighter(),
+    }))
+end
