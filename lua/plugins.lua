@@ -24,37 +24,29 @@ require('lazy').setup({
         'catppuccin/nvim',
         name = 'catppuccin',
         priority = 1000,
-        cond = not vim.g.vscode,
     },
     {
         'rebelot/kanagawa.nvim',
-        cond = not vim.g.vscode,
     },
     {
         'dracula/vim',
-        cond = not vim.g.vscode,
     },
     {
         'ayu-theme/ayu-vim',
-        cond = not vim.g.vscode,
     },
     {
         'folke/tokyonight.nvim',
-        cond = not vim.g.vscode,
     },
     {
         'sainnhe/everforest',
-        cond = not vim.g.vscode,
     },
     {
         'nvim-tree/nvim-web-devicons',
-        cond = not vim.g.vscode,
     },
 
     -- Icons and Cursor
     {
         'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
-        cond = not vim.g.vscode,
     },
     {
         "sphamba/smear-cursor.nvim",
@@ -191,6 +183,7 @@ require('lazy').setup({
     },
     {
         'nvimdev/lspsaga.nvim',
+        cond = not vim.g.vscode,
         config = function()
             require('lspsaga').setup({})
         end,

@@ -28,6 +28,10 @@ if vim.g.os == "Windows" then
 end
 
 -- MISC
+if vim.g.vscode then
+  vim.g.cmdheight = 3
+  return
+end
 vim.opt.encoding            = 'utf-8'
 vim.opt.mouse               = 'a'   -- mouse clicking enabled in all modes
 vim.opt.ttyfast             = true

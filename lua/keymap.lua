@@ -19,9 +19,11 @@ keymap('n', '<leader>bl', ':ls<CR>', {})
 
 -- ==================
 -- Clipboard
-keymap('n', '<leader>y', require('osc52').copy_operator, {expr = true})
+if not vim.g.vscode then
+    keymap('n', '<leader>y', require('osc52').copy_operator, {expr = true})
+    keymap('v', '<leader>y', require('osc52').copy_visual)
+end
 keymap('n', '<leader>yy', '<leader>y_', {remap = true})
-keymap('v', '<leader>y', require('osc52').copy_visual)
 
 -- ==================
 -- Autoformat toggle for buffer.
@@ -96,72 +98,74 @@ keymap('n', '<M-c>p', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', opts)
 -- Magic buffer-picking mode
 keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
 
--- ==================
--- Lspsaga Keybindings --
+if not vim.g.vscode then
+    -- ==================
+    -- Lspsaga Keybindings --
 
--- LSP finder - Find the symbol's definition
--- If there is no definition, it will instead be hidden
--- When you use an action in finder like "open vsplit",
--- you can use <C-t> to jump back
--- keymap("n", "gh", "<cmd>Lspsaga finder tyd+ref+imp+def <CR>")
+    -- LSP finder - Find the symbol's definition
+    -- If there is no definition, it will instead be hidden
+    -- When you use an action in finder like "open vsplit",
+    -- you can use <C-t> to jump back
+    -- keymap("n", "gh", "<cmd>Lspsaga finder tyd+ref+imp+def <CR>")
 
--- Code action
-keymap({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+    -- Code action
+    keymap({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
--- Rename all occurrences of the hovered word for the entire file
-keymap("n", "<leader>re", "<cmd>Lspsaga rename<CR>")
+    -- Rename all occurrences of the hovered word for the entire file
+    keymap("n", "<leader>re", "<cmd>Lspsaga rename<CR>")
 
--- Peek definition
--- You can edit the file containing the definition in the floating window
--- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
--- It also supports tagstack
--- Use <C-t> to jump back
-keymap("n", "<leader>pd", "<cmd>Lspsaga peek_definition<CR>")
+    -- Peek definition
+    -- You can edit the file containing the definition in the floating window
+    -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+    -- It also supports tagstack
+    -- Use <C-t> to jump back
+    keymap("n", "<leader>pd", "<cmd>Lspsaga peek_definition<CR>")
 
--- Go to definition
--- keymap("n","gd", "<cmd>Lspsaga goto_definition<CR>")
+    -- Go to definition
+    -- keymap("n","gd", "<cmd>Lspsaga goto_definition<CR>")
 
--- Peek type definition
--- You can edit the file containing the type definition in the floating window
--- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
--- It also supports tagstack
--- Use <C-t> to jump back
-keymap("n", "<leader>pt", "<cmd>Lspsaga peek_type_definition<CR>")
+    -- Peek type definition
+    -- You can edit the file containing the type definition in the floating window
+    -- It also supports open/vsplit/etc operations, do refer to "definition_action_keys"
+    -- It also supports tagstack
+    -- Use <C-t> to jump back
+    keymap("n", "<leader>pt", "<cmd>Lspsaga peek_type_definition<CR>")
 
--- Show line diagnostics
--- You can pass argument ++unfocus to
--- unfocus the show_line_diagnostics floating window
-keymap("n", "<leader>ss", "<cmd>Lspsaga show_line_diagnostics<CR>")
+    -- Show line diagnostics
+    -- You can pass argument ++unfocus to
+    -- unfocus the show_line_diagnostics floating window
+    keymap("n", "<leader>ss", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
--- Show buffer diagnostics
-keymap("n", "<leader>sd", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+    -- Show buffer diagnostics
+    keymap("n", "<leader>sd", "<cmd>Lspsaga show_buf_diagnostics<CR>")
 
--- Show workspace diagnostics
-keymap("n", "<leader>sa", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
+    -- Show workspace diagnostics
+    keymap("n", "<leader>sa", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
 
--- Show cursor diagnostics
-keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+    -- Show cursor diagnostics
+    keymap("n", "<leader>sc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 
--- Diagnostic jump
--- You can use <C-o> to jump back to your previous location
-keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+    -- Diagnostic jump
+    -- You can use <C-o> to jump back to your previous location
+    keymap("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+    keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
--- Toggle outline
-keymap("n","<leader>lo", "<cmd>Lspsaga outline<CR>")
+    -- Toggle outline
+    keymap("n","<leader>lo", "<cmd>Lspsaga outline<CR>")
 
--- Hover Doc
--- If there is no hover doc,
--- there will be a notification stating that
--- there is no information available.
--- To disable it just use ":Lspsaga hover_doc ++quiet"
--- Pressing the key twice will enter the hover window
-keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
+    -- Hover Doc
+    -- If there is no hover doc,
+    -- there will be a notification stating that
+    -- there is no information available.
+    -- To disable it just use ":Lspsaga hover_doc ++quiet"
+    -- Pressing the key twice will enter the hover window
+    keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 
--- Call hierarchy
-keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+    -- Call hierarchy
+    keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+    keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
--- Floating terminal
-keymap({"n", "t"}, "<D-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
-keymap({"n", "t"}, "<M-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+    -- Floating terminal
+    keymap({"n", "t"}, "<D-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+    keymap({"n", "t"}, "<M-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+end
