@@ -146,7 +146,7 @@ require('lazy').setup({
         'rcarriga/nvim-dap-ui',
         dependencies = { {'nvim-dap'} },
     },
-
+    'theHamsta/nvim-dap-virtual-text',
     {
         'nvimtools/none-ls.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
@@ -289,7 +289,7 @@ require('lazy').setup({
     'preservim/nerdcommenter',
     {
         'mcauley-penney/tidy.nvim',
-        cond = not vim.g.os == "Windows",
+        cond = vim.g.os ~= "Windows",
         branch = "main",
         opts = {
             filetype_exclude = { 'markdown', 'diff', 'svelte' }
