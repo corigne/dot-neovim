@@ -3,7 +3,6 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-local toggle_tidy = require("tidy").toggle
 
 -- ==================
 -- Clear Search HL
@@ -26,7 +25,10 @@ keymap('v', '<leader>y', require('osc52').copy_visual)
 
 -- ==================
 -- Autoformat toggle for buffer.
-keymap('n', '<leader>nt', toggle_tidy, {})
+if vim.g.os ~= "Windows" then
+    local toggle_tidy = require("tidy").toggle
+    keymap('n', '<leader>nt', toggle_tidy, {})
+end
 
 -- ==================
 -- Telescope and NvimTree
@@ -161,5 +163,5 @@ keymap("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
 -- Floating terminal
-keymap({"n", "t"}, "<D-d>", "<cmd>Lspsaga term_toggle<CR>")
-keymap({"n", "t"}, "<M-d>", "<cmd>Lspsaga term_toggle<CR>")
+keymap({"n", "t"}, "<D-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+keymap({"n", "t"}, "<M-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")

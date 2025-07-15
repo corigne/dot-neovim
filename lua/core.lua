@@ -1,4 +1,31 @@
 -- CORE NEOVIM CONFIG
+if vim.fn.exists('g:os') == 0 then
+    local is_windows = vim.fn.has("win64") == 1 or vim.fn.has("win32") == 1 or vim.fn.has("win16") == 1
+    if is_windows then
+        vim.g.os = "Windows"
+
+        vim.o.shell = "powershell"
+        local powershell_options = {
+            shell = vim.fn.executable "pwsh" == 1 and "pwsh" or "powershell",
+            shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+            shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
+            shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+            shellquote = "",
+            shellxquote = "",
+        }
+
+        for option, value in pairs(powershell_options) do
+            vim.opt[option] = value
+        end
+    else
+        local uname_output = vim.fn.system('uname')
+        vim.g.os = string.gsub(uname_output, '\n', '')
+    end
+end
+
+if vim.g.os == "Windows" then
+    -- windows specific shit here
+end
 
 -- MISC
 vim.opt.encoding            = 'utf-8'

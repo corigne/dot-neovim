@@ -51,10 +51,14 @@ require('lazy').setup({
         cond = not vim.g.vscode,
     },
 
-    -- Icons
+    -- Icons and Cursor
     {
         'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
         cond = not vim.g.vscode,
+    },
+    {
+        "sphamba/smear-cursor.nvim",
+        opts = {},
     },
 
     -- Window and Workflow Improvements
@@ -92,7 +96,7 @@ require('lazy').setup({
         },
         init = function() vim.g.barbar_auto_setup = false end,
         opts = {
-            animation = false,
+            animation = true,
             insert_at_start = true,
             sidebar_filetypes = {
                 NvimTree = true,
@@ -107,7 +111,11 @@ require('lazy').setup({
             'nvim-lua/plenary.nvim',
         },
     },
-    'andweeb/presence.nvim',
+    -- 'andweeb/presence.nvim',
+    {
+        'vyfor/cord.nvim',
+        build = ':Cord update',
+    },
     {
         'gelguy/wilder.nvim',
         cond = not vim.g.vscode
@@ -172,6 +180,15 @@ require('lazy').setup({
         dependencies = "kevinhwang91/promise-async",
     },
     -- Autocompletion Engine and Extensions
+    {
+        'akinsho/toggleterm.nvim',
+        version = "*",
+        config = function()
+            require("toggleterm").setup {
+                shell = vim.g.os == "Windows" and "powershell" or vim.o.shell
+            }
+        end,
+    },
     {
         'nvimdev/lspsaga.nvim',
         config = function()
@@ -279,12 +296,14 @@ require('lazy').setup({
     'preservim/nerdcommenter',
     {
         'mcauley-penney/tidy.nvim',
+        cond = not vim.g.os == "Windows",
+        branch = "main",
         opts = {
             filetype_exclude = { 'markdown', 'diff', 'svelte' }
         },
         init = function()
             vim.keymap.set('n', '<leader>te', require('tidy').toggle, {})
-        end
+        end,
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -440,7 +459,14 @@ require('ufo').setup({
 --
 -- End Setup Folding
 
-require("presence").setup({ })
+require('cord').setup {
+    display = {
+        theme = 'catppuccin',
+        flavor = 'dark',
+        swap_fields = false,
+        swap_icons = false,
+    },
+}
 
 require('nvim-autopairs').setup {}
 require('nvim-ts-autotag').setup({
