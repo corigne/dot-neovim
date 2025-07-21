@@ -10,38 +10,39 @@ keymap('n', '<leader>\\', ':nohl<CR><C-l>', { silent = true })
 
 -- ==================
 -- Buffers
-keymap('n', '<leader>q', ':BufferClose<CR>', {})
-keymap('n', '<leader>qq', ':BufferClose!<CR>', {})
-keymap('n', '<leader>qa', ':BufferCloseAllButCurrent<CR>', {})
-keymap('n', '<leader>qp', ':BufferCloseAllButCurrentOrPinned<CR>', {})
-keymap('n', '<leader>bc', ':ls<CR>:b<Space>', {})
-keymap('n', '<leader>bl', ':ls<CR>', {})
+keymap('n', '<leader>q', ':bp|bd #<CR>', {})
+keymap('n', '<leader>qq', ':bp|bd #!<CR>', {})
 
 -- ==================
 -- Clipboard
 if not vim.g.vscode then
-    keymap('n', '<leader>y', require('osc52').copy_operator, {expr = true})
+    keymap('n', '<leader>y', require('osc52').copy_operator, { expr = true })
     keymap('v', '<leader>y', require('osc52').copy_visual)
 end
-keymap('n', '<leader>yy', '<leader>y_', {remap = true})
+keymap('n', '<leader>yy', '<leader>y_', { remap = true })
 
 -- ==================
 -- Autoformat toggle for buffer.
 if vim.g.os ~= "Windows" then
     local toggle_tidy = require("tidy").toggle
-    keymap('n', '<leader>nt', toggle_tidy, {})
+    keymap('n', '<leader>te', toggle_tidy, {})
 end
 
 -- ==================
--- Telescope and NvimTree
+-- Folding
+-- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+
+-- ==================
+-- Telescope
 local telescope_builtin = require('telescope.builtin')
 
-keymap('n', '<leader>tt', ':NvimTreeToggle<CR>', opts)
-keymap('n' , '<leader>ttf',':NvimTreeFindFile<CR>', opts)
 keymap('n', '<leader>tf', ':Telescope file_browser<CR>', {})
+keymap('n', '<leader>tb', telescope_builtin.buffers, {})
 keymap('n', '<leader>ff', telescope_builtin.find_files, {})
 keymap('n', '<leader>fg', telescope_builtin.live_grep, {})
-keymap('n', '<leader>fb', telescope_builtin.buffers, {})
 keymap('n', '<leader>fr', telescope_builtin.lsp_references, {})
 keymap('n', '<leader>fi', telescope_builtin.lsp_implementations, {})
 keymap('n', '<leader>fd', telescope_builtin.lsp_definitions, {})
@@ -67,37 +68,6 @@ keymap("n", "<Leader>C", ":DapContinue<CR>", opts)
 keymap("n", "<Leader>I", ":DapStepInto<CR>", opts)
 keymap("n", "<Leader>O", ":DapStepOver<CR>", opts)
 
--- ==================
--- barbar Keybindings
-
--- Move to previous/next
-keymap('n', ',', '<Cmd>BufferPrevious<CR>', opts)
-keymap('n', '.', '<Cmd>BufferNext<CR>', opts)
--- Re-order to previous/next
-keymap('n', '<M-,>', '<Cmd>BufferMovePrevious<CR>', opts)
-keymap('n', '<M-.>', '<Cmd>BufferMoveNext<CR>', opts)
--- Goto buffer in position...
-keymap('n', '<M-1>', '<Cmd>BufferGoto 1<CR>', opts)
-keymap('n', '<M-2>', '<Cmd>BufferGoto 2<CR>', opts)
-keymap('n', '<M-3>', '<Cmd>BufferGoto 3<CR>', opts)
-keymap('n', '<M-4>', '<Cmd>BufferGoto 4<CR>', opts)
-keymap('n', '<M-5>', '<Cmd>BufferGoto 5<CR>', opts)
-keymap('n', '<M-6>', '<Cmd>BufferGoto 6<CR>', opts)
-keymap('n', '<M-7>', '<Cmd>BufferGoto 7<CR>', opts)
-keymap('n', '<M-8>', '<Cmd>BufferGoto 8<CR>', opts)
-keymap('n', '<M-9>', '<Cmd>BufferGoto 9<CR>', opts)
-keymap('n', '<M-0>', '<Cmd>BufferLast<CR>', opts)
--- Pin/unpin buffer
-keymap('n', '<M-p>', '<Cmd>BufferPin<CR>', opts)
--- Close buffer
-keymap('n', '<M-c>', '<Cmd>BufferClose<CR>', opts)
--- Wipeout buffer
---                 :BufferWipeout
--- Close commands
-keymap('n', '<M-c>p', '<Cmd>BufferCloseAllButCurrentOrPinned<CR>', opts)
--- Magic buffer-picking mode
-keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', opts)
-
 if not vim.g.vscode then
     -- ==================
     -- Lspsaga Keybindings --
@@ -109,7 +79,7 @@ if not vim.g.vscode then
     -- keymap("n", "gh", "<cmd>Lspsaga finder tyd+ref+imp+def <CR>")
 
     -- Code action
-    keymap({"n","v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+    keymap({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
     -- Rename all occurrences of the hovered word for the entire file
     keymap("n", "<leader>re", "<cmd>Lspsaga rename<CR>")
@@ -151,7 +121,7 @@ if not vim.g.vscode then
     keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
 
     -- Toggle outline
-    keymap("n","<leader>lo", "<cmd>Lspsaga outline<CR>")
+    keymap("n", "<leader>lo", "<cmd>Lspsaga outline<CR>")
 
     -- Hover Doc
     -- If there is no hover doc,
@@ -166,6 +136,18 @@ if not vim.g.vscode then
     keymap("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 
     -- Floating terminal
-    keymap({"n", "t"}, "<D-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
-    keymap({"n", "t"}, "<M-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+    keymap({ "n", "t" }, "<D-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+    keymap({ "n", "t" }, "<M-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
+    function SetTerminalKeymaps()
+        local termopts = { buffer = 0 }
+        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+        keymap("t", "<esc>", [[<C-\><C-n>]], termopts)
+        keymap("t", "<C-h>", [[<Cmd>wincmd h<CR>]], termopts)
+        keymap("t", "<C-j>", [[<Cmd>wincmd j<CR>]], termopts)
+        keymap("t", "<C-k>", [[<Cmd>wincmd k<CR>]], termopts)
+        keymap("t", "<C-l>", [[<Cmd>wincmd l<CR>]], termopts)
+        keymap("t", "<C-w>", [[<C-\><C-n><C-w>]], termopts)
+    end
+
+    vim.cmd('autocmd! TermOpen term://* lua SetTerminalKeymaps()')
 end
