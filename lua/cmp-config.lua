@@ -113,8 +113,15 @@ cmp.setup {
     },
     sources = {
         { name = "nvim_lsp" },
-        { name = "luasnip"},
-        { name = "orgmode"},
+        {
+            name = "luasnip",
+            entry_filter = function()
+                local context = require("cmp.config.context")
+                return not context.in_treesitter_capture("string")
+                    and not context.in_syntax_group("String")
+            end
+        },
+        { name = "orgmode" },
         { name = "buffer" },
         { name = "path" },
     },
@@ -138,8 +145,14 @@ cmp.setup {
         if vim.api.nvim_get_mode().mode == 'c' then
             return true
         else
+            local is_not_buftype = function()
+                local prompt = vim.bo.buftype == "prompt"
+                local preview = vim.bo.buftype == "preview"
+                return not prompt and not preview
+            end
             return not context.in_treesitter_capture("comment")
                 and not context.in_syntax_group("Comment")
+                and is_not_buftype()
         end
     end
 }
