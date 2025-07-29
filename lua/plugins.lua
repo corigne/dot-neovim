@@ -176,6 +176,7 @@ require('lazy').setup({
                                 -- your custom normal mode mappings
                             },
                         },
+                        respect_gitignore = false,
                     },
                     -- extension_name = {
                     --   extension_config_key = value,
@@ -360,7 +361,21 @@ require('lazy').setup({
     },
     {
         'folke/trouble.nvim',
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        opts = {
+            auto_close = true,
+            warn_no_results = false,
+            modes = {
+                test = {
+                    mode = "diagnostics",
+                    preview = {
+                        type = "split",
+                        relative = "win",
+                        position = "right",
+                        size = 0.3,
+                    },
+                },
+            },
+        }, -- for default options, refer to the configuration section for custom setup.
         cmd = 'Trouble',
         keys = {
             {
