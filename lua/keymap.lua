@@ -140,7 +140,6 @@ if not vim.g.vscode then
     keymap({ "n", "t" }, "<M-d>", "<cmd>exe v:count1 . \"ToggleTerm\"<CR>")
     function SetTerminalKeymaps()
         local termopts = { buffer = 0 }
-        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
         keymap("t", "<esc>", [[<C-\><C-n>]], termopts)
         keymap("t", "<C-h>", [[<Cmd>wincmd h<CR>]], termopts)
         keymap("t", "<C-j>", [[<Cmd>wincmd j<CR>]], termopts)
@@ -148,6 +147,14 @@ if not vim.g.vscode then
         keymap("t", "<C-l>", [[<Cmd>wincmd l<CR>]], termopts)
         keymap("t", "<C-w>", [[<C-\><C-n><C-w>]], termopts)
     end
+
+    local nvim_tmux_nav = require('nvim-tmux-navigation')
+    keymap("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft, opts)
+    keymap("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown, opts)
+    keymap("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp, opts)
+    keymap("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight, opts)
+    keymap("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive, opts)
+    keymap("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext, opts)
 
     vim.cmd('autocmd! TermOpen term://* lua SetTerminalKeymaps()')
 end

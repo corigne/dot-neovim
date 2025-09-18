@@ -103,6 +103,7 @@ require('lazy').setup({
             'nvim-lua/plenary.nvim',
         },
     },
+    { 'alexghergh/nvim-tmux-navigation' },
     -- 'andweeb/presence.nvim',
     {
         'vyfor/cord.nvim',
