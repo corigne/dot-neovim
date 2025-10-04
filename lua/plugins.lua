@@ -122,7 +122,12 @@ require('lazy').setup({
         cond = not vim.g.vscode,
         opts = { modes = { ':', '/', '?' } },
     },
-
+    {
+        'vlime/vlime',
+        config = function()
+            rtp = 'vim/'
+        end
+    },
     -- Status line (bottom)
     {
         'nvim-lualine/lualine.nvim',
@@ -452,16 +457,14 @@ require('lazy').setup({
         }
     },
     -- comments, whitespace, and highlighting (ts)
-    'tpope/vim-sleuth',
-    'preservim/nerdcommenter',
     {
-        'mcauley-penney/tidy.nvim',
-        cond = vim.g.os ~= "Windows",
-        branch = "main",
+        'numToStr/Comment.nvim',
         opts = {
-            filetype_exclude = { 'markdown', 'diff', 'svelte' }
-        },
+            -- add any options here
+        }
     },
+    'mcauley-penney/tidy.nvim',
+    'tpope/vim-sleuth',
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = false,
