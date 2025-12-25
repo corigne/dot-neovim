@@ -29,26 +29,27 @@ if vim.g.os == "Windows" then
 end
 
 -- Autoformat on save.
-vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("lsp", { clear = true }),
-    callback = function(args)
-        -- 2
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            -- 3
-            buffer = args.buf,
-            callback = function()
-                -- 4 + 5
-                vim.lsp.buf.format { async = false, id = args.data.client_id }
-            end,
-        })
-    end
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+--     callback = function(args)
+--         -- 2
+--         vim.api.nvim_create_autocmd("BufWritePre", {
+--             -- 3
+--             buffer = args.buf,
+--             callback = function()
+--                 -- 4 + 5
+--                 vim.lsp.buf.format { async = false, id = args.data.client_id }
+--             end,
+--         })
+--     end
+-- })
 
 -- MISC
 if vim.g.vscode then
     vim.g.cmdheight = 3
     return
 end
+
 vim.opt.encoding           = 'utf-8'
 vim.opt.mouse              = 'a'   -- mouse clicking enabled in all modes
 vim.opt.ttyfast            = true
@@ -61,12 +62,12 @@ vim.g.loaded_perl_provider = 0
 -- VISUAL
 vim.opt.termguicolors      = true
 vim.cmd.colorscheme 'catppuccin'
+vim.opt.signcolumn     = 'yes:2'
 vim.opt.number         = true                  -- line numbers
 vim.opt.relativenumber = true                  -- rel line numbers
 vim.opt.wildmode       = { 'longest', 'list' } -- bashlike tab completion
 vim.opt.cc             = { 79, 139 }
 vim.opt.linespace      = 1
-vim.opt.signcolumn     = 'yes'
 vim.opt.wrap           = true
 vim.opt.linebreak      = true
 
@@ -92,7 +93,7 @@ vim.opt.splitbelow     = true
 vim.opt.tabstop        = 4
 vim.opt.softtabstop    = 4
 vim.opt.expandtab      = true -- converts tabs to whitespace
-vim.opt.shiftwidth     = 4 -- default autoindent shift amount
+vim.opt.shiftwidth     = 4    -- default autoindent shift amount
 vim.opt.autoindent     = true
 vim.opt.list           = true
 vim.opt.listchars:append "space:⋅"
