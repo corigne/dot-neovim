@@ -1,5 +1,4 @@
 -- PLUGIN SETTINGS
-
 -- Installs lazy.nvim if it isn't installed already.
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -52,26 +51,11 @@ require('lazy').setup({
 			},
 		}
 	},
-	{
-		'rebelot/kanagawa.nvim',
-	},
-	{
-		'dracula/vim',
-	},
-	{
-		'ayu-theme/ayu-vim',
-	},
-	{
-		'folke/tokyonight.nvim',
-	},
-	{
-		'sainnhe/everforest',
-	},
+
+	-- Icons and Cursor
 	{
 		'nvim-tree/nvim-web-devicons',
 	},
-
-	-- Icons and Cursor
 	{
 		'lewis6991/gitsigns.nvim', -- used for GIT status for barbar
 		opts = {}
@@ -82,10 +66,6 @@ require('lazy').setup({
 	},
 
 	-- Window and Workflow Improvements
-	{
-		'nvim-telescope/telescope-file-browser.nvim',
-		dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-	},
 	{
 		'kylechui/nvim-surround',
 		version = '*', -- Use for stability; omit to use `main` branch for the latest features
@@ -195,6 +175,10 @@ require('lazy').setup({
 					telescope.load_extension('file_browser')
 				end
 			},
+			{
+				'nvim-telescope/telescope-file-browser.nvim',
+				dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+			},
 
 			-- LSP, Folds, Debugging, and LINT
 			{
@@ -264,22 +248,26 @@ require('lazy').setup({
 				dependencies = { 'mason-org/mason.nvim', 'nvim-lspconfig' },
 				config = function()
 					local capabilities = require("blink.cmp").get_lsp_capabilities()
-					---@type MasonLspconfigSettings
-					return {
-						ensure_installed = {},
-						automatic_installation = false,
+					require("mason-lspconfig").setup({
+						ensure_installed = { "gopls", "lua_ls" },
+						automatic_installation = true,
 						handlers = {
-							-- this first function is the "default handler"
-							-- it applies to every language server without a "custom handler"
 							function(server_name)
 								require("lspconfig")[server_name].setup({ capabilities = capabilities })
 							end,
 						},
-					}
+					})
 				end,
 			},
 			{
 				"nvimtools/none-ls.nvim"
+			},
+			{
+				'mfussenegger/nvim-jdtls'
+			},
+			{
+				'jay-babu/mason-null-ls.nvim',
+				opts = {}
 			},
 			{
 				'mfussenegger/nvim-dap',
@@ -296,13 +284,6 @@ require('lazy').setup({
 				'leoluz/nvim-dap-go'
 			},
 			{
-				'mfussenegger/nvim-jdtls'
-			},
-			{
-				'jay-babu/mason-null-ls.nvim',
-				opts = {}
-			},
-			{
 				'jay-babu/mason-nvim-dap.nvim',
 				opts = {
 					automatic_installation = true,
@@ -314,55 +295,6 @@ require('lazy').setup({
 							-- Keep original functionality
 							require('mason-nvim-dap').default_setup(config)
 						end,
-						-- delve = function(config)
-						-- 	config.configurations = {
-						-- 		{
-						-- 			type = 'delve',
-						-- 			name = 'Debug File',
-						-- 			request = 'launch',
-						-- 			program = '${file}'
-						-- 		},
-						-- 		{
-						-- 			type = 'delve',
-						-- 			name = 'Debug Module',
-						-- 			request = 'launch',
-						-- 			program = './${relativeFileDirname}'
-						-- 		},
-						-- 		{
-						-- 			type = 'delve',
-						-- 			name = 'Debug Module w/ Args',
-						-- 			request = 'launch',
-						-- 			program = './${relativeFileDirname}',
-						-- 			args = function()
-						-- 				local args_string = vim.fn.input('Arguments: ')
-						-- 				return vim.split(args_string, ' ')
-						-- 			end,
-						-- 		},
-						-- 		{
-						-- 			type = 'delve',
-						-- 			name = 'Debug File Tests',
-						-- 			request = 'launch',
-						-- 			mode = 'test',
-						-- 			program = '${file}'
-						-- 		},
-						-- 		{
-						-- 			type = 'delve',
-						-- 			name = 'Debug Module Tests',
-						-- 			request = 'launch',
-						-- 			mode = 'test',
-						-- 			program = './${relativeFileDirname}'
-						-- 		}
-						-- 	}
-						-- 	config.adapters = {
-						-- 		type = 'server',
-						-- 		port = '${port}',
-						-- 		executable = {
-						-- 			command = vim.fn.stdpath('data') .. '/mason/bin/dlv',
-						-- 			args = { 'dap', '-l', '127.0.0.1:${port}' },
-						-- 		},
-						-- 	}
-						-- 	require('mason-nvim-dap').default_setup(config) -- don't forget this!
-						-- end,
 					},
 				},
 			},
@@ -385,7 +317,22 @@ require('lazy').setup({
 					provider_selector = function(bufnr, filetype, buftype)
 						return { 'treesitter', 'indent' }
 					end
-				}
+				},
+				config = function()
+					local capabilities = vim.lsp.protocol.make_client_capabilities()
+					capabilities.textDocument.foldingRange = {
+						dynamicRegistration = false,
+						lineFoldingOnly = true
+					}
+					local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
+					for _, ls in ipairs(language_servers) do
+						require('lspconfig')[ls].setup({
+							capabilities = capabilities
+							-- you can add other fields for setting up lsp server in this table
+						})
+					end
+					require('ufo').setup()
+				end
 			},
 			-- Autocompletion Engine and Extensions
 			{
@@ -397,16 +344,6 @@ require('lazy').setup({
 					border = 'double'
 				}
 			},
-			{
-				'nvimdev/lspsaga.nvim',
-				cond = not vim.g.vscode,
-				dependencies = {
-					'nvim-treesitter/nvim-treesitter',
-					'nvim-tree/nvim-web-devicons'
-				},
-				opts = {}
-			},
-
 			{
 				'simrat39/rust-tools.nvim',
 				cond = not vim.g.vscode
@@ -613,72 +550,18 @@ require('lazy').setup({
 						model = 'gpt-4.1',
 						temperature = 0.1,           -- Lower = focused, higher = creative
 						window = {
-							layout = 'float',
-							width = 75, -- Fixed width in columns
-							height = 35, -- Fixed height in rows
-							border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
+							-- layout = 'float',
+							-- border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
 							title = '🤖 Copilot Chat',
+							width = 0.33, -- Fixed width in columns
 							zindex = 100, -- Ensure window stays on top
 						},
 						auto_insert_mode = true,     -- Enter insert mode when opening
 					}
 				},
 				{
-					'folke/trouble.nvim',
-					opts = {
-						auto_close = true,
-						warn_no_results = false,
-						modes = {
-							test = {
-								mode = "diagnostics",
-								preview = {
-									type = "split",
-									relative = "win",
-									position = "right",
-									size = 0.25,
-								},
-							},
-						},
-					}, -- for default options, refer to the configuration section for custom setup.
-					cmd = 'Trouble',
-					keys = {
-						{
-							'<leader>xx',
-							'<cmd>Trouble diagnostics toggle<cr>',
-							desc = 'Diagnostics (Trouble)',
-						},
-						{
-							'<leader>xX',
-							'<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-							desc = 'Buffer Diagnostics (Trouble)',
-						},
-						{
-							'<leader>cs',
-							'<cmd>Trouble symbols toggle focus=false<cr>',
-							desc = 'Symbols (Trouble)',
-						},
-						{
-							'<leader>cl',
-							'<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-							desc = 'LSP Definitions / references / ... (Trouble)',
-						},
-						{
-							'<leader>xL',
-							'<cmd>Trouble loclist toggle<cr>',
-							desc = 'Location List (Trouble)',
-						},
-						{
-							'<leader>xQ',
-							'<cmd>Trouble qflist toggle<cr>',
-							desc = 'Quickfix List (Trouble)',
-						},
-					},
-					cond = not vim.g.vscode
-				},
-				{
 					'danymat/neogen', opts = {}
 				},
-
 				{
 					'saghen/blink.pairs',
 					version = '*', -- (recommended) only required with prebuilt binaries

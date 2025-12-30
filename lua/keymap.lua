@@ -31,6 +31,8 @@ end
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 km('n', 'zR', require('ufo').openAllFolds)
 km('n', 'zM', require('ufo').closeAllFolds)
+km('n', 'zr', require('ufo').openFoldsExceptKinds)
+km('n', 'zm', require('ufo').closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 
 -- ==================
 -- Telescope
@@ -46,8 +48,8 @@ km('n', '<leader>fd', telescope_builtin.lsp_definitions, {})
 km('n', '<leader>ft', telescope_builtin.lsp_type_definitions, {})
 km('n', '<leader>fh', telescope_builtin.help_tags, {})
 --
--- km('n', '<leader>gs', telescope_builtin.git_status, {})
 km('n', '<leader>gc', telescope_builtin.git_commits, {})
+-- km('n', '<leader>gs', telescope_builtin.git_status, {})
 -- km('n', '<leader>gb', telescope_builtin.git_branches, {})
 -- km('n', '<leader>sd', telescope_builtin.diagnostics, {})
 
@@ -86,70 +88,35 @@ km('n', '<Leader>cm', ':CopilotChatModels<CR>', opts)
 
 if not vim.g.vscode then
     -- ==================
-    -- Lspsaga Keybindings --
-
-    -- LSP finder - Find the symbol's definition
-    -- If there is no definition, it will instead be hidden
-    -- When you use an action in finder like 'open vsplit',
-    -- you can use <C-t> to jump back
-    -- km('n', 'gh', '<cmd>Lspsaga finder tyd+ref+imp+def <CR>')
+    -- Native LSP Keybindings --
 
     -- Code action
-    km({ 'n', 'v' }, '<leader>ca', '<cmd>Lspsaga code_action<CR>')
+    km({ 'n', 'v' }, '<leader>ca', function() vim.lsp.buf.code_action() end)
 
     -- Rename all occurrences of the hovered word for the entire file
-    km('n', '<leader>re', '<cmd>Lspsaga rename<CR>')
-
-    -- Peek definition
-    -- You can edit the file containing the definition in the floating window
-    -- It also supports open/vsplit/etc operations, do refer to 'definition_action_keys'
-    -- It also supports tagstack
-    -- Use <C-t> to jump back
-    km('n', '<leader>pd', '<cmd>Lspsaga peek_definition<CR>')
+    km('n', '<leader>re', function() vim.lsp.buf.rename() end)
 
     -- Go to definition
-    -- km('n','gd', '<cmd>Lspsaga goto_definition<CR>')
+    km('n', 'gd', function() vim.lsp.buf.definition() end)
 
-    -- Peek type definition
-    -- You can edit the file containing the type definition in the floating window
-    -- It also supports open/vsplit/etc operations, do refer to 'definition_action_keys'
-    -- It also supports tagstack
-    -- Use <C-t> to jump back
-    km('n', '<leader>pt', '<cmd>Lspsaga peek_type_definition<CR>')
+    -- Go to type definition
+    km('n', 'gt', function() vim.lsp.buf.type_definition() end)
 
-    -- Show line diagnostics
-    -- You can pass argument ++unfocus to
-    -- unfocus the show_line_diagnostics floating window
-    --     km('n', '<leader>ss', '<cmd>Lspsaga show_line_diagnostics<CR>')
-    --
-    --     -- Show buffer diagnostics
-    --     km('n', '<leader>sd', '<cmd>Lspsaga show_buf_diagnostics<CR>')
-    --
-    --     -- Show workspace diagnostics
-    --     km('n', '<leader>sa', '<cmd>Lspsaga show_workspace_diagnostics<CR>')
-    --
-    -- Show cursor diagnostics
-    km('n', '<leader>sdc', '<cmd>Lspsaga show_cursor_diagnostics<CR>')
+    -- Show line diagnostics (float)
+    km('n', '<leader>sd', function() vim.diagnostic.open_float() end)
+
+    -- Show cursor diagnostics (float)
+    km('n', '<leader>sdc', function() vim.diagnostic.open_float() end)
 
     -- Diagnostic jump
-    -- You can use <C-o> to jump back to your previous location
-    km('n', ']d', '<cmd>Lspsaga diagnostic_jump_prev<CR>')
-    km('n', '[d', '<cmd>Lspsaga diagnostic_jump_next<CR>')
-
-    -- Toggle outline
-    km('n', '<leader>lo', '<cmd>Lspsaga outline<CR>')
+    km('n', ']d', function() vim.diagnostic.goto_next() end)
+    km('n', '[d', function() vim.diagnostic.goto_prev() end)
 
     -- Hover Doc
-    -- If there is no hover doc,
-    -- there will be a notification stating that
-    -- there is no information available.
-    -- To disable it just use ':Lspsaga hover_doc ++quiet'
-    -- Pressing the key twice will enter the hover window
-    km('n', 'K', '<cmd>Lspsaga hover_doc<CR>')
+    km('n', 'K', function() vim.lsp.buf.hover() end)
 
-    -- Call hierarchy
-    km('n', '<Leader>ci', '<cmd>Lspsaga incoming_calls<CR>')
-    km('n', '<Leader>co', '<cmd>Lspsaga outgoing_calls<CR>')
+    -- Outline (Telescope, if installed)
+    km('n', '<leader>lo', '<cmd>Telescope lsp_document_symbols<CR>')
 
     -- Floating terminal
     km({ 'n', 't' }, '<D-d>', '<cmd>exe v:count1 . \'ToggleTerm\'<CR>')
