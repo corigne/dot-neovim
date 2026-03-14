@@ -1246,6 +1246,24 @@ require("lazy").setup({
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		cond = not vim.g.vscode,
+		config = function()
+			local rainbow = require("rainbow-delimiters")
+			-- Neovim 0.10+ changed vim.treesitter.get_parser to return nil
+			-- instead of throwing for missing parsers. rainbow-delimiters uses
+			-- pcall() which only catches thrown errors, so parser ends up nil
+			-- and crashes at parser:register_cbs (lib.lua:202). Fix: use a
+			-- default strategy function that bails early if no parser exists.
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = function(bufnr)
+						if not vim.treesitter.get_parser(bufnr) then
+							return nil
+						end
+						return rainbow.strategy["global"]
+					end,
+				},
+			}
+		end,
 	},
 	{ "windwp/nvim-autopairs" },
 	{
