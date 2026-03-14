@@ -1,147 +1,188 @@
-# dogma.nvim
-### (In)contravertibly the best neovim config. /s
+# dogmatic.nvim
+### contravertibly the best neovim config.
 
-Note: I am working on updating the keybindings and plugin list to cut down on unnecessary bulk in the config and better align with my current workflow. These changes shift toward telescope. Until these changes are finalized please refer to the keybinding lua file.
+My neovim configurations, ported from my old monolitchic vimscript to lua, 
+with QoL additions inspired from various sources.
 
-Nvim configs ported from my old vimscript configs to lua, with some
-additions inspired from lunarvim and nvchad.
+This is a personal repo, and highly opinionated. 
 
-This is a personal work-in-progress. 
-If you discover any issues unrelated to the plugins themselves, please create
-an issue ticket and I will happily look into handling it.  
+Please submit issues only for bugs related to the configuration itself, 
+and not for general neovim questions or bugs with the plugins, as I will 
+not be able to help with those.
 
-Basic items, tab to cycle through autocompletion, enter to accept.
-Everything else is self-explanatory. Keybinds are listed in the section below.
+Basic items: 
+- supertab style completion with all the standard providers (snippets, lsp, etc, buffer, path)
+- copilot integration, make sure to configure your tokens in your environment
+- catpuccin-frappe by default
+- telescope by default
+- some select Snacks for additional features
+- lazygit integration
+- toggleterm
+- nvim-dap with mason-nvim-dap for autoconfiguration of debug adapters
 
 Enjoy!
 
-##### Diagnostics:  
+## Screenshots
 
-![image](https://github.com/corigne/dot-neovim/assets/7695563/856e8da9-ea5a-4452-9cec-4975f06f5d93)
+1. **CopilotChat** - Interactive AI code chat panel with syntax highlighting and code blocks
+   ![CopilotChat](./assets/screenshots/copilot.png)
 
-##### LSP with autocomplete, and snippets:  
+2. **Trouble Diagnostics Panel** - Multi-level diagnostic hierarchy view with file organization
+   ![Trouble Diagnostics](./assets/screenshots/trouble.png)
 
-![image](https://github.com/corigne/dot-neovim/assets/7695563/0203868c-8026-46ed-a4de-f8c11458f149)
+3. **Git Blame & Gitsigns** - Line blame overlay with commit details and diff hunks
+   ![Git Blame](./assets/screenshots/gitblame.png)
 
-##### Fuzzy Finder using Telescope:  
+4. **DAP Debugging UI** - dapui with variables, stack trace, watches, and breakpoints
+   ![DAP UI](./assets/screenshots/dap.png)
 
-![image](https://github.com/corigne/dot-neovim/assets/7695563/bab2d3a4-f807-45e5-a34f-27ac53dd2d3a)
+5. **ToggleTerm Integration** - Floating terminal with window management
+   ![ToggleTerm](./assets/screenshots/toggleterm.png)
 
-##### Nice nvim popout menus with autocompletion:  
-
-![image](https://github.com/corigne/dot-neovim/assets/7695563/d8bec591-4351-401a-a2ab-bba74dc2c674)
+6. **Lazygit Integration** - Interactive git operations UI
+   ![Lazygit](./assets/screenshots/lazygit.png)
 
 ## Useful Features
 
-Workflow:
+### Workflow & Development
+- **LSP Integration**: Full Language Server Protocol support with diagnostics, code completion, hover docs, and code actions via [nvim-lspconfig](github.com/neovim/nvim-lspconfig)
+- **Completion Engine**: Supertab-style completion with multiple providers - LSP, Copilot, snippets, buffer, and path via [blink.cmp](github.com/saghen/blink.cmp)
+- **Snippets**: Full snippet expansion support via [LuaSnip](github.com/L3MON4D3/LuaSnip) with friendly-snippets library
+- **Debugging**: Full DAP (Debug Adapter Protocol) support with [nvim-dap](github.com/mfussenegger/nvim-dap), [dapui](github.com/rcarriga/nvim-dap-ui), and automatic adapter configuration via [mason-nvim-dap](github.com/jay-babu/mason-nvim-dap.nvim)
+- **Linting & Formatting**: Code quality tools via [none-ls](github.com/nvimtools/none-ls.nvim)
+- **Package Management**: LSP, DAP, and linter installer via [Mason](github.com/williamboman/mason.nvim)
 
-- LSP, Linter, and Debugger installer: [Mason](github.com/williamboman/mason.nvim)
-- LSP Handler: [Lspsaga](github.com/nvimdev/lspsaga.nvim)
-(Replaced lunarvim LSP Handler)
-- Linter: [null-ls](github.com/jose-elias-alvarez/null-ls.nvim)
-- LSP Hook Automation: [mason-lspconfig](github.com/williamboman/mason-lspconfig.nvim)
-- DAP Adapter Autoconfiguration: [mason-nvim-dap](github.com/jay-babu/mason-nvim-dap.nvim)
-- Commenting Macros: [nerdcommenter](github.com/preservim/nerdcommenter)
-- Telescope (Fuzzy Find, Grep, Diagnostics, and more): [Telescope](github.com/nvim-telescope/telescope.nvim)
-- Whitespace management: [vim-better-whitespace](github.com/ntpeters/vim-better-whitespace)
-- Lunarvim's autocomplete backend: [nvim-cmp](github.com/hrsh7th/nvim-cmp)
+### Searching & Navigation
+- **Fuzzy Finder**: [Telescope](github.com/nvim-telescope/telescope.nvim) for files, buffers, grep, diagnostics, symbols, and more
+- **File Browser**: Integrated file browser picker within Telescope
+- **Symbol Navigation**: Document and workspace symbol browsing via Telescope
+- **Git Integration**: Git-aware navigation with git commits, branches, and file history
 
-UI:
-- Statusbar: [lualine](github.com/nvim-lualine/lualine.nvim)
-- Filetree: Removed in favor of the Telescope file picker.
-- IDE Style Buffer Tabs: [barbar](github.com/romgrk/barbar)
-- Popup nvim command menu: [wilder](github.com/gelguy/wilder.nvim)
-- Syntax Highlighting: [nvim-treesitter](github.com/christoomey/nvim-treesitter)
-- Colors: Ships with [catppuccin-frappe](github.com/catppuccin/nvim) as
-  the default, but also installs:  
-  [everforest](github.com/sainnhe/everforest),
-  [kanagawa](github.com/rebelot/kanagawa.nvim)
-  [dracula](github.com/Mofiqul/dracula.nvim),
-  and [ayu-vim](github.com/ayu-theme/ayu-vim). among others.
-- Icons: ships with necessary Nerdfont icons for statusbars and filetree.
+### Git & Version Control
+- **Line Blame**: Git blame information inline via [git-blame.nvim](github.com/f-person/git-blame.nvim)
+- **Git Signs**: Visual diff indicators and hunk management via [gitsigns.nvim](github.com/lewis6991/gitsigns.nvim)
+- **Git Commands**: Full lazygit integration for interactive git operations via [lazygit.nvim](github.com/kdheepak/lazygit.nvim)
+- **Blame Details**: Customizable blame message template with author, date, and commit SHA
 
-## Requirements
+### AI-Powered Assistance
+- **GitHub Copilot**: Code completion powered by GitHub Copilot with [copilot.lua](github.com/zbirenbaum/copilot.lua) and [blink-copilot](github.com/fang2hou/blink-copilot) integration
+- **CopilotChat**: Interactive AI chat interface via [CopilotChat.nvim](github.com/CopilotC-Nvim/CopilotChat.nvim) with Claude Haiku backend
 
-- [git](www.youtube.com/watch?v=l60MnDJklnM)
-- [neovim](github.com/neovim/neovim/wiki/Installing-Neovim) - (version __0.9.1__ or greater)
-- [ripgrep](github.com/BurntSushi/ripgrep)
+### Editor Enhancements
+- **Smart Surround**: Easy manipulation of surrounding characters via [nvim-surround](github.com/kylechui/nvim-surround)
+- **Auto Pairs**: Automatic bracket and quote pairing via [nvim-autopairs](github.com/windwp/nvim-autopairs)
+- **Comments**: Smart comment toggling via [Comment.nvim](github.com/numToStr/Comment.nvim)
+- **Rainbow Delimiters**: Colorized nested bracket pairs via [rainbow-delimiters.nvim](github.com/HiPhish/rainbow-delimiters.nvim)
+- **Todo Comments**: Highlight and navigate todo/fixme comments via [todo-comments.nvim](github.com/folke/todo-comments.nvim)
+- **Indentation Guides**: Visual indentation markers via [blink.indent](github.com/saghen/blink.indent)
 
-## Recommended (required for some LSPs)
+### UI & Visual Enhancements
+- **Syntax Highlighting**: Modern syntax via [nvim-treesitter](github.com/nvim-treesitter/nvim-treesitter) with 40+ languages
+- **Code Folding**: Intelligent code folding via [nvim-ufo](github.com/kevinhwang91/nvim-ufo) with treesitter support
+- **Color Scheme**: Ships with [Catppuccin Frappe](github.com/catppuccin/nvim) as default, highly customizable
+- **Status Line**: Beautiful status bar via [lualine.nvim](github.com/nvim-lualine/lualine.nvim) with Copilot status integration
+- **Icons**: Complete Nerd Font icon support for UI elements
+- **Cursor Effects**: Smear cursor animation via [smear-cursor.nvim](github.com/sphamba/smear-cursor.nvim)
+- **Command Menu**: Enhanced command-line interface via [wilder.nvim](github.com/gelguy/wilder.nvim)
 
-Note: many of these can be installed using your
-linux distro's package manager or homebrew.
-Mason diagnostic output will usually tell you when there's a missing dependency
-during install.
+### Terminal Integration
+- **Floating Terminal**: Integrated floating terminal via [toggleterm.nvim](github.com/akinsho/toggleterm.nvim)
+- **Terminal Navigation**: Seamless window switching including terminal windows
 
-- [llvm](llvm.org)
-- [clang](clang.llvm.org)
-- [nodejs](nodejs.org/en)
-- [python](python.org)
+### Window & Tab Management
+- **Tmux Integration**: Seamless navigation between Neovim and Tmux splits via [nvim-tmux-navigation](github.com/alexghergh/nvim-tmux-navigation)
+- **Tab Scoping**: Smart buffer scoping per tab via [scope.nvim](github.com/tiagovla/scope.nvim)
 
-## Install
-
-1. Clone this repo directly into your neovim config directory
-  (~/.config/nvim/ is typical):  
-  `git clone https://github.com/corigne/dot-neovim.git ~/.config/nvim`  
-2. Run neovim `nvim` to install all associated plugins on first-run.
-3. Install any LSP's you might want to use with `:Mason`
+### Additional Tools
+- **Documentation Generation**: Auto-generate function documentation via [neogen](github.com/danymat/neogen)
+- **Clipboard Over SSH**: Copy to clipboard via SSH with OSC52 support via [nvim-osc52](github.com/ojroques/nvim-osc52)
+- **Org Mode**: Full Emacs org-mode support via [orgmode](github.com/nvim-orgmode/orgmode)
+- **Dev Environment**: Lua development tools via [neodev.nvim](github.com/folke/neodev.nvim)
+- **Language Support**: Go development tools via [go.nvim](github.com/ray-x/go.nvim) and Rust via [rust-tools.nvim](github.com/simrat39/rust-tools.nvim)
 
 ## Keybinds
 
-Some helpful keybinds for common plugins, see [the keymap.lua file](lua/keymap.lua)
-for the rest of the bindings, e.g. LSPSaga and
-
 **Note: Default leader is Space**
 
-Normal Mode:
+### General Navigation & Search (Telescope)
+- `<leader>tb` = Browse open buffers (Telescope)
+- `<leader>tf` = File browser picker (Telescope)
+- `<leader>ff` = Find files (Telescope)
+- `<leader>fg` = Live grep (Telescope)
+- `<leader>fr` = Find references (Telescope/LSP)
+- `<leader>fi` = Find implementations (Telescope/LSP)
+- `<leader>fd` = Find definitions (Telescope/LSP)
+- `<leader>ft` = Find type definitions (Telescope/LSP)
+- `<leader>fh` = Help tags (Telescope)
+- `<leader>gc` = Git commits (Telescope)
+- `<leader>lo` = Document symbols/Outline (Telescope)
 
-- , = navigate one tab to the left in barbar
-- . = navigate one tab to the right in barbar
-- Super/Meta + , = move current tab to the left
-- Super/Meta + , = move current tab to the right
+### Trouble (Diagnostics Panel)
+- `<leader>xx` = Toggle diagnostics panel (Trouble)
+- `<leader>xX` = Toggle buffer diagnostics (Trouble)
+- `<leader>cs` = Toggle symbols (Trouble)
+- `<leader>cl` = Toggle LSP locations (Trouble)
+- `<leader>xL` = Toggle location list (Trouble)
+- `<leader>xQ` = Toggle quickfix list (Trouble)
 
-- leader + \  = nohl
-- leader + nt = toggle nvim tidy on/off, default is on
-- leader + ss = Strip highlighted whitespace from file (trailing)
-- leader + q = close current buffer (closes the tab too, intentionally)
-- leader + tt = telescope file picker
-- leader + fg = telescope findgrep
-- leader + ff = telescope findfile
-- leader + fd = telescope lsp definitions
-- leader + fr = telescope lsp references
-- leader + ft = telescope lsp typedef
-- leader + sd = telescope diagnostics
-- leader + gs = telescope git status
+### LSP & Code Navigation
+- `gd` = Go to definition (LSP)
+- `gt` = Go to type definition (LSP)
+- `K` = Hover documentation (LSP)
+- `<leader>ca` = Code actions (LSP)
+- `<leader>re` = Rename symbol (LSP)
+- `<leader>sd` = Show diagnostics (float)
+- `<leader>sdc` = Show cursor diagnostics (float)
+- `]d` = Next diagnostic (LSP)
+- `[d` = Previous diagnostic (LSP)
 
-- Super/Meta + d = toggle hover terminal (LSPSaga)
-- leader + ca = show LSPSaga code actions
-- leader + re = LSPSaga rename current variable under cursor
-- leader + pd = LSPSaga peek definition
-- leader + ss = LSPSaga show current line diagnostics
-- leader + sc = LSPSaga cursor diagnostics
-- leader + K  = LSPSaga hover doc toggle
+### Git Integration
+- `<leader>gb` = Git blame toggle
+- `<leader>gg` = Open lazygit
 
-- leader + ddd = toggle dap-ui on/off
-- leader + B = set a breakpoint for DAP
-- leader + C = continue in DAP
-- leader + I = step into in DAP
-- leader + O = step over in DAP
+### AI & Copilot
+- `<leader>cc` = Toggle CopilotChat panel
+- `<leader>cr` = Reset CopilotChat conversation
+- `<leader>cl` = Load CopilotChat session
+- `<leader>cs` = Save CopilotChat session
+- `<leader>cS` = Stop CopilotChat
+- `<leader>cm` = Select CopilotChat model
 
-## Adding/Installing/Configuring LSP Servers and Debug Adapters
+### Debugging (DAP)
+- `<leader>dd` = Toggle DAP UI
+- `<leader>b` / `<leader>db` = Toggle breakpoint
+- `<leader>dbc` = Clear all breakpoints
+- `<leader>dc` / `<F5>` = Continue execution
+- `<leader>ds` / `<F10>` = Step over
+- `<leader>di` / `<F11>` = Step into
+- `<leader>do` / `<F12>` = Step out
+- `<leader>dx` = Stop debugger
+- `<leader>dr` = REPL toggle
+- `<leader>dl` = Run last debug session
 
-Install the LSP server of your choice using `:Mason`. LSP servers should be
-set up automatically once installed by Mason. The same goes for debug adapters.
+### Terminal
+- `<D-d>` / `<M-d>` = Toggle terminal (n/t modes)
+- `<esc>` = Exit terminal mode
+- `<C-h/j/k/l>` = Navigate windows from terminal
+- `<C-w>` = Window commands from terminal
 
-## Filemap
+### Window Navigation (Tmux Integration)
+- `<C-h>` = Move to left window
+- `<C-j>` = Move to bottom window
+- `<C-k>` = Move to top window
+- `<C-l>` = Move to right window
+- `<C-\>` = Navigate to last active window
+- `<C-Space>` = Navigate to next window
 
-```bash
-.
-├── init.lua
-├── lua
-│   ├── cmp-config.lua
-│   ├── core.lua
-│   ├── dap-config.lua
-│   ├── keymap.lua
-│   └── plugins.lua
-└── README.md
-```
+### Editing & Text Manipulation
+- `<leader>\` = Clear search highlighting
+- `<leader>y` = Copy with OSC52 (over SSH) - operator mode
+- `<leader>yy` = Copy line with OSC52
+- `<leader>te` = Toggle autoformat on save (tidy)
+- `<leader>ng` = Generate documentation (neogen)
+
+### Folding (UFO)
+- `zR` = Open all folds
+- `zM` = Close all folds
+- `zr` = Open folds except kinds
+- `zm` = Close folds with

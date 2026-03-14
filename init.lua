@@ -1,6 +1,13 @@
-require('plugins')
-require('core')
-require('keymap')
-require('dap-config')
+local config = require("helpers.config")
 
-print('All configurations loaded successfully.')
+local modules = {
+	core = { "plugins", "autocmd", "core", "keymap" },
+	optional = {
+		{
+			modules = { "dap-config" },
+			condition = not vim.g.vscode,
+		},
+	},
+}
+
+config.load_modules(modules)
