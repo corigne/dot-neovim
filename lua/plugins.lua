@@ -1325,6 +1325,12 @@ require("lazy").setup({
 				"yaml",
 			},
 		},
+		-- The rewritten 'main' branch requires an explicit config function to
+		-- call setup(); using only 'opts' does not trigger it, leaving parsers
+		-- in ensure_installed uninstalled (causing rainbow-delimiters crashes).
+		config = function(_, opts)
+			require("nvim-treesitter").setup(opts)
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
