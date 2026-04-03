@@ -120,6 +120,8 @@ require("lazy").setup({
 		cond = not vim.g.vscode,
 		config = function()
 			rtp = "vim/"
+			-- Use <Space>l as vlime prefix to avoid conflicts with snacks (<Space>s*)
+			vim.g.vlime_leader = "<Space>l"
 		end,
 	},
 	-- Status line (bottom)
@@ -127,7 +129,7 @@ require("lazy").setup({
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
 			opts.sections = opts.sections or {}
-			opts.sections.lualine_c = opts.sections.lualine_c or {}
+			opts.sections.lualine_c = opts.sections.lualine_c or { "filename" }
 
 			-- Copilot status
 			table.insert(opts.sections.lualine_c, {
@@ -1341,6 +1343,7 @@ require("lazy").setup({
 				"vim",
 				"vimdoc",
 				"yaml",
+				"commonlisp",
 			},
 		},
 		-- The rewritten 'main' branch requires an explicit config function to
