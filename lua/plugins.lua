@@ -1041,9 +1041,14 @@ require("lazy").setup({
 			sources = {
 				default = { "lsp", "copilot", "path", "snippets", "buffer" },
 				per_filetype = {
-					lisp = { "omni", "buffer" },
+					lisp        = { "swank", "buffer" },
+					commonlisp  = { "swank", "buffer" },
 				},
 				providers = {
+					swank = {
+						name   = "Swank",
+						module = "swank.blink_source",
+					},
 					omni = {
 						name = "Omni",
 						module = "blink.cmp.sources.complete_func",
@@ -1393,5 +1398,13 @@ require("lazy").setup({
 			--- :help string.gmatch
 			custom_colors = {},
 		},
+	},
+
+	{
+		"corigne/swank.nvim",
+		ft = { "lisp", "commonlisp" },
+		config = function()
+			require("swank").setup()
+		end,
 	},
 })

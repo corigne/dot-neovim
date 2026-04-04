@@ -31,6 +31,18 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
+-- swank.nvim: attach on Lisp buffers
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("swank_attach", { clear = true }),
+	pattern = { "lisp", "commonlisp" },
+	callback = function(args)
+		local ok, swank = pcall(require, "swank")
+		if ok then
+			swank.attach(args.buf)
+		end
+	end,
+})
+
 -- Autoformat on save
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp_autoformat", { clear = true }),
