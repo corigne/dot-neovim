@@ -177,7 +177,7 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		cond = not vim.g.vscode,
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
 		config = function(telescope, opts)
 			telescope = require("telescope")
 			opts = {
@@ -226,6 +226,7 @@ require("lazy").setup({
 			telescope.setup(opts)
 			telescope.load_extension("scope")
 			telescope.load_extension("file_browser")
+			telescope.load_extension("ui-select")
 		end,
 	},
 	{
