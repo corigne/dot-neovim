@@ -1040,7 +1040,15 @@ require("lazy").setup({
 		opts = {
 			sources = {
 				default = { "lsp", "copilot", "path", "snippets", "buffer" },
+				per_filetype = {
+					lisp = { "omni", "buffer" },
+				},
 				providers = {
+					omni = {
+						name = "Omni",
+						module = "blink.cmp.sources.complete_func",
+						opts = { complete_func = "vlime#plugin#CompleteFunc" },
+					},
 					copilot = {
 						name = "copilot",
 						module = "blink-copilot",
