@@ -35,7 +35,7 @@ require("lazy").setup({
 			transparent_background = false, -- disables setting the background color.
 			show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
 			dim_inactive = {
-				enabled = false, -- dims the background color of inactive window
+				enabled = false,   -- dims the background color of inactive window
 				shade = "dark",
 				percentage = 0.15, -- percentage of the shade to apply to the inactive window
 			},
@@ -114,15 +114,6 @@ require("lazy").setup({
 		"gelguy/wilder.nvim",
 		cond = not vim.g.vscode,
 		opts = { modes = { ":", "/", "?" } },
-	},
-	{
-		"vlime/vlime",
-		cond = not vim.g.vscode,
-		config = function()
-			rtp = "vim/"
-			-- Use <Space>l as vlime prefix to avoid conflicts with snacks (<Space>s*)
-			vim.g.vlime_leader = "<Space>l"
-		end,
 	},
 	-- Status line (bottom)
 	{
@@ -1042,8 +1033,8 @@ require("lazy").setup({
 			sources = {
 				default = { "lsp", "copilot", "path", "snippets", "buffer" },
 				per_filetype = {
-					lisp        = { "swank", "buffer" },
-					commonlisp  = { "swank", "buffer" },
+					lisp       = { "swank", "buffer" },
+					commonlisp = { "swank", "buffer" },
 				},
 				providers = {
 					swank = {
@@ -1400,12 +1391,20 @@ require("lazy").setup({
 			custom_colors = {},
 		},
 	},
+	-- {
+	-- 	"corigne/swank.nvim",
+	-- 	ft = { "lisp", "commonlisp" },
+	-- 	config = function()
+	-- 		require("swank").setup()
+	-- 	end,
+	-- },
 
 	{
-		"corigne/swank.nvim",
+		dir = "/home/nexus/dev/personal/swank.nvim",
 		ft = { "lisp", "commonlisp" },
 		config = function()
 			require("swank").setup()
 		end,
 	},
+
 })
