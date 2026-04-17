@@ -245,7 +245,21 @@ require("lazy").setup({
 		},
 		dependencies = { "mason-org/mason.nvim", "nvim-lspconfig" },
 		config = function()
+			-- Blink Auto-config LSP
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+			-- Sextant (Common Lisp LSP) — not managed by mason, use native LSP API
+			vim.lsp.config("sextant", {
+				cmd = { vim.fn.expand("~/Tools/sextant/sextant") },
+				filetypes = { "lisp" },
+				root_dir = function(bufnr, cb)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					cb(vim.fs.root(fname, { ".git", "*.asd" }) or vim.fs.dirname(fname))
+				end,
+				capabilities = capabilities,
+			})
+			vim.lsp.enable("sextant")
+
 			require("mason-lspconfig").setup({
 				ensure_installed = { "gopls", "lua_ls" },
 				automatic_installation = true,
@@ -1033,8 +1047,8 @@ require("lazy").setup({
 			sources = {
 				default = { "lsp", "copilot", "path", "snippets", "buffer" },
 				per_filetype = {
-					lisp       = { "swank", "buffer" },
-					commonlisp = { "swank", "buffer" },
+					-- lisp       = { "swank", "buffer" },
+					-- commonlisp = { "swank", "buffer" },
 				},
 				providers = {
 					swank = {
@@ -1391,20 +1405,7 @@ require("lazy").setup({
 			custom_colors = {},
 		},
 	},
-	-- {
-	-- 	"corigne/swank.nvim",
-	-- 	ft = { "lisp", "commonlisp" },
-	-- 	config = function()
-	-- 		require("swank").setup()
-	-- 	end,
-	-- },
-
 	{
-		dir = "/home/nexus/dev/personal/swank.nvim",
-		ft = { "lisp", "commonlisp" },
-		config = function()
-			require("swank").setup()
-		end,
+		"corigne/swank.nvim",
 	},
-
 })
