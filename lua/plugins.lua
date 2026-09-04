@@ -35,7 +35,7 @@ require("lazy").setup({
 			transparent_background = false, -- disables setting the background color.
 			show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
 			dim_inactive = {
-				enabled = false,   -- dims the background color of inactive window
+				enabled = false, -- dims the background color of inactive window
 				shade = "dark",
 				percentage = 0.15, -- percentage of the shade to apply to the inactive window
 			},
@@ -77,6 +77,16 @@ require("lazy").setup({
 
 	-- Window and Workflow Improvements
 	{
+		"christoomey/vim-tmux-navigator",
+		lazy = false,
+		init = function()
+			vim.g.tmux_navigator_no_mappings = 1
+		end,
+		config = function()
+			dofile(vim.fn.expand("~/tools/vim-herdr-navigation/editor/nvim.lua"))
+		end,
+	},
+	{
 		"kylechui/nvim-surround",
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
@@ -115,14 +125,22 @@ require("lazy").setup({
 		cond = not vim.g.vscode,
 		opts = { modes = { ":", "/", "?" } },
 	},
+	{
+		"vlime/vlime",
+		cond = not vim.g.vscode,
+		config = function()
+			rtp = "vim/"
+		end,
+	},
 	-- Status line (bottom)
 	{
 		"nvim-lualine/lualine.nvim",
+		dependencies = { "zbirenbaum/copilot.lua", "folke/trouble.nvim", "sidekick.nvim" },
 		opts = function(_, opts)
 			opts.sections = opts.sections or {}
-			opts.sections.lualine_c = opts.sections.lualine_c or { "filename" }
+			opts.sections.lualine_c = opts.sections.lualine_c or { "filename" } -- fallback to filename if empty
 
-			-- Copilot status
+			-- Copilot status (append to the end)
 			table.insert(opts.sections.lualine_c, {
 				function()
 					return " "
@@ -141,8 +159,15 @@ require("lazy").setup({
 				end,
 			})
 
-			-- CLI session status
-			table.insert(opts.sections.lualine_c, 2, {
+			-- CLI session status (insert after filename, if present)
+			local filename_idx = nil
+			for i, v in ipairs(opts.sections.lualine_c) do
+				if v == "filename" then
+					filename_idx = i
+					break
+				end
+			end
+			table.insert(opts.sections.lualine_c, (filename_idx or 1) + 1, {
 				function()
 					local status = require("sidekick.status").cli()
 					return " " .. (#status > 1 and #status or "")
@@ -153,6 +178,23 @@ require("lazy").setup({
 				color = function()
 					return "Special"
 				end,
+			})
+
+			-- trouble.nvim status
+			local trouble = require("trouble")
+			local symbols = trouble.statusline({
+				mode = "lsp_document_symbols",
+				groups = {},
+				title = false,
+				filter = { range = true },
+				format = "{kind_icon}{symbol.name:Normal}",
+				-- The following line is needed to fix the background color
+				-- Set it to the lualine section you want to use
+				hl_group = "lualine_c_normal",
+			})
+			table.insert(opts.sections.lualine_c, {
+				symbols.get,
+				cond = symbols.has,
 			})
 		end,
 	},
@@ -168,7 +210,7 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		cond = not vim.g.vscode,
-		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-ui-select.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function(telescope, opts)
 			telescope = require("telescope")
 			opts = {
@@ -198,11 +240,9 @@ require("lazy").setup({
 				},
 				extensions = {
 					file_browser = {
-						-- disables netrw and use telescope-file-browser in its place
 						hijack_netrw = false,
 						hidden = { file_browser = true, folder_browser = true },
 						follow_symlinks = true,
-						-- theme = "ivy",
 						mappings = {
 							["i"] = {
 								-- your custom insert mode mappings
@@ -217,13 +257,22 @@ require("lazy").setup({
 			telescope.setup(opts)
 			telescope.load_extension("scope")
 			telescope.load_extension("file_browser")
-			telescope.load_extension("ui-select")
 		end,
 	},
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		cond = not vim.g.vscode,
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	},
+	{
+		"sindrets/diffview.nvim",
+		opts = {
+			view = {
+				merge_tool = {
+					layout = "diff3_mixed",
+				},
+			},
+		},
 	},
 	-- LSP, Folds, Debugging, and LINT
 	{
@@ -245,21 +294,7 @@ require("lazy").setup({
 		},
 		dependencies = { "mason-org/mason.nvim", "nvim-lspconfig" },
 		config = function()
-			-- Blink Auto-config LSP
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-			-- Sextant (Common Lisp LSP) — not managed by mason, use native LSP API
-			vim.lsp.config("sextant", {
-				cmd = { vim.fn.expand("~/Tools/sextant/sextant") },
-				filetypes = { "lisp" },
-				root_dir = function(bufnr, cb)
-					local fname = vim.api.nvim_buf_get_name(bufnr)
-					cb(vim.fs.root(fname, { ".git", "*.asd" }) or vim.fs.dirname(fname))
-				end,
-				capabilities = capabilities,
-			})
-			vim.lsp.enable("sextant")
-
 			require("mason-lspconfig").setup({
 				ensure_installed = { "gopls", "lua_ls" },
 				automatic_installation = true,
@@ -399,13 +434,8 @@ require("lazy").setup({
 			dashboard = { enabled = true },
 			explorer = {
 				enabled = false,
-				Config = {
-					---@class snacks.explorer.Config
-					{
-						replace_netrw = true, -- Replace netrw with the snacks explorer
-						trash = true, -- Use the system trash when deleting files
-					},
-				},
+				replace_netrw = false, -- handled via custom autocmd using smart picker
+				trash = true,
 			},
 			indent = { enabled = true },
 			input = { enabled = true },
@@ -413,7 +443,14 @@ require("lazy").setup({
 				enabled = true,
 				timeout = 3000,
 			},
-			picker = { enabled = false },
+			picker = {
+				enabled = true,
+				sources = {
+					smart = {
+						filter = { cwd = true }, -- only show files in the current project root
+					},
+				},
+			},
 			quickfile = { enabled = true },
 			scope = { enabled = true },
 			scroll = { enabled = true },
@@ -487,9 +524,9 @@ require("lazy").setup({
 			{
 				"<leader>ff",
 				function()
-					Snacks.picker.files()
+					Snacks.picker.smart()
 				end,
-				desc = "Find Files",
+				desc = "Smart Find Files",
 			},
 			{
 				"<leader>fg",
@@ -999,8 +1036,28 @@ require("lazy").setup({
 	{
 		"folke/trouble.nvim",
 		cond = not vim.g.vscode,
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
 		cmd = "Trouble",
+		opts = {
+			modes = {
+				mydiags = {
+					mode = "diagnostics", -- inherit from diagnostics mode
+					auto_close = true,
+					auto_open = false,
+					filter = {
+						any = {
+							buf = 0, -- current buffer
+							{
+								severity = vim.diagnostic.severity.ERROR, -- errors only
+								-- limit to files in the current project
+								function(item)
+									return item.filename:find((vim.loop or vim.uv).cwd(), 1, true)
+								end,
+							},
+						},
+					},
+				},
+			},
+		}, -- for default options, refer to the configuration section for custom setup.
 	},
 	{
 		"zbirenbaum/copilot.lua",
@@ -1046,20 +1103,7 @@ require("lazy").setup({
 		opts = {
 			sources = {
 				default = { "lsp", "copilot", "path", "snippets", "buffer" },
-				per_filetype = {
-					-- lisp       = { "swank", "buffer" },
-					-- commonlisp = { "swank", "buffer" },
-				},
 				providers = {
-					swank = {
-						name   = "Swank",
-						module = "swank.blink_source",
-					},
-					omni = {
-						name = "Omni",
-						module = "blink.cmp.sources.complete_func",
-						opts = { complete_func = "vlime#plugin#CompleteFunc" },
-					},
 					copilot = {
 						name = "copilot",
 						module = "blink-copilot",
@@ -1267,24 +1311,6 @@ require("lazy").setup({
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		cond = not vim.g.vscode,
-		config = function()
-			local rainbow = require("rainbow-delimiters")
-			-- Neovim 0.10+ changed vim.treesitter.get_parser to return nil
-			-- instead of throwing for missing parsers. rainbow-delimiters uses
-			-- pcall() which only catches thrown errors, so parser ends up nil
-			-- and crashes at parser:register_cbs (lib.lua:202). Fix: use a
-			-- default strategy function that bails early if no parser exists.
-			vim.g.rainbow_delimiters = {
-				strategy = {
-					[""] = function(bufnr)
-						if not vim.treesitter.get_parser(bufnr) then
-							return nil
-						end
-						return rainbow.strategy["global"]
-					end,
-				},
-			}
-		end,
 	},
 	{ "windwp/nvim-autopairs" },
 	{
@@ -1298,6 +1324,13 @@ require("lazy").setup({
 		--- @type blink.indent.Config
 		-- opts = {},
 	},
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
+	},
 	-- clipboard (dependencies an osc52 compliant terminal emulator)
 	{
 		"ojroques/nvim-osc52",
@@ -1307,12 +1340,22 @@ require("lazy").setup({
 	{
 		"nvim-orgmode/orgmode",
 		event = "VeryLazy",
-		ft = { "org" },
-		opts = {
-			org_agenda_files = "~/orgfiles/**/*",
-			org_default_notes_file = "~/orgfiles/refile.org",
-		},
-		vim.lsp.enable("org"),
+		config = function()
+			-- Setup orgmode
+			require("orgmode").setup({
+				org_agenda_files = "~/orgfiles/**/*",
+				org_default_notes_file = "~/orgfiles/refile.org",
+				mappings = {
+					org = {
+						-- Remap Tab/S-Tab cycle to avoid conflict with blink.cmp super-tab / snippet jump
+						org_cycle = "<leader>oc",
+						org_global_cycle = "<leader>oC",
+					},
+				},
+			})
+			-- Experimental LSP support
+			vim.lsp.enable("org")
+		end,
 	},
 	-- comments, whitespace, and highlighting (ts)
 	{
@@ -1362,15 +1405,8 @@ require("lazy").setup({
 				"vim",
 				"vimdoc",
 				"yaml",
-				"commonlisp",
 			},
 		},
-		-- The rewritten 'main' branch requires an explicit config function to
-		-- call setup(); using only 'opts' does not trigger it, leaving parsers
-		-- in ensure_installed uninstalled (causing rainbow-delimiters crashes).
-		config = function(_, opts)
-			require("nvim-treesitter").setup(opts)
-		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -1404,8 +1440,5 @@ require("lazy").setup({
 			--- :help string.gmatch
 			custom_colors = {},
 		},
-	},
-	{
-		"corigne/swank.nvim",
 	},
 })

@@ -47,21 +47,37 @@ All mappings use `<leader>` as the leader key (commonly set to the **spacebar**)
 
 ---
 
-## 🔭 Telescope (File Finder & More)
+## 🔭 Snacks Picker (File Finder & More)
 
 | Keymap           | Action                        |
 |------------------|-------------------------------|
-| `<leader>tf`     | Open file browser             |
-| `<leader>tb`     | Switch buffers                |
-| `<leader>ff`     | Find files                    |
-| `<leader>fg`     | Live grep                     |
-| `<leader>fr`     | LSP references                |
-| `<leader>fi`     | LSP implementations           |
-| `<leader>fd`     | LSP definitions               |
-| `<leader>ft`     | LSP type definitions          |
-| `<leader>fh`     | Help tags                     |
-| `<leader>gc`     | Git commits                   |
-| _(More available if you uncomment in your config)_ |
+| `<leader>ff`     | Smart find files (cwd/git)    |
+| `<leader><space>` | Smart find files             |
+| `<leader>fg`     | Find git-tracked files        |
+| `<leader>fc`     | Find config files             |
+| `<leader>fr`     | Recent files                  |
+| `<leader>fb`     | Buffers                       |
+| `<leader>fp`     | Projects                      |
+| `<leader>/`      | Grep (live search)            |
+| `<leader>sg`     | Grep                          |
+| `<leader>sw`     | Grep word / selection         |
+| `<leader>sh`     | Help pages                    |
+| `<leader>ss`     | LSP symbols                   |
+| `<leader>sS`     | LSP workspace symbols         |
+| `<leader>sd`     | Diagnostics                   |
+| `<leader>sD`     | Buffer diagnostics            |
+| `<leader>sk`     | Keymaps                       |
+| `<leader>su`     | Undo history                  |
+| `<leader>sR`     | Resume last picker            |
+| `gd`             | LSP definitions               |
+| `gD`             | LSP declarations              |
+| `gr`             | LSP references                |
+| `gI`             | LSP implementations           |
+| `gy`             | LSP type definitions          |
+| `<leader>gl`     | Git log                       |
+| `<leader>gb`     | Git branches                  |
+| `<leader>gs`     | Git status                    |
+| `<leader>gc`     | Git commits (log)             |
 
 ---
 

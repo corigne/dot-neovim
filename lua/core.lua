@@ -27,6 +27,10 @@ if vim.g.os == "Windows" then
 	-- windows specific shit here
 end
 
+-- Spellcheck
+vim.g.spell = true
+vim.g.spelllang = "en_us"
+
 -- Autoformat on save toggle (set true by default)
 vim.g.autoformat_enabled = true
 

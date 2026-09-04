@@ -1,47 +1,40 @@
 -- Autocommands and Similar
 
--- Disable netrw and hijack directory opens with Telescope
+-- Disable netrw so snacks can hijack directory opens
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Clear netrw autocommands to prevent conflicts
 vim.api.nvim_create_augroup("FileExplorer", { clear = true })
 
--- Open Telescope find_files when a directory is opened
-vim.api.nvim_create_autocmd("VimEnter", {
-	group = vim.api.nvim_create_augroup("telescope_hijack_netrw", { clear = true }),
-	pattern = "*",
-	callback = function()
-		local args = vim.fn.argv()
-		if #args == 0 then
+-- Open Snacks smart picker when a directory is opened, rooted at project root
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = vim.api.nvim_create_augroup("snacks_hijack_netrw", { clear = true }),
+	callback = function(ev)
+		local path = ev.file
+		if path == "" or vim.fn.isdirectory(path) == 0 then
 			return
 		end
-
-		local target = args[1]
-		if vim.fn.isdirectory(target) == 0 then
-			return
-		end
-
-		local telescope_ok = pcall(require, "telescope.builtin")
-		if telescope_ok then
-			vim.defer_fn(function()
-				require("telescope.builtin").find_files({ cwd = target })
-			end, 10)
+		local buf = ev.buf
+		local cwd = Snacks.git.get_root(path) or vim.fn.getcwd()
+		if vim.v.vim_did_enter == 0 then
+			-- startup: clear bufname so nvim doesn't try to load it again,
+			-- then open picker on UIEnter when the UI is ready
+			vim.api.nvim_buf_set_name(buf, "")
+			vim.api.nvim_create_autocmd("UIEnter", {
+				once = true,
+				group = vim.api.nvim_create_augroup("snacks_hijack_netrw_enter", { clear = true }),
+				callback = function()
+					Snacks.picker.smart({ cwd = cwd })
+				end,
+			})
+		else
+			-- mid-session: delete the directory buffer, then open picker
+			Snacks.bufdelete.delete(buf)
+			Snacks.picker.smart({ cwd = cwd })
 		end
 	end,
 })
-
--- swank.nvim: attach on Lisp buffers
--- vim.api.nvim_create_autocmd("FileType", {
--- 	group = vim.api.nvim_create_augroup("swank_attach", { clear = true }),
--- 	pattern = { "lisp", "commonlisp" },
--- 	callback = function(args)
--- 		local ok, swank = pcall(require, "swank")
--- 		if ok then
--- 			swank.attach(args.buf)
--- 		end
--- 	end,
--- })
 
 -- Autoformat on save
 vim.api.nvim_create_autocmd("LspAttach", {

@@ -54,26 +54,6 @@ if not vim.g.vscode then
 	km("n", "zm", require("ufo").closeFoldsWith) -- closeAllFolds == closeFoldsWith(0)
 
 	-- ==================
-	-- Telescope
-	local telescope_builtin = require("telescope.builtin")
-
-	km("n", "<leader>tb", telescope_builtin.buffers, {})
-	km("n", "<leader>tf", ":Telescope file_browser<CR>", {})
-	km("n", "<leader>ff", telescope_builtin.find_files, {})
-	km("n", "<leader>fg", telescope_builtin.live_grep, {})
-	km("n", "<leader>fr", telescope_builtin.lsp_references, {})
-	km("n", "<leader>fi", telescope_builtin.lsp_implementations, {})
-	km("n", "<leader>fd", telescope_builtin.lsp_definitions, {})
-	km("n", "<leader>ft", telescope_builtin.lsp_type_definitions, {})
-	km("n", "<leader>fh", telescope_builtin.help_tags, {})
-	km("n", "<leader>gc", telescope_builtin.git_commits, {})
-	km("n", "<leader>lo", "<cmd>Telescope lsp_document_symbols<CR>", opts)
-
-	-- ==================
-	-- Snacks
-	local snacks = require("snacks")
-
-	-- ==================
 	-- Trouble
 	km("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", {})
 	km("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", {})
