@@ -14,8 +14,7 @@ Basic items:
 - supertab style completion with all the standard providers (snippets, lsp, etc, buffer, path)
 - copilot integration, make sure to configure your tokens in your environment
 - catpuccin-frappe by default
-- telescope by default
-- some select Snacks for additional features
+- Snacks picker/explorer/dashboard as the default UI toolkit
 - lazygit integration
 - toggleterm
 - nvim-dap with mason-nvim-dap for autoconfiguration of debug adapters
@@ -30,17 +29,11 @@ Enjoy!
 2. **Trouble Diagnostics Panel** - Multi-level diagnostic hierarchy view with file organization
    ![Trouble Diagnostics](./assets/screenshots/trouble.png)
 
-3. **Git Blame & Gitsigns** - Line blame overlay with commit details and diff hunks
-   ![Git Blame](./assets/screenshots/gitblame.png)
-
-4. **DAP Debugging UI** - dapui with variables, stack trace, watches, and breakpoints
+3. **DAP Debugging UI** - dapui with variables, stack trace, watches, and breakpoints
    ![DAP UI](./assets/screenshots/dap.png)
 
-5. **ToggleTerm Integration** - Floating terminal with window management
+4. **ToggleTerm Integration** - Floating terminal with window management
    ![ToggleTerm](./assets/screenshots/toggleterm.png)
-
-6. **Lazygit Integration** - Interactive git operations UI
-   ![Lazygit](./assets/screenshots/lazygit.png)
 
 ## Useful Features
 
@@ -53,10 +46,10 @@ Enjoy!
 - **Package Management**: LSP, DAP, and linter installer via [Mason](github.com/williamboman/mason.nvim)
 
 ### Searching & Navigation
-- **Fuzzy Finder**: [Telescope](github.com/nvim-telescope/telescope.nvim) for files, buffers, grep, diagnostics, symbols, and more
-- **File Browser**: Integrated file browser picker within Telescope
-- **Symbol Navigation**: Document and workspace symbol browsing via Telescope
-- **Git Integration**: Git-aware navigation with git commits, branches, and file history
+- **Fuzzy Finder**: [Snacks Picker](github.com/folke/snacks.nvim) for files, buffers, grep, diagnostics, symbols, and more (default picker-set)
+- **File Explorer**: Snacks explorer replaces netrw for directory browsing
+- **Symbol Navigation**: Document and workspace symbol browsing via Snacks Picker (LSP)
+- **Git Integration**: Git-aware pickers for commits, branches, status, stash, and diff hunks
 
 ### Git & Version Control
 - **Line Blame**: Git blame information inline via [git-blame.nvim](github.com/f-person/git-blame.nvim)
@@ -66,7 +59,7 @@ Enjoy!
 
 ### AI-Powered Assistance
 - **GitHub Copilot**: Code completion powered by GitHub Copilot with [copilot.lua](github.com/zbirenbaum/copilot.lua) and [blink-copilot](github.com/fang2hou/blink-copilot) integration
-- **CopilotChat**: Interactive AI chat interface via [CopilotChat.nvim](github.com/CopilotC-Nvim/CopilotChat.nvim) with Claude Haiku backend
+- **CopilotChat**: Interactive AI chat interface via [CopilotChat.nvim](github.com/CopilotC-Nvim/CopilotChat.nvim), configured for Claude Sonnet 4.6 by default
 
 ### Editor Enhancements
 - **Smart Surround**: Easy manipulation of surrounding characters via [nvim-surround](github.com/kylechui/nvim-surround)
@@ -102,51 +95,82 @@ Enjoy!
 
 ## Keybinds
 
-**Note: Default leader is Space**
+**Note: Default leader is Space. See `CHEATSHEET.md` for the full reference, including a few noted keybind collisions.**
 
-### General Navigation & Search (Telescope)
-- `<leader>tb` = Browse open buffers (Telescope)
-- `<leader>tf` = File browser picker (Telescope)
-- `<leader>ff` = Find files (Telescope)
-- `<leader>fg` = Live grep (Telescope)
-- `<leader>fr` = Find references (Telescope/LSP)
-- `<leader>fi` = Find implementations (Telescope/LSP)
-- `<leader>fd` = Find definitions (Telescope/LSP)
-- `<leader>ft` = Find type definitions (Telescope/LSP)
-- `<leader>fh` = Help tags (Telescope)
-- `<leader>gc` = Git commits (Telescope)
-- `<leader>lo` = Document symbols/Outline (Telescope)
+### General Editing
+- `<leader>\` = Clear search highlighting
+- `<leader>q` = Delete current buffer (bdelete)
+- `<leader>y` = Copy with OSC52 (over SSH) - operator mode / visual mode
+- `<leader>yy` = Copy current line with OSC52
+- `<leader>af` = Toggle autoformat globally
+- `<leader>te` = Toggle autoformat on save for buffer (tidy, not on Windows)
+- `<leader>ng` = Generate documentation (neogen)
+
+### Snacks Picker (Find, Search, Explorer)
+- `<leader><space>` / `<leader>ff` = Smart find files
+- `<leader>,` / `<leader>fb` = Buffers
+- `<leader>/` / `<leader>sg` = Grep
+- `<leader>e` = File explorer
+- `<leader>fc` = Find config files
+- `<leader>fg` = Find git-tracked files
+- `<leader>fp` = Projects
+- `<leader>fr` = Recent files
+- `<leader>sw` = Grep word/selection (normal/visual)
+- `<leader>sd` / `<leader>sD` = Diagnostics / buffer diagnostics
+- `<leader>sh` = Help pages
+- `<leader>sk` = Keymaps
+- `<leader>su` = Undo history
+- `<leader>sR` = Resume last picker
+- `<leader>ss` / `<leader>sS` = LSP document/workspace symbols
+- `gd` / `gD` / `gr` / `gI` / `gy` = LSP definitions/declarations/references/implementations/type-defs
+- `gai` / `gao` = LSP incoming/outgoing calls
+- `<leader>gl` / `<leader>gs` / `<leader>gS` / `<leader>gd` / `<leader>gf` = Git log/status/stash/diff/log-file
+- `<leader>gi` / `<leader>gI` / `<leader>gp` / `<leader>gP` = GitHub issues/PRs (open/all)
+- `<leader>gB` = Git browse (open in browser)
+- `<leader>gg` = Lazygit
+- `<leader>z` / `<leader>Z` = Zen mode / zoom
+- `<leader>.` / `<leader>S` = Scratch buffer toggle / select
+- `<leader>n` / `<leader>un` = Notification history / dismiss all
+- `<C-/>` / `<C-_>` = Toggle Snacks terminal
+- `]]` / `[[` = Next/previous reference under cursor
+
+> Full picker list (registers, jumps, marks, man pages, colorschemes, etc.) is in `CHEATSHEET.md`.
 
 ### Trouble (Diagnostics Panel)
-- `<leader>xx` = Toggle diagnostics panel (Trouble)
-- `<leader>xX` = Toggle buffer diagnostics (Trouble)
-- `<leader>cs` = Toggle symbols (Trouble)
-- `<leader>cl` = Toggle LSP locations (Trouble)
-- `<leader>xL` = Toggle location list (Trouble)
-- `<leader>xQ` = Toggle quickfix list (Trouble)
+- `<leader>xx` = Toggle diagnostics panel
+- `<leader>xX` = Toggle buffer diagnostics
+- `<leader>xL` = Toggle location list
+- `<leader>xQ` = Toggle quickfix list
+- `<leader>cs` / `<leader>cl` = Bound, but currently overridden by the CopilotChat mappings below (see note in `CHEATSHEET.md`)
 
 ### LSP & Code Navigation
-- `gd` = Go to definition (LSP)
-- `gt` = Go to type definition (LSP)
-- `K` = Hover documentation (LSP)
-- `<leader>ca` = Code actions (LSP)
-- `<leader>re` = Rename symbol (LSP)
-- `<leader>sd` = Show diagnostics (float)
+- `gd` = Go to definition (native LSP; overrides the Snacks picker binding above)
+- `gt` = Go to type definition (native LSP)
+- `K` = Hover documentation
+- `<leader>ca` = Code actions (normal/visual)
+- `<leader>re` = Rename symbol
+- `<leader>sd` = Show line diagnostics (float; overrides the Snacks diagnostics picker binding above)
 - `<leader>sdc` = Show cursor diagnostics (float)
-- `]d` = Next diagnostic (LSP)
-- `[d` = Previous diagnostic (LSP)
+- `]d` / `[d` = Next/previous diagnostic
 
-### Git Integration
-- `<leader>gb` = Git blame toggle
+### Git
+- `<leader>gb` = Git blame toggle (overrides the Snacks "Git Branches" picker binding above)
 - `<leader>gg` = Open lazygit
 
 ### AI & Copilot
 - `<leader>cc` = Toggle CopilotChat panel
 - `<leader>cr` = Reset CopilotChat conversation
-- `<leader>cl` = Load CopilotChat session
-- `<leader>cs` = Save CopilotChat session
+- `<leader>cl` = Load CopilotChat session (wins over Trouble's `<leader>cl`)
+- `<leader>cs` = Save CopilotChat session (wins over Trouble's `<leader>cs`)
 - `<leader>cS` = Stop CopilotChat
 - `<leader>cm` = Select CopilotChat model
+- `<tab>` = Sidekick: jump to/apply next edit suggestion (falls back to normal Tab)
+- `<c-.>` / `<leader>aa` = Toggle Sidekick CLI (normal/terminal/insert/visual)
+- `<leader>as` = Select Sidekick CLI tool
+- `<leader>ad` = Detach a CLI session
+- `<leader>at` / `<leader>aF` / `<leader>av` = Send this/file/selection to CLI
+- `<leader>ap` = Select a Sidekick prompt
+- `<leader>ac` = Toggle Sidekick with Copilot CLI directly
 
 ### Debugging (DAP)
 - `<leader>dd` = Toggle DAP UI
@@ -156,30 +180,18 @@ Enjoy!
 - `<leader>ds` / `<F10>` = Step over
 - `<leader>di` / `<F11>` = Step into
 - `<leader>do` / `<F12>` = Step out
-- `<leader>dx` = Stop debugger
+- `<leader>dS` = Stop debugger
 - `<leader>dr` = REPL toggle
 - `<leader>dl` = Run last debug session
 
 ### Terminal
-- `<D-d>` / `<M-d>` = Toggle terminal (n/t modes)
+- `<D-d>` / `<M-d>` = Toggle floating terminal (normal/terminal modes, ToggleTerm)
 - `<esc>` = Exit terminal mode
-- `<C-h/j/k/l>` = Navigate windows from terminal
-- `<C-w>` = Window commands from terminal
+- `<C-h/j/k/l>` = Navigate windows from terminal mode
+- `<C-w>` = Window commands from terminal mode
 
-### Window Navigation (Tmux Integration)
-- `<C-h>` = Move to left window
-- `<C-j>` = Move to bottom window
-- `<C-k>` = Move to top window
-- `<C-l>` = Move to right window
-- `<C-\>` = Navigate to last active window
-- `<C-Space>` = Navigate to next window
-
-### Editing & Text Manipulation
-- `<leader>\` = Clear search highlighting
-- `<leader>y` = Copy with OSC52 (over SSH) - operator mode
-- `<leader>yy` = Copy line with OSC52
-- `<leader>te` = Toggle autoformat on save (tidy)
-- `<leader>ng` = Generate documentation (neogen)
+### Window Navigation (herdr/tmux Integration)
+- `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` = Move to the left/bottom/top/right window; at a split edge, hands off to herdr or tmux if running (see `~/tools/vim-herdr-navigation`)
 
 ### Folding (UFO)
 - `zR` = Open all folds
