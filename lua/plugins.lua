@@ -35,7 +35,7 @@ require("lazy").setup({
 			transparent_background = false, -- disables setting the background color.
 			show_end_of_buffer = true, -- shows the '~' characters after the end of buffers
 			dim_inactive = {
-				enabled = false, -- dims the background color of inactive window
+				enabled = false,   -- dims the background color of inactive window
 				shade = "dark",
 				percentage = 0.15, -- percentage of the shade to apply to the inactive window
 			},
@@ -83,7 +83,7 @@ require("lazy").setup({
 			vim.g.tmux_navigator_no_mappings = 1
 		end,
 		config = function()
-			dofile(vim.fn.expand("~/tools/vim-herdr-navigation/editor/nvim.lua"))
+			dofile(vim.fn.expand("~/Tools/vim-herdr-navigation/editor/nvim.lua"))
 		end,
 	},
 	{
@@ -1045,7 +1045,7 @@ require("lazy").setup({
 					auto_open = false,
 					filter = {
 						any = {
-							buf = 0, -- current buffer
+							buf = 0,              -- current buffer
 							{
 								severity = vim.diagnostic.severity.ERROR, -- errors only
 								-- limit to files in the current project
