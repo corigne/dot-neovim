@@ -1,6 +1,7 @@
 -- PLUGIN SETTINGS
 -- Installs lazy.nvim if it isn't installed already.
 
+local herdr_navigation = require("helpers.herdr_navigation")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
@@ -83,7 +84,11 @@ require("lazy").setup({
 			vim.g.tmux_navigator_no_mappings = 1
 		end,
 		config = function()
-			dofile(vim.fn.expand("~/Tools/vim-herdr-navigation/editor/nvim.lua"))
+			local path = herdr_navigation.find_config()
+			if not path then
+				error("Could not find vim-herdr-navigation under the user home")
+			end
+			dofile(path)
 		end,
 	},
 	{

@@ -260,7 +260,7 @@ variant instead, rebind the losing side to a different key.
 | `<D-d>` / `<M-d>` (normal/terminal) | Toggle floating terminal (ToggleTerm)                        |
 | `<esc>` (terminal)                | Exit terminal mode to normal mode                                |
 | `<C-w>` (terminal)                | Window commands from terminal mode                               |
-| `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` | Move to left/bottom/top/right window; at a split edge, hands off to herdr or tmux (from `~/tools/vim-herdr-navigation`, loaded via `dofile` in `plugins.lua`) |
+| `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` | Move to left/bottom/top/right window; at a split edge, hands off to herdr or tmux (auto-discovered under the user home, or set with `HERDR_VIM_NAVIGATION`) |
 
 Note: `vim-tmux-navigator` is installed but its own mappings are disabled
 (`vim.g.tmux_navigator_no_mappings = 1`); the `<C-h/j/k/l>` bindings above

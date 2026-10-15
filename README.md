@@ -191,7 +191,7 @@ Enjoy!
 - `<C-w>` = Window commands from terminal mode
 
 ### Window Navigation (herdr/tmux Integration)
-- `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` = Move to the left/bottom/top/right window; at a split edge, hands off to herdr or tmux if running (see `~/tools/vim-herdr-navigation`)
+- `<C-h>` / `<C-j>` / `<C-k>` / `<C-l>` = Move to the left/bottom/top/right window; at a split edge, hands off to herdr or tmux if running. The config searches the user home for `vim-herdr-navigation`; set `HERDR_VIM_NAVIGATION` to its root directory to override the location.
 
 ### Folding (UFO)
 - `zR` = Open all folds
